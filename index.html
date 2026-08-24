@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lean IT Kaizen — Guía de estudio</title>
+<style>
+  :root{
+    --bg:#f6f5f0;
+    --surface:#ffffff;
+    --surface-2:#eef1ea;
+    --ink:#1f2a22;
+    --ink-soft:#5b6960;
+    --border:#dde3da;
+    --accent:#1f7a53;
+    --accent-soft:#e4f3ea;
+    --accent-ink:#ffffff;
+    --danger:#b0392b;
+    --danger-soft:#fbe9e6;
+    --good:#1f7a53;
+    --good-soft:#e4f3ea;
+    --shadow:0 1px 2px rgba(31,42,34,.06), 0 8px 24px rgba(31,42,34,.06);
+    --font-display:"Bahnschrift","Segoe UI Semibold","Segoe UI",sans-serif;
+    --font-body:Georgia,"Times New Roman",serif;
+    --font-mono:Consolas,"Courier New",monospace;
+  }
+  :root[data-theme="dark"]{
+    --bg:#111713;
+    --surface:#182019;
+    --surface-2:#1f2822;
+    --ink:#e9efe8;
+    --ink-soft:#a3b1a6;
+    --border:#2b352d;
+    --accent:#4fb886;
+    --accent-soft:#1c3428;
+    --accent-ink:#0b140e;
+    --danger:#e2857a;
+    --danger-soft:#3a2320;
+    --good:#4fb886;
+    --good-soft:#1c3428;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);line-height:1.55;}
+  h1,h2,h3,h4,.font-display{font-family:var(--font-display);}
+  a{color:var(--accent);}
+  button{font-family:inherit;}
+  .masthead{background:var(--surface);border-bottom:1px solid var(--border);padding:20px 24px;}
+  .masthead-inner{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;}
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand-mark{width:40px;height:40px;border-radius:10px;background:var(--accent);color:var(--accent-ink);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:18px;flex:none;}
+  .brand-text h1{margin:0;font-size:20px;letter-spacing:.2px;}
+  .brand-text .sub{color:var(--ink-soft);font-size:13px;font-family:var(--font-mono);}
+  .meta-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+  .pill{background:var(--surface-2);border:1px solid var(--border);border-radius:999px;padding:6px 12px;font-size:12.5px;font-family:var(--font-mono);color:var(--ink-soft);}
+  .pill strong{color:var(--ink);}
+  .theme-btn{border:1px solid var(--border);background:var(--surface-2);color:var(--ink);border-radius:999px;padding:8px 14px;cursor:pointer;font-size:13px;}
+  .theme-btn:hover{border-color:var(--accent);}
+  .layout{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:260px 1fr;gap:22px;padding:22px 24px 60px;}
+  .rail{align-self:start;position:sticky;top:16px;display:flex;flex-direction:column;gap:16px;}
+  .rail-group{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:10px;box-shadow:var(--shadow);}
+  .rail-label{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);padding:8px 10px 4px;}
+  .rail-btn{width:100%;display:flex;align-items:center;gap:10px;text-align:left;background:transparent;border:none;border-radius:10px;padding:9px 10px;cursor:pointer;color:var(--ink);font-size:14px;}
+  .rail-btn:hover{background:var(--surface-2);}
+  .rail-btn.active{background:var(--accent-soft);color:var(--accent);font-weight:700;}
+  .rail-code{font-family:var(--font-mono);font-size:11px;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;padding:1px 6px;color:var(--ink-soft);flex:none;}
+  .rail-btn.active .rail-code{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);}
+  .panel{background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);min-height:60vh;overflow:hidden;}
+  .panel-head{padding:20px 24px 0;}
+  .panel-head h2{margin:0 0 4px;font-size:22px;}
+  .panel-head .desc{color:var(--ink-soft);font-size:14.5px;margin:0 0 14px;}
+  .subtabs{display:flex;gap:6px;border-bottom:1px solid var(--border);padding:0 24px;}
+  .subtab{background:transparent;border:none;padding:10px 4px;margin-right:18px;cursor:pointer;color:var(--ink-soft);font-size:14px;border-bottom:2px solid transparent;font-family:var(--font-display);}
+  .subtab.active{color:var(--accent);border-bottom-color:var(--accent);}
+  .panel-body{padding:22px 24px 30px;}
+  .theory h3{font-size:17px;margin:22px 0 8px;color:var(--accent);}
+  .theory h3:first-child{margin-top:0;}
+  .theory p{margin:0 0 10px;}
+  .theory ul{margin:0 0 12px;padding-left:20px;}
+  .theory li{margin-bottom:6px;}
+  .theory strong{color:var(--ink);}
+  .cardgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;}
+  .fc{perspective:1000px;height:150px;cursor:pointer;}
+  .fc-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;}
+  .fc.flipped .fc-inner{transform:rotateY(180deg);}
+  .fc-front,.fc-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;border:1px solid var(--border);padding:14px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:14.5px;}
+  .fc-front{background:var(--surface-2);}
+  .fc-front .t{font-family:var(--font-display);font-weight:700;font-size:16px;}
+  .fc-front .hint{position:absolute;bottom:8px;right:10px;font-size:10.5px;color:var(--ink-soft);font-family:var(--font-mono);}
+  .fc-back{background:var(--accent-soft);color:var(--ink);transform:rotateY(180deg);font-size:13.5px;}
+  .quiz-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+  .qcount{font-family:var(--font-mono);font-size:13px;color:var(--ink-soft);}
+  .dots{display:flex;flex-wrap:wrap;gap:6px;max-width:100%;}
+  .dot{width:10px;height:10px;border-radius:50%;background:var(--surface-2);border:1px solid var(--border);cursor:pointer;padding:0;}
+  .dot.current{outline:2px solid var(--accent);outline-offset:2px;}
+  .dot.done{background:var(--ink-soft);}
+  .dot.right{background:var(--good);border-color:var(--good);}
+  .dot.wrong{background:var(--danger);border-color:var(--danger);}
+  .qcard{border:1px solid var(--border);border-radius:14px;padding:18px;background:var(--surface-2);}
+  .qcard .qtag{font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;}
+  .qcard .qtext{font-size:16.5px;margin:0 0 16px;font-weight:600;}
+  .opt{display:block;width:100%;text-align:left;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:11px 14px;margin-bottom:9px;cursor:pointer;font-size:14.5px;color:var(--ink);}
+  .opt:hover:not(:disabled){border-color:var(--accent);}
+  .opt:disabled{cursor:default;}
+  .opt.right{border-color:var(--good);background:var(--good-soft);font-weight:700;}
+  .opt.chosen-wrong{border-color:var(--danger);background:var(--danger-soft);}
+  .explain{display:none;margin-top:14px;padding:12px 14px;border-radius:10px;background:var(--surface);border:1px dashed var(--border);font-size:14px;}
+  .explain.show{display:block;}
+  .explain b{color:var(--accent);}
+  .quiz-actions{display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:10px;flex-wrap:wrap;}
+  .btn{border:1px solid var(--border);background:var(--surface);color:var(--ink);border-radius:10px;padding:9px 16px;cursor:pointer;font-size:14px;}
+  .btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);}
+  .btn:disabled{opacity:.45;cursor:not-allowed;}
+  .summary{text-align:center;padding:20px 10px;}
+  .summary .score{font-family:var(--font-display);font-size:44px;color:var(--accent);margin:6px 0;}
+  .summary .verdict{display:inline-block;padding:6px 16px;border-radius:999px;font-weight:700;margin-bottom:16px;}
+  .verdict.pass{background:var(--good-soft);color:var(--good);}
+  .verdict.fail{background:var(--danger-soft);color:var(--danger);}
+  table.ref{width:100%;border-collapse:collapse;margin:10px 0 24px;font-size:14px;}
+  table.ref th, table.ref td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top;}
+  table.ref th{background:var(--surface-2);font-family:var(--font-display);}
+  .breakdown{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:18px;text-align:left;}
+  .breakdown div{border:1px solid var(--border);border-radius:10px;padding:10px 12px;background:var(--surface);}
+  .breakdown .code{font-family:var(--font-mono);color:var(--ink-soft);font-size:11px;}
+  footer{max-width:1180px;margin:0 auto;padding:10px 24px 40px;color:var(--ink-soft);font-size:12.5px;}
+  @media (max-width:860px){
+    .layout{grid-template-columns:1fr;}
+    .rail{position:static;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="brand">
+      <div class="brand-mark">改</div>
+      <div class="brand-text">
+        <h1>Lean IT Kaizen — Guía de estudio</h1>
+        <div class="sub">APMG · Netmind JST296 (prerrequisito: Lean IT Foundation)</div>
+      </div>
+    </div>
+    <div class="meta-row">
+      <span class="pill">📝 <strong>40</strong> preguntas</span>
+      <span class="pill">⏱ <strong>90</strong> min</span>
+      <span class="pill">✅ ≥ <strong>26/40</strong> (65%)</span>
+      <button class="theme-btn" id="themeBtn">🌓 Tema</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="rail">
+    <div class="rail-group">
+      <div class="rail-label">Módulos</div>
+      <div id="moduleNav"></div>
+    </div>
+    <div class="rail-group">
+      <div class="rail-label">Práctica y referencia</div>
+      <button class="rail-btn" data-nav="resumen"><span class="rail-code">RE</span> Resumen rápido</button>
+      <button class="rail-btn" data-nav="exam"><span class="rail-code">EX</span> Examen simulado (40)</button>
+      <button class="rail-btn" data-nav="sim1"><span class="rail-code">S1</span> Simulacro 1 · Fácil (20)</button>
+      <button class="rail-btn" data-nav="sim2"><span class="rail-code">S2</span> Simulacro 2 · Medio (20)</button>
+    </div>
+  </nav>
+
+  <main class="panel" id="panel"></main>
+</div>
+
+<footer>
+  Contenido original elaborado a partir de fuentes públicas de APMG y Netmind sobre la certificación Lean IT Kaizen (JST296) — no reproduce ningún examen oficial con derechos de autor. Ver <a href="README.md">README</a> para las fuentes.
+</footer>
+
+<script>
+/* ============ DATA ============ */
+const MODULES = [
+  { id:'in', code:'01', name:'Introducción a Kaizen',
+    theory: `
+      <h3>¿Qué es Kaizen?</h3>
+      <p><strong>Kaizen</strong> (改善) es la palabra japonesa para «cambio para mejor». Se refiere a la <strong>mejora continua</strong> a través de <strong>pequeños cambios incrementales, sostenidos en el tiempo</strong> y con la participación de todas las personas del equipo, no solo de especialistas.</p>
+      <p>Lean IT Kaizen construye sobre las bases de Lean IT Foundation (valor, desperdicio, flujo, personas) y forma a profesionales de TI en las habilidades concretas para <strong>facilitar eventos de mejora</strong>.</p>
+      <h3>Kaizen diario vs. Kaizen de mejora</h3>
+      <ul>
+        <li><strong>Kaizen diario (Daily Kaizen):</strong> mejora continua integrada en el trabajo normal del equipo. Se visualiza en un <strong>tablero de equipo (day board)</strong> y no requiere abrir un evento formal.</li>
+        <li><strong>Kaizen de mejora (Improvement Kaizen):</strong> evento <strong>estructurado y limitado en el tiempo</strong> para resolver un problema concreto, siguiendo el ciclo <strong>DMAIC</strong> y documentado en un <strong>A3</strong>.</li>
+      </ul>
+      <h3>Modelos de mejora continua</h3>
+      <ul>
+        <li><strong>PDCA</strong> (Plan-Do-Check-Act, Deming): ciclo iterativo básico sobre el que se apoyan los demás modelos.</li>
+        <li><strong>DMAIC</strong> (Define-Measure-Analyze-Improve-Control): modelo de Six Sigma para mejorar un proceso <em>existente</em>.</li>
+        <li><strong>DMEDI</strong> (Define-Measure-Explore-Develop-Implement): ciclo de <em>innovación/diseño</em>, usado cuando no existe un proceso previo y hay que crear uno nuevo.</li>
+        <li><strong>ITIL CSI</strong> (Continual Service Improvement): enfoque de mejora continua en gestión de servicios TI, alineado conceptualmente con PDCA.</li>
+      </ul>
+      <h3>El espíritu Kaizen</h3>
+      <p>Mejora basada en datos, pasos pequeños y sostenibles, trabajo visible para todo el equipo y respeto por las personas que ejecutan el proceso.</p>`,
+    flashcards:[
+      {t:'Kaizen', d:'Palabra japonesa (改善): "cambio para mejor". Mejora continua mediante pequeños cambios incrementales.'},
+      {t:'Kaizen diario', d:'Mejora continua integrada en el trabajo diario del equipo, visible en un day board.'},
+      {t:'Kaizen de mejora', d:'Evento estructurado y limitado en el tiempo para resolver un problema, usando DMAIC y A3.'},
+      {t:'PDCA', d:'Plan-Do-Check-Act (Deming): ciclo iterativo básico de mejora continua.'},
+      {t:'DMAIC', d:'Define-Measure-Analyze-Improve-Control: modelo Six Sigma para mejorar procesos existentes.'},
+      {t:'DMEDI', d:'Define-Measure-Explore-Develop-Implement: ciclo de innovación usado cuando no existe un proceso previo.'},
+      {t:'ITIL CSI', d:'Continual Service Improvement: mejora continua en gestión de servicios TI, alineada con PDCA.'},
+    ]},
+  { id:'org', code:'02', name:'Organizando Kaizen',
+    theory:`
+      <h3>Tableros de equipo</h3>
+      <ul>
+        <li><strong>Day board (tablero diario):</strong> trabajo del día, estado de ánimo del equipo e impedimentos/issues.</li>
+        <li><strong>Week board (tablero semanal):</strong> objetivos, KPIs y lecciones aprendidas de la semana.</li>
+        <li><strong>Improvement board (tablero de mejora):</strong> hace visible el avance de los problemas en resolución (ciclo DMAIC/A3 en curso).</li>
+      </ul>
+      <h3>Roles en un evento Kaizen</h3>
+      <ul>
+        <li><strong>Kaizen Lead / facilitador:</strong> guía el proceso de forma <em>neutral</em>, sin imponer soluciones.</li>
+        <li><strong>Sponsor / champion:</strong> aporta recursos, respaldo y elimina barreras organizativas.</li>
+        <li><strong>Equipo del evento:</strong> multidisciplinar, conocedor del proceso.</li>
+        <li><strong>Stakeholders:</strong> partes interesadas afectadas o consultadas.</li>
+      </ul>
+      <h3>Selección y preparación</h3>
+      <p>Las oportunidades de mejora se priorizan con criterios como <strong>impacto</strong> y <strong>esfuerzo/factibilidad</strong>, a menudo mediante una <strong>matriz de priorización</strong>. Preparar un evento implica definir el alcance, reunir datos preliminares, planificar la logística y fijar una agenda (los eventos suelen durar de 1 a 5 días).</p>`,
+    flashcards:[
+      {t:'Day board', d:'Tablero diario: trabajo del día, estado de ánimo del equipo y problemas/impedimentos.'},
+      {t:'Week board', d:'Tablero semanal: objetivos, KPIs y lecciones aprendidas.'},
+      {t:'Improvement board', d:'Tablero de mejora: visualiza el avance de problemas en resolución (DMAIC/A3).'},
+      {t:'Kaizen Lead', d:'Facilitador neutral del evento; guía el proceso sin imponer soluciones.'},
+      {t:'Sponsor / Champion', d:'Proporciona recursos y respaldo, y elimina barreras organizativas al equipo.'},
+      {t:'Matriz de priorización', d:'Herramienta para seleccionar oportunidades de mejora según impacto y esfuerzo.'},
+    ]},
+  { id:'a3', code:'03', name:'Método A3',
+    theory:`
+      <h3>¿Qué es un A3?</h3>
+      <p>Un <strong>A3</strong> es un documento de una sola página (tamaño A3) que resume un problema, su análisis y su plan de acción de forma <strong>clara y visual</strong>. Es tanto una herramienta de <strong>pensamiento estructurado</strong> (A3 thinking) como de comunicación.</p>
+      <h3>Tipos de A3</h3>
+      <ul>
+        <li><strong>A3 de propuesta (Proposal A3):</strong> sigue el ciclo DMAIC completo para proponer una solución.</li>
+        <li><strong>A3 de estado (Status Report A3):</strong> comunica el avance de una iniciativa ya en marcha.</li>
+        <li><strong>A3 de resolución de problemas (Troubleshooting A3):</strong> enfocado en incidentes puntuales.</li>
+      </ul>
+      <h3>Estructura típica</h3>
+      <p>Título → Antecedentes (Background) → Situación actual (Current Condition) → Objetivo/Meta (Target) → Análisis de causa raíz → Contramedidas propuestas → Plan de implementación → Seguimiento/resultados.</p>
+      <h3>Comunicación y catchball</h3>
+      <p>Un buen A3 «cuenta una historia» lógica y visual, con datos, comprensible en pocos minutos. El <strong>catchball</strong> es el diálogo iterativo de ida y vuelta entre el autor del A3 y los stakeholders para refinar el pensamiento antes de decidir.</p>`,
+    flashcards:[
+      {t:'A3', d:'Documento de una página que resume problema, análisis y plan de acción; herramienta de pensamiento estructurado.'},
+      {t:'A3 de propuesta', d:'Sigue el ciclo DMAIC completo para proponer una solución a un problema.'},
+      {t:'A3 de estado', d:'Comunica el avance de una iniciativa de mejora en curso.'},
+      {t:'Catchball', d:'Diálogo iterativo entre el autor del A3 y los stakeholders para refinar ideas antes de decidir.'},
+      {t:'A3 thinking', d:'Enfoque estructurado y visual para resolver problemas y comunicar el razonamiento en una sola página.'},
+    ]},
+  { id:'de', code:'04', name:'Fase Define',
+    theory:`
+      <h3>Objetivo de la fase</h3>
+      <p>Enunciar con claridad el <strong>problema</strong>, su impacto y el <strong>alcance</strong> del proyecto de mejora, antes de buscar soluciones.</p>
+      <h3>Problem statement</h3>
+      <p>Debe ser <strong>específico, medible y basado en hechos</strong> (no en causas ni soluciones), describiendo el «gap» entre el desempeño actual y el esperado.</p>
+      <h3>Herramientas clave</h3>
+      <ul>
+        <li><strong>SIPOC</strong> (Suppliers-Inputs-Process-Outputs-Customers): mapa de alto nivel para entender el alcance y los límites del proceso.</li>
+        <li><strong>Voice of the Customer (VoC):</strong> recoge las necesidades del cliente para entender qué es «valor».</li>
+        <li><strong>Análisis de stakeholders:</strong> identifica a las partes interesadas según su nivel de <strong>influencia e interés</strong>.</li>
+        <li><strong>Project charter:</strong> formaliza problema, objetivo, alcance, equipo y cronograma.</li>
+      </ul>
+      <p>El problema y el objetivo se <strong>validan con el sponsor</strong> antes de avanzar a Measure.</p>`,
+    flashcards:[
+      {t:'Problem statement', d:'Enunciado claro y medible del problema, basado en hechos, sin causas ni soluciones implícitas.'},
+      {t:'SIPOC', d:'Suppliers-Inputs-Process-Outputs-Customers: mapa de alto nivel para definir el alcance de un proceso.'},
+      {t:'Voice of the Customer (VoC)', d:'Recopilación de necesidades y expectativas del cliente para definir el valor.'},
+      {t:'Project charter', d:'Documento que formaliza problema, objetivo, alcance, equipo y cronograma del proyecto.'},
+      {t:'Análisis de stakeholders', d:'Identificación de partes interesadas según su influencia e interés en el proyecto.'},
+    ]},
+  { id:'me', code:'05', name:'Fase Measure',
+    theory:`
+      <h3>Objetivo de la fase</h3>
+      <p>Establecer una <strong>línea base (baseline)</strong> fiable del desempeño actual del proceso, con datos, antes de analizar causas.</p>
+      <h3>Plan de recolección de datos</h3>
+      <p>Define <strong>qué</strong> medir, <strong>cómo</strong>, <strong>quién</strong>, <strong>cuándo</strong> y con qué frecuencia; cada métrica debe definirse operacionalmente.</p>
+      <h3>Tipos de métricas</h3>
+      <ul>
+        <li><strong>De resultado (lag):</strong> miden el resultado final del proceso (ej. satisfacción del cliente).</li>
+        <li><strong>De proceso (lead):</strong> miden un paso intermedio que predice el resultado.</li>
+      </ul>
+      <h3>Value Stream Mapping (VSM)</h3>
+      <p>Mapa visual del flujo de valor que muestra todos los pasos del proceso, identificando desperdicios (los 8 desperdicios <strong>TIMWOODS</strong>) y tiempos de espera.</p>
+      <h3>Process Cycle Efficiency (PCE)</h3>
+      <p>Relación entre el <strong>tiempo que añade valor</strong> y el <strong>tiempo total del proceso</strong> (Lead Time).</p>`,
+    flashcards:[
+      {t:'Baseline', d:'Medición del desempeño actual del proceso antes de introducir mejoras.'},
+      {t:'Data collection plan', d:'Plan que define qué, cómo, quién y cuándo se mide cada métrica.'},
+      {t:'Métrica de resultado (lag)', d:'Mide el resultado final del proceso.'},
+      {t:'Métrica de proceso (lead)', d:'Mide un paso intermedio que predice el resultado final.'},
+      {t:'VSM', d:'Value Stream Mapping: mapa visual del flujo de valor, tiempos y desperdicios.'},
+      {t:'PCE', d:'Process Cycle Efficiency: % de tiempo de valor añadido sobre el tiempo total (Lead Time).'},
+      {t:'TIMWOODS', d:'Los 8 desperdicios Lean: Transporte, Inventario, Movimiento, Espera, Sobreproducción, Sobreprocesamiento, Defectos, Talento no utilizado.'},
+    ]},
+  { id:'an', code:'06', name:'Fase Analyze',
+    theory:`
+      <h3>Objetivo de la fase</h3>
+      <p>Identificar la(s) <strong>causa(s) raíz</strong> del problema usando datos, no suposiciones.</p>
+      <h3>Herramientas de análisis</h3>
+      <ul>
+        <li><strong>5 Whys (5 porqués):</strong> preguntar «¿por qué?» de forma iterativa hasta llegar a la causa raíz.</li>
+        <li><strong>Diagrama de Ishikawa</strong> (espina de pescado): organiza posibles causas en categorías (las 6M, o su adaptación a TI: Personas, Proceso, Tecnología, Datos…).</li>
+        <li><strong>Diagrama de Pareto:</strong> principio 80/20 — las pocas causas vitales que explican la mayoría del problema.</li>
+      </ul>
+      <h3>Causa raíz vs. síntoma</h3>
+      <p>La <strong>causa raíz</strong> es el origen fundamental cuya eliminación evita que el problema se repita; un síntoma o causa intermedia no lo es.</p>
+      <h3>Gemba</h3>
+      <p>«El lugar real» donde ocurre el trabajo. Un <strong>gemba walk</strong> permite observar directamente y validar hipótesis con datos, no solo con brainstorming.</p>`,
+    flashcards:[
+      {t:'5 Whys', d:'Preguntar "¿por qué?" repetidamente para llegar a la causa raíz.'},
+      {t:'Diagrama de Ishikawa', d:'Diagrama causa-efecto (espina de pescado) que organiza posibles causas por categorías.'},
+      {t:'Diagrama de Pareto', d:'Gráfico 80/20 que prioriza las causas de mayor impacto.'},
+      {t:'Causa raíz', d:'Origen fundamental de un problema; eliminarla evita que se repita.'},
+      {t:'Gemba', d:'"El lugar real" donde ocurre el trabajo; un gemba walk valida hipótesis in situ.'},
+    ]},
+  { id:'im', code:'07', name:'Fase Improve',
+    theory:`
+      <h3>Objetivo de la fase</h3>
+      <p>Generar, evaluar y seleccionar <strong>contramedidas</strong> que ataquen la causa raíz validada.</p>
+      <h3>Ideación y selección</h3>
+      <ul>
+        <li><strong>Brainstorming / brainwriting / benchmarking:</strong> técnicas para generar el máximo número de ideas sin juzgarlas de inmediato.</li>
+        <li><strong>Matriz impacto/esfuerzo:</strong> prioriza soluciones según impacto esperado y esfuerzo o factibilidad.</li>
+        <li><strong>Análisis coste-beneficio:</strong> compara el coste de implementar frente al beneficio esperado.</li>
+      </ul>
+      <h3>Prueba piloto</h3>
+      <p>Probar la solución a <strong>pequeña escala</strong> (ciclo PDCA) antes de implementarla por completo, para validar que resuelve la causa raíz sin generar efectos no deseados.</p>
+      <h3>Plan de implementación</h3>
+      <p>Define quién, qué, cuándo y con qué recursos se despliega la solución, gestionando el riesgo asociado.</p>`,
+    flashcards:[
+      {t:'Contramedida', d:'Solución diseñada específicamente para eliminar o mitigar una causa raíz validada.'},
+      {t:'Matriz impacto/esfuerzo', d:'Prioriza soluciones según impacto esperado y esfuerzo requerido.'},
+      {t:'Prueba piloto', d:'Prueba a pequeña escala (PDCA) antes de la implementación completa.'},
+      {t:'Brainstorming', d:'Generación de ideas en grupo, sin juzgar, para maximizar opciones.'},
+      {t:'Análisis coste-beneficio', d:'Compara el coste de implementar una solución con el beneficio esperado.'},
+    ]},
+  { id:'co', code:'08', name:'Fase Control',
+    theory:`
+      <h3>Objetivo de la fase</h3>
+      <p>Asegurar que la mejora se <strong>mantenga en el tiempo</strong> y no se vuelva a los antiguos hábitos.</p>
+      <h3>Plan de control</h3>
+      <p>Documenta cómo se monitoreará el proceso mejorado: <strong>qué métrica</strong>, con qué <strong>frecuencia</strong>, quién <strong>responde</strong> ante desviaciones y qué <strong>umbrales</strong> las disparan.</p>
+      <h3>Trabajo estándar</h3>
+      <p>Documenta la nueva forma <strong>correcta y repetible</strong> de trabajar, para que sea fácil de mantener y transferir.</p>
+      <h3>Cierre y réplica</h3>
+      <ul>
+        <li><strong>Cierre del A3/evento:</strong> se comunican resultados y lecciones aprendidas, y se traspasa la propiedad del proceso a su dueño operativo.</li>
+        <li><strong>Yokoten:</strong> réplica horizontal — compartir la mejora con otras áreas donde aplique.</li>
+      </ul>
+      <p>El ciclo no termina: alimenta el siguiente Kaizen (PDCA continuo).</p>`,
+    flashcards:[
+      {t:'Plan de control', d:'Define métrica, frecuencia, responsable y umbrales para monitorear el proceso mejorado.'},
+      {t:'Trabajo estándar', d:'Documentación de la nueva forma correcta y repetible de trabajar.'},
+      {t:'Yokoten', d:'Réplica horizontal: compartir una mejora exitosa con otras áreas o equipos.'},
+      {t:'Sostenibilidad de la mejora', d:'Capacidad de mantener los resultados en el tiempo, sin volver a los antiguos hábitos.'},
+      {t:'Cierre del A3', d:'Comunicación de resultados y lecciones aprendidas, y traspaso de la propiedad del proceso.'},
+    ]},
+];
+
+const EXAM = [
+ {m:'in',q:'¿Qué significa la palabra japonesa "Kaizen"?',o:['Control de calidad total','Cambio para mejor / mejora continua','Eliminación total de desperdicios','Justo a tiempo'],c:1,e:'Kaizen (改善) se traduce como "cambio para mejor" y designa la mejora continua mediante pequeños pasos.'},
+ {m:'in',q:'¿Cuál es la principal diferencia entre el Kaizen diario y el Kaizen de mejora (Improvement Kaizen)?',o:['El Kaizen diario requiere aprobación del sponsor y el de mejora no','El Kaizen diario se integra en el trabajo normal del equipo mientras que el de mejora es un evento estructurado y limitado en el tiempo','El Kaizen de mejora solo aplica a procesos de TI','No existe diferencia, son sinónimos'],c:1,e:'El Kaizen diario ocurre de forma continua en el trabajo del equipo; el de mejora es un evento acotado que sigue el ciclo DMAIC.'},
+ {m:'in',q:'¿Qué modelo de mejora continua sirve de base conceptual tanto a DMAIC como a ITIL CSI?',o:['SIPOC','PDCA (Plan-Do-Check-Act)','5S','TIMWOODS'],c:1,e:'El ciclo PDCA de Deming es la base iterativa sobre la que se construyen DMAIC y el enfoque de mejora continua de ITIL.'},
+ {m:'in',q:'¿Cuándo es más apropiado usar el ciclo DMEDI en lugar de DMAIC?',o:['Cuando el proceso ya existe y solo necesita ajustes menores','Cuando no existe un proceso y hay que diseñar uno nuevo (innovación/rediseño)','Cuando el problema es puramente de comportamiento del equipo','Cuando el evento Kaizen dura menos de un día'],c:1,e:'DMEDI (Define, Measure, Explore, Develop, Implement) es un ciclo de diseño/innovación para cuando no existe un proceso previo.'},
+ {m:'in',q:'¿Cuál de los siguientes es un prerrequisito oficial para presentarse al examen Lean IT Kaizen?',o:['Certificación Lean Six Sigma Green Belt','Certificación Lean IT Foundation','Certificación ITIL Foundation','No existe prerrequisito'],c:1,e:'Lean IT Foundation es un prerrequisito oficial para presentarse al examen Lean IT Kaizen.'},
+ {m:'org',q:'¿Qué información se visualiza típicamente en un "day board" (tablero diario)?',o:['Los KPIs anuales de la organización','El trabajo del día, el estado de ánimo del equipo y los impedimentos','El presupuesto del departamento de TI','El organigrama del equipo'],c:1,e:'El day board hace visible el trabajo diario, el ánimo del equipo y los impedimentos a resolver.'},
+ {m:'org',q:'¿Cuál es el rol principal del Kaizen Lead durante un evento de mejora?',o:['Imponer la solución que considera correcta','Facilitar el proceso de forma neutral, sin imponer soluciones','Aprobar el presupuesto del proyecto','Sustituir al dueño del proceso'],c:1,e:'El Kaizen Lead facilita el proceso de forma neutral; no impone soluciones al equipo.'},
+ {m:'org',q:'¿Qué aporta principalmente el sponsor/champion a un evento Kaizen?',o:['Conocimiento técnico detallado del proceso','Recursos, respaldo y eliminación de barreras organizativas','Facilitación neutral de las sesiones','Redacción del A3 final'],c:1,e:'El sponsor proporciona recursos, respaldo y elimina barreras organizativas al equipo.'},
+ {m:'org',q:'En un "week board" (tablero semanal) es habitual encontrar:',o:['Únicamente el registro de incidencias del día','Objetivos, KPIs y lecciones aprendidas de la semana','El plan de vacaciones del equipo','El diagrama de Ishikawa del último problema'],c:1,e:'El week board resume objetivos, KPIs y lecciones aprendidas a nivel semanal.'},
+ {m:'org',q:'¿Qué criterios se usan típicamente en una matriz de priorización para seleccionar oportunidades de mejora?',o:['Antigüedad del proceso y número de empleados involucrados','Impacto esperado y esfuerzo/factibilidad','Idioma del equipo y ubicación geográfica','Color del tablero utilizado'],c:1,e:'La priorización se basa habitualmente en el impacto esperado y el esfuerzo o factibilidad de cada opción.'},
+ {m:'a3',q:'¿Cuál es el propósito principal de un documento A3?',o:['Sustituir las reuniones de seguimiento del proyecto','Resumir en una sola página un problema, su análisis y su plan de acción de forma clara y visual','Registrar formalmente las horas dedicadas al proyecto','Servir como contrato legal entre el equipo y el sponsor'],c:1,e:'El A3 resume en una página el problema, el análisis y el plan de acción, de forma visual.'},
+ {m:'a3',q:'¿Qué diferencia a un "A3 de propuesta" (Proposal A3) de un "A3 de estado" (Status Report A3)?',o:['El A3 de propuesta sigue el ciclo DMAIC completo para proponer una solución; el de estado comunica el avance de una iniciativa ya en marcha','No hay diferencia real entre ambos','El A3 de estado solo se usa para incidentes críticos','El A3 de propuesta no requiere datos'],c:0,e:'El A3 de propuesta recorre todo el DMAIC; el de estado informa del avance de algo ya iniciado.'},
+ {m:'a3',q:'¿Qué se entiende por "catchball" en el contexto del método A3?',o:['Un juego de team building previo al evento Kaizen','Un diálogo iterativo de ida y vuelta entre el autor del A3 y los stakeholders para refinar el pensamiento','La fase final de cierre del A3','Un tipo de gráfico usado en la fase Measure'],c:1,e:'Catchball es el intercambio iterativo entre autor y stakeholders para refinar el A3 antes de decidir.'},
+ {m:'a3',q:'Un buen "A3 thinking" se caracteriza principalmente por:',o:['Usar el máximo texto posible para no omitir detalles','Contar una historia lógica y visual apoyada en datos, comprensible en pocos minutos','Centrarse solo en la solución, sin describir el problema','Evitar la participación de los stakeholders'],c:1,e:'El A3 thinking cuenta una historia lógica, visual y basada en datos, fácil de entender rápidamente.'},
+ {m:'a3',q:'¿En qué sección de un A3 se documenta habitualmente el análisis de causa raíz?',o:['En los antecedentes (Background)','Entre la situación actual/objetivo y las contramedidas propuestas','En el plan de implementación','No forma parte de la estructura del A3'],c:1,e:'El análisis de causa raíz se ubica entre la descripción de la situación/objetivo y las contramedidas.'},
+ {m:'de',q:'Un buen "problem statement" (enunciado del problema) debe:',o:['Incluir ya la solución propuesta','Ser específico, medible y basado en hechos, sin implicar causas ni soluciones','Ser lo más general posible para no limitar el análisis','Redactarse únicamente por el sponsor'],c:1,e:'El problem statement describe hechos observables y medibles, sin adelantar causas ni soluciones.'},
+ {m:'de',q:'¿Para qué se utiliza la herramienta SIPOC en la fase Define?',o:['Para calcular el Process Cycle Efficiency','Para obtener un mapa de alto nivel de Proveedores-Entradas-Proceso-Salidas-Clientes y definir el alcance','Para priorizar las causas raíz','Para documentar el plan de control'],c:1,e:'SIPOC da una visión de alto nivel del proceso y ayuda a delimitar su alcance.'},
+ {m:'de',q:'La "Voice of the Customer" (VoC) tiene como objetivo:',o:['Medir el tiempo de ciclo del proceso','Recoger las necesidades y expectativas del cliente para entender qué es valor','Documentar el trabajo estándar','Seleccionar al Kaizen Lead'],c:1,e:'VoC recoge la perspectiva del cliente para definir qué constituye valor.'},
+ {m:'de',q:'El "project charter" (carta del proyecto) en la fase Define sirve para:',o:['Formalizar el problema, objetivo, alcance, equipo y cronograma del proyecto de mejora','Registrar las causas raíz identificadas','Documentar el plan de control final','Sustituir al A3'],c:0,e:'El project charter formaliza problema, objetivo, alcance, equipo y cronograma.'},
+ {m:'de',q:'En el análisis de stakeholders, las partes interesadas se clasifican habitualmente según:',o:['Su antigüedad en la empresa','Su nivel de influencia e interés en el proyecto','El idioma que hablan','El departamento de TI al que pertenecen únicamente'],c:1,e:'Se clasifican según su nivel de influencia e interés, para definir la estrategia de comunicación.'},
+ {m:'me',q:'¿Cuál es el objetivo principal de la fase Measure?',o:['Implementar la solución definitiva','Establecer una línea base fiable del desempeño actual antes de analizar causas','Cerrar el evento Kaizen','Seleccionar al sponsor del proyecto'],c:1,e:'Measure busca establecer una línea base fiable antes de pasar a analizar causas.'},
+ {m:'me',q:'Una métrica de "resultado" (lag) se diferencia de una métrica de "proceso" (lead) en que:',o:['La de resultado mide un paso intermedio que predice el desempeño final','La de resultado mide el resultado final del proceso, mientras que la de proceso mide un paso intermedio','No existe diferencia, son intercambiables','Las métricas de proceso solo aplican a TI'],c:1,e:'Lag mide el resultado final; lead mide un paso intermedio que lo predice.'},
+ {m:'me',q:'El Value Stream Mapping (VSM) permite principalmente:',o:['Calcular el presupuesto del proyecto','Visualizar el flujo de valor completo e identificar desperdicios y tiempos de espera','Redactar el A3 de propuesta','Seleccionar las contramedidas finales'],c:1,e:'El VSM visualiza el flujo completo y expone desperdicios y esperas.'},
+ {m:'me',q:'El Process Cycle Efficiency (PCE) se calcula como:',o:['Número de defectos dividido entre el número de unidades producidas','Tiempo que añade valor dividido entre el tiempo total del proceso (Lead Time)','Coste del proyecto dividido entre beneficio esperado','Número de stakeholders dividido entre el tamaño del equipo'],c:1,e:'PCE = tiempo de valor añadido / tiempo total (Lead Time).'},
+ {m:'me',q:'El acrónimo TIMWOODS se utiliza para recordar:',o:['Las fases del ciclo DMAIC','Los ocho tipos de desperdicio Lean','Los roles de un evento Kaizen','Las secciones de un documento A3'],c:1,e:'TIMWOODS enumera los 8 desperdicios Lean.'},
+ {m:'an',q:'La técnica de los "5 Whys" (5 porqués) se utiliza para:',o:['Priorizar soluciones según impacto y esfuerzo','Llegar a la causa raíz de un problema preguntando "¿por qué?" de forma iterativa','Calcular el Process Cycle Efficiency','Documentar el plan de control'],c:1,e:'Los 5 Whys ayudan a llegar a la causa raíz preguntando "¿por qué?" repetidamente.'},
+ {m:'an',q:'En un diagrama de Ishikawa (espina de pescado), las posibles causas se organizan:',o:['Por orden cronológico de aparición','En categorías (por ejemplo, las 6M o su adaptación a TI)','Por coste de investigación','Alfabéticamente'],c:1,e:'Las causas se agrupan en categorías, como las 6M o su adaptación a TI.'},
+ {m:'an',q:'El diagrama de Pareto se basa en el principio de que:',o:['Todas las causas tienen el mismo peso en el problema','Un pequeño número de causas explica la mayor parte del problema (80/20)','Solo existe una causa raíz posible por problema','Las causas deben validarse sin usar datos'],c:1,e:'El principio 80/20 indica que pocas causas explican la mayor parte del efecto.'},
+ {m:'an',q:'¿Qué distingue a una causa raíz de un simple síntoma?',o:['La causa raíz es siempre la más fácil de resolver','La causa raíz es el origen fundamental cuya eliminación evita que el problema se repita','El síntoma siempre aparece antes que la causa raíz','No hay diferencia práctica entre ambos'],c:1,e:'La causa raíz, al eliminarse, evita que el problema vuelva a ocurrir; el síntoma no.'},
+ {m:'an',q:'Realizar un "gemba walk" durante la fase Analyze significa:',o:['Reunir al equipo en una sala de conferencias para hacer brainstorming','Ir al lugar real donde ocurre el trabajo para observar y validar hipótesis directamente','Enviar una encuesta a los stakeholders','Redactar el informe final del A3'],c:1,e:'Un gemba walk implica ir al lugar real de trabajo para observar y validar con datos.'},
+ {m:'im',q:'El objetivo principal de la fase Improve es:',o:['Medir el desempeño actual del proceso','Generar, evaluar y seleccionar contramedidas que ataquen la causa raíz validada','Definir el problema y su alcance','Cerrar el evento Kaizen'],c:1,e:'Improve genera, evalúa y selecciona contramedidas contra la causa raíz validada.'},
+ {m:'im',q:'Una matriz de impacto/esfuerzo se utiliza en la fase Improve para:',o:['Calcular el Process Cycle Efficiency','Priorizar las soluciones candidatas según su impacto esperado y el esfuerzo requerido','Definir el enunciado del problema','Documentar el trabajo estándar'],c:1,e:'Sirve para priorizar soluciones candidatas por impacto y esfuerzo.'},
+ {m:'im',q:'¿Por qué se recomienda realizar una prueba piloto antes de implementar una solución a gran escala?',o:['Porque es un requisito legal en todos los proyectos de TI','Porque permite validar a pequeña escala, mediante PDCA, que la solución resuelve la causa raíz sin efectos no deseados','Porque reduce el número de stakeholders involucrados','Porque sustituye la necesidad de medir la línea base'],c:1,e:'La prueba piloto valida a pequeña escala, vía PDCA, que la solución funciona sin efectos no deseados.'},
+ {m:'im',q:'El brainstorming como técnica de ideación se caracteriza por:',o:['Juzgar y descartar ideas inmediatamente para ahorrar tiempo','Generar el máximo número de ideas en grupo sin juzgarlas en el momento','Limitarse a una sola persona para evitar sesgos','Aplicarse únicamente en la fase Control'],c:1,e:'El brainstorming maximiza la cantidad de ideas en grupo, sin juicio inmediato.'},
+ {m:'im',q:'Un análisis coste-beneficio en la fase Improve sirve para:',o:['Comparar el coste de implementar una solución con el beneficio esperado','Calcular el Lead Time del proceso','Definir los stakeholders del proyecto','Sustituir el diagrama de Ishikawa'],c:0,e:'Compara el coste de implementar una solución frente al beneficio esperado.'},
+ {m:'co',q:'¿Cuál es el propósito principal de un plan de control?',o:['Documentar el problema inicial del proyecto','Definir cómo se monitoreará el proceso mejorado: métrica, frecuencia, responsable y umbrales','Sustituir el A3 de propuesta','Seleccionar al Kaizen Lead del siguiente evento'],c:1,e:'El plan de control define métrica, frecuencia, responsable y umbrales de monitoreo.'},
+ {m:'co',q:'El "trabajo estándar" (standard work) tras una mejora tiene como fin:',o:['Documentar la nueva forma correcta y repetible de realizar el proceso mejorado','Registrar únicamente los errores del proceso anterior','Sustituir la necesidad de un plan de control','Eliminar la necesidad de gestión visual'],c:0,e:'El trabajo estándar documenta la nueva forma correcta y repetible de trabajar.'},
+ {m:'co',q:'El término "yokoten" hace referencia a:',o:['El cierre formal del evento Kaizen','La réplica horizontal de una mejora exitosa a otras áreas o equipos','El diagrama de causa-efecto','La fase final del ciclo DMEDI'],c:1,e:'Yokoten es la réplica horizontal de una mejora exitosa a otras áreas.'},
+ {m:'co',q:'Sostener una mejora en el tiempo (evitar volver a los antiguos hábitos) depende principalmente de:',o:['Aumentar el presupuesto del proyecto','Un plan de control efectivo y trabajo estándar bien comunicado','Cambiar de Kaizen Lead cada mes','Eliminar la gestión visual del proceso'],c:1,e:'La sostenibilidad depende de un buen plan de control y un trabajo estándar bien comunicado.'},
+ {m:'co',q:'Al cerrar un A3/evento Kaizen es una buena práctica:',o:['Evitar comunicar los resultados para no generar expectativas','Comunicar resultados y lecciones aprendidas, y traspasar la propiedad del proceso al dueño correspondiente','Eliminar el tablero de mejora inmediatamente','Mantener al equipo del evento como propietario permanente del proceso'],c:1,e:'Al cerrar, se comunican resultados/lecciones y se traspasa la propiedad del proceso a su dueño.'},
+];
+
+const SIM1 = [
+ {m:'in',q:'¿Qué significan "Kai" y "Zen" en la palabra Kaizen?',o:['Rápido y lento','Cambio y para mejor','Grande y pequeño','Individual y equipo'],c:1,e:'"Kai" = cambio, "Zen" = para mejor.'},
+ {m:'in',q:'El ciclo PDCA significa:',o:['Plan-Do-Check-Act','Process-Data-Control-Analysis','Plan-Define-Check-Analyze','Problem-Diagnose-Correct-Act'],c:0,e:'PDCA: Plan-Do-Check-Act.'},
+ {m:'org',q:'¿Qué tablero muestra el trabajo, ánimo e impedimentos del día?',o:['Week board','Day board','Improvement board','Control board'],c:1,e:'El day board se centra en el trabajo diario, el ánimo del equipo y los impedimentos.'},
+ {m:'org',q:'¿Quién facilita un evento Kaizen de forma neutral?',o:['El sponsor','El Kaizen Lead','El cliente','El auditor'],c:1,e:'El Kaizen Lead facilita de forma neutral.'},
+ {m:'a3',q:'¿Qué tamaño de página da nombre al método A3?',o:['A4','A3','A2','Carta'],c:1,e:'El método toma su nombre del tamaño de papel A3.'},
+ {m:'a3',q:'El diálogo iterativo entre autor y stakeholders del A3 se llama:',o:['Gemba walk','Catchball','Yokoten','Brainstorming'],c:1,e:'Ese diálogo iterativo se llama catchball.'},
+ {m:'de',q:'¿Qué herramienta mapea Proveedores-Entradas-Proceso-Salidas-Clientes?',o:['VSM','SIPOC','A3','DMAIC'],c:1,e:'SIPOC mapea Suppliers-Inputs-Process-Outputs-Customers.'},
+ {m:'de',q:'Un problem statement no debe incluir:',o:['Datos','El impacto del problema','La causa o solución del problema','El alcance'],c:2,e:'No debe adelantar causas ni soluciones, solo describir hechos.'},
+ {m:'me',q:'¿Qué mide una línea base (baseline)?',o:['El desempeño futuro deseado','El desempeño actual antes de mejorar','El coste del proyecto','La satisfacción del sponsor'],c:1,e:'La línea base mide el desempeño actual, antes de mejorar.'},
+ {m:'me',q:'TIMWOODS enumera:',o:['Las fases DMAIC','Los 8 desperdicios Lean','Los roles del equipo','Las secciones del A3'],c:1,e:'TIMWOODS enumera los 8 desperdicios Lean.'},
+ {m:'an',q:'¿Cuántas veces se pregunta típicamente "¿por qué?" en la técnica 5 Whys?',o:['3','5','8','10'],c:1,e:'La técnica toma su nombre de preguntar "por qué" típicamente 5 veces.'},
+ {m:'an',q:'El diagrama de Ishikawa también se conoce como:',o:['Diagrama de Pareto','Diagrama de espina de pescado','Diagrama SIPOC','Diagrama de flujo de valor'],c:1,e:'Ishikawa = diagrama de espina de pescado (causa-efecto).'},
+ {m:'an',q:'Ir al gemba significa:',o:['Consultar una base de datos histórica','Ir al lugar real donde ocurre el trabajo','Redactar el informe final','Convocar al sponsor'],c:1,e:'Gemba es el lugar real donde ocurre el trabajo.'},
+ {m:'im',q:'Probar una solución a pequeña escala antes de implementarla del todo se llama:',o:['Plan de control','Prueba piloto','Trabajo estándar','Gemba walk'],c:1,e:'Se llama prueba piloto.'},
+ {m:'im',q:'Una matriz impacto/esfuerzo sirve para:',o:['Medir el Lead Time','Priorizar soluciones candidatas','Definir el problema','Cerrar el A3'],c:1,e:'Sirve para priorizar soluciones candidatas.'},
+ {m:'co',q:'El trabajo estándar documenta:',o:['Los errores del proceso anterior','La nueva forma correcta y repetible de trabajar','El presupuesto del proyecto','Los stakeholders del proyecto'],c:1,e:'Documenta la nueva forma correcta y repetible de trabajar.'},
+ {m:'co',q:'Replicar una mejora exitosa en otras áreas se denomina:',o:['Catchball','Yokoten','Gemba','PDCA'],c:1,e:'Esa réplica horizontal se llama yokoten.'},
+ {m:'in',q:'DMEDI se usa preferentemente cuando:',o:['Ya existe un proceso maduro a optimizar','Hay que diseñar un proceso nuevo','El evento dura menos de un día','No hay sponsor disponible'],c:1,e:'DMEDI se usa cuando hay que diseñar un proceso nuevo.'},
+ {m:'de',q:'La Voice of the Customer (VoC) ayuda a definir:',o:['El presupuesto del proyecto','Qué es valor desde la perspectiva del cliente','El plan de control','El trabajo estándar'],c:1,e:'VoC ayuda a definir qué es valor desde la perspectiva del cliente.'},
+ {m:'me',q:'El PCE (Process Cycle Efficiency) compara:',o:['Coste vs beneficio','Tiempo de valor añadido vs tiempo total del proceso','Número de defectos vs unidades','Stakeholders vs equipo'],c:1,e:'PCE compara el tiempo de valor añadido con el tiempo total del proceso.'},
+];
+
+const SIM2 = [
+ {m:'org',q:'Un equipo de TI resuelve pequeños problemas cada mañana en una reunión de 15 minutos frente a su tablero, sin abrir un evento formal. ¿Qué tipo de Kaizen practican?',o:['Improvement Kaizen','Kaizen diario','DMEDI','A3 de propuesta'],c:1,e:'Resolver problemas pequeños en el trabajo diario, sin evento formal, es Kaizen diario.'},
+ {m:'org',q:'Durante un evento Kaizen, el facilitador propone directamente la solución que él considera correcta e impide que el equipo explore otras alternativas. ¿Qué principio incumple?',o:['El principio de neutralidad del Kaizen Lead','El uso de SIPOC','El cálculo del PCE','La regla de las 6M'],c:0,e:'El Kaizen Lead debe ser neutral y no imponer soluciones.'},
+ {m:'in',q:'Un equipo detecta un problema de disponibilidad en un servicio completamente nuevo, sin proceso previo definido. ¿Qué ciclo es más adecuado?',o:['DMAIC','DMEDI','PDCA clásico','5 Whys'],c:1,e:'Sin proceso previo que mejorar, DMEDI (diseño/innovación) es más adecuado que DMAIC.'},
+ {m:'org',q:'El sponsor de un proyecto libera tiempo de dos analistas para el equipo y elimina un bloqueo con el área de seguridad. ¿Qué rol desempeña?',o:['Kaizen Lead','Sponsor/Champion','Stakeholder externo','Dueño del proceso'],c:1,e:'Aportar recursos y eliminar barreras es propio del sponsor/champion.'},
+ {m:'de',q:'Un equipo redacta: "El proceso de aprobación de cambios es lento porque el equipo de aprobadores no usa la herramienta correcta". ¿Cuál es el defecto principal?',o:['Es demasiado corto','Ya incluye una causa/solución implícita en lugar de describir solo el hecho observable','No menciona el nombre del proceso','Está escrito en presente'],c:1,e:'El enunciado adelanta una causa/solución, cuando debería describir solo el hecho observable.'},
+ {m:'de',q:'Al construir el SIPOC de un proceso de gestión de incidencias, el equipo identifica quién solicita el servicio y quién recibe el resultado final. ¿A qué elementos corresponde?',o:['Suppliers e Inputs','Process y Outputs','Suppliers y Customers','Inputs y Outputs'],c:2,e:'Quien solicita es el Supplier (o el propio Customer que origina la solicitud) y quien recibe el resultado es el Customer; en este caso corresponde a Suppliers y Customers.'},
+ {m:'me',q:'Un equipo mide el tiempo que tarda un ticket en resolverse (resultado final) y, por separado, el tiempo que tarda en ser asignado a un técnico (paso intermedio). ¿Cómo se clasifican?',o:['Ambas son métricas de resultado (lag)','Métrica de resultado (lag) y métrica de proceso (lead)','Métrica de proceso (lead) y métrica de resultado (lag)','Ambas son métricas de proceso (lead)'],c:1,e:'El tiempo de resolución final es lag; el tiempo de asignación (paso intermedio) es lead.'},
+ {m:'me',q:'En un VSM, un ticket permanece 6 horas en cola sin que nadie trabaje en él, de un total de 8 horas. ¿Qué indica esto sobre el PCE?',o:['El PCE será muy alto, cercano al 100%','El PCE será bajo, ya que la mayor parte del tiempo no añade valor','El PCE no se puede calcular sin conocer el coste','El PCE mide directamente la satisfacción del cliente'],c:1,e:'Si la mayor parte del tiempo es espera sin valor añadido, el PCE resultante es bajo.'},
+ {m:'an',q:'Aplicando los 5 Whys a un fallo recurrente de un servidor, el equipo se detiene en la segunda pregunta porque "el disco se llenó". ¿Qué riesgo tiene detenerse ahí?',o:['Ninguno, esa ya es la causa raíz','Confundir un síntoma o causa intermedia con la causa raíz real','Haber preguntado demasiadas veces','Que el diagrama de Ishikawa quede incompleto'],c:1,e:'Detenerse pronto puede confundir una causa intermedia con la verdadera causa raíz.'},
+ {m:'an',q:'En un diagrama de Ishikawa aplicado a TI, el equipo agrupa causas bajo "Proceso", "Personas", "Tecnología" y "Datos". ¿Qué está haciendo?',o:['Sustituyendo el DMAIC por DMEDI','Adaptando las categorías clásicas (6M) al contexto de TI','Calculando el PCE','Redactando el problem statement'],c:1,e:'Está adaptando las categorías clásicas del Ishikawa (6M) al contexto de TI.'},
+ {m:'an',q:'Un Pareto muestra que el 78% de los tickets de un tipo provienen de solo 2 de 15 causas posibles. ¿Qué debería priorizar el equipo?',o:['Atacar las 13 causas restantes primero','Enfocar el análisis y las soluciones en esas 2 causas vitales','Ignorar el Pareto y usar solo el diagrama de Ishikawa','Repetir la medición porque el resultado es inválido'],c:1,e:'Según el principio 80/20, hay que enfocarse en las pocas causas vitales.'},
+ {m:'im',q:'Antes de implementar una nueva forma de asignar tickets a todo el departamento, el equipo la aplica primero solo con un turno durante dos semanas. ¿Qué práctica es esta?',o:['Yokoten','Prueba piloto (PDCA a pequeña escala)','Gemba walk','Catchball'],c:1,e:'Probar a pequeña escala antes de generalizar es una prueba piloto (PDCA).'},
+ {m:'im',q:'El equipo genera 30 ideas para reducir el tiempo de espera sin descartar ninguna en la sesión inicial, evaluándolas solo después. ¿Qué técnica usan y por qué no juzgar en el momento?',o:['5 Whys; para llegar rápido a la causa raíz','Brainstorming; para maximizar la cantidad de ideas antes de evaluarlas','SIPOC; para definir el alcance','Pareto; para priorizar causas'],c:1,e:'Es brainstorming: no juzgar de inmediato maximiza la cantidad de ideas generadas.'},
+ {m:'im',q:'Dos soluciones tienen impacto similar, pero una requiere cambiar un sistema legado (alto esfuerzo) y otra solo un ajuste de configuración (bajo esfuerzo). ¿Cuál se prioriza primero normalmente?',o:['La de alto esfuerzo, porque es más duradera','La de bajo esfuerzo y buen impacto ("quick win")','Ninguna, hay que esperar a Control','Se eligen ambas simultáneamente sin análisis'],c:1,e:'Con impacto similar, se prioriza la de menor esfuerzo ("quick win").'},
+ {m:'co',q:'Tras implementar la mejora, el equipo define qué métrica se revisará cada semana, quién actuará si se desvía y qué umbral dispara una alerta. ¿Qué están elaborando?',o:['El problem statement','El plan de control','El SIPOC','La matriz de priorización'],c:1,e:'Definir métrica, responsable y umbrales de desviación es el plan de control.'},
+ {m:'co',q:'Un proceso mejorado se documenta paso a paso para que cualquier técnico nuevo pueda ejecutarlo igual, incluso sin el creador de la mejora presente. ¿Qué concepto se aplica?',o:['Trabajo estándar','Yokoten','Catchball','DMEDI'],c:0,e:'Documentar el proceso paso a paso para que sea repetible es trabajo estándar.'},
+ {m:'co',q:'El área de TI que resolvió un problema de lentitud en despliegues comparte su solución con otro equipo con un problema similar en otra plataforma. ¿Cómo se llama esta práctica?',o:['Gemba walk','Yokoten (réplica horizontal)','Catchball','SIPOC'],c:1,e:'Compartir una mejora con otro equipo/área es yokoten.'},
+ {m:'in',q:'Un Kaizen Lead nota que el equipo empieza a proponer soluciones antes de haber medido el proceso actual. ¿Qué fase del ciclo DMAIC se está saltando?',o:['Define','Measure','Control','Ninguna, es válido saltar fases'],c:1,e:'Proponer soluciones sin datos de línea base indica que se está saltando Measure.'},
+ {m:'co',q:'En el cierre de un evento Kaizen, el equipo transfiere la responsabilidad de mantener el nuevo proceso a quien lo ejecuta día a día. ¿A quién se traspasa la propiedad?',o:['Al Kaizen Lead de forma permanente','Al sponsor únicamente','Al dueño del proceso/equipo operativo','A un consultor externo'],c:2,e:'La propiedad del proceso se traspasa al dueño del proceso/equipo operativo.'},
+ {m:'me',q:'Un equipo confunde "estar ocupado" con "estar generando valor" al medir su proceso. ¿Qué herramienta de Measure ayuda a distinguir el tiempo que añade valor del que no?',o:['SIPOC','Value Stream Mapping (VSM) y el cálculo de PCE','Diagrama de Ishikawa','Matriz impacto/esfuerzo'],c:1,e:'El VSM y el PCE distinguen claramente el tiempo de valor añadido del que no lo es.'},
+];
+
+const MODULE_NAME = Object.fromEntries(MODULES.map(m=>[m.id, m.name]));
+
+/* ============ STATE / RENDER ============ */
+let activeNav = MODULES[0].id;
+let activeSubtab = 'theory';
+const quizState = {}; // id -> {current, answers:{idx:{picked,correct}}}
+
+function initQuiz(id){
+  if(!quizState[id]) quizState[id] = {current:0, answers:{}};
+}
+
+const railNav = document.getElementById('moduleNav');
+MODULES.forEach(m=>{
+  const b = document.createElement('button');
+  b.className = 'rail-btn';
+  b.dataset.nav = m.id;
+  b.innerHTML = `<span class="rail-code">${m.code}</span> ${m.name}`;
+  railNav.appendChild(b);
+});
+
+document.querySelectorAll('[data-nav]').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    activeNav = b.dataset.nav;
+    activeSubtab = 'theory';
+    render();
+  });
+});
+
+document.getElementById('themeBtn').addEventListener('click', ()=>{
+  const html = document.documentElement;
+  const cur = html.getAttribute('data-theme');
+  const next = cur === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('lik-theme', next);
+});
+(function(){
+  const saved = localStorage.getItem('lik-theme');
+  if(saved) document.documentElement.setAttribute('data-theme', saved);
+})();
+
+function setActiveRail(){
+  document.querySelectorAll('[data-nav]').forEach(b=>{
+    b.classList.toggle('active', b.dataset.nav === activeNav);
+  });
+}
+
+function render(){
+  setActiveRail();
+  const panel = document.getElementById('panel');
+  const mod = MODULES.find(m=>m.id===activeNav);
+  if(mod){
+    panel.innerHTML = `
+      <div class="panel-head">
+        <h2>${mod.code} · ${mod.name}</h2>
+        <p class="desc">Módulo ${mod.code} de 08 — Lean IT Kaizen</p>
+      </div>
+      <div class="subtabs">
+        <button class="subtab" data-sub="theory">Teoría</button>
+        <button class="subtab" data-sub="flash">Flashcards (${mod.flashcards.length})</button>
+      </div>
+      <div class="panel-body" id="panelBody"></div>`;
+    panel.querySelectorAll('[data-sub]').forEach(b=>{
+      b.classList.toggle('active', b.dataset.sub===activeSubtab);
+      b.addEventListener('click', ()=>{ activeSubtab=b.dataset.sub; render(); });
+    });
+    const body = document.getElementById('panelBody');
+    if(activeSubtab==='theory'){
+      body.innerHTML = `<div class="theory">${mod.theory}</div>`;
+    } else {
+      body.innerHTML = `<div class="cardgrid">${mod.flashcards.map((f,i)=>`
+        <div class="fc" data-i="${i}">
+          <div class="fc-inner">
+            <div class="fc-front"><div class="t">${f.t}</div><span class="hint">clic para voltear</span></div>
+            <div class="fc-back">${f.d}</div>
+          </div>
+        </div>`).join('')}</div>`;
+      body.querySelectorAll('.fc').forEach(el=>{
+        el.addEventListener('click', ()=> el.classList.toggle('flipped'));
+      });
+    }
+    return;
+  }
+
+  if(activeNav==='resumen'){ renderResumen(panel); return; }
+
+  const quizMap = { exam: {data:EXAM, title:'Examen simulado (40 preguntas)', pass:26, total:40},
+                     sim1: {data:SIM1, title:'Simulacro 1 · Fácil (20 preguntas)', pass:13, total:20},
+                     sim2: {data:SIM2, title:'Simulacro 2 · Medio (20 preguntas)', pass:13, total:20} };
+  if(quizMap[activeNav]){
+    initQuiz(activeNav);
+    renderQuiz(panel, activeNav, quizMap[activeNav]);
+  }
+}
+
+function renderResumen(panel){
+  panel.innerHTML = `
+    <div class="panel-head">
+      <h2>Resumen rápido</h2>
+      <p class="desc">Tablas de referencia para repaso final</p>
+    </div>
+    <div class="panel-body">
+      <h3 style="color:var(--accent);margin-top:0;">Ciclo DMAIC</h3>
+      <table class="ref">
+        <tr><th>Fase</th><th>Objetivo</th><th>Herramientas clave</th></tr>
+        <tr><td><b>Define</b></td><td>Enunciar el problema, impacto y alcance</td><td>Problem statement, SIPOC, VoC, project charter, stakeholders</td></tr>
+        <tr><td><b>Measure</b></td><td>Establecer la línea base con datos fiables</td><td>Data collection plan, VSM, PCE, métricas lead/lag</td></tr>
+        <tr><td><b>Analyze</b></td><td>Identificar la causa raíz</td><td>5 Whys, Ishikawa, Pareto, gemba walk</td></tr>
+        <tr><td><b>Improve</b></td><td>Generar y seleccionar contramedidas</td><td>Brainstorming, matriz impacto/esfuerzo, prueba piloto</td></tr>
+        <tr><td><b>Control</b></td><td>Sostener la mejora en el tiempo</td><td>Plan de control, trabajo estándar, yokoten</td></tr>
+      </table>
+
+      <h3 style="color:var(--accent);">Kaizen diario vs. Kaizen de mejora</h3>
+      <table class="ref">
+        <tr><th></th><th>Kaizen diario</th><th>Kaizen de mejora (Improvement)</th></tr>
+        <tr><td><b>Alcance</b></td><td>Pequeñas mejoras del trabajo normal</td><td>Problema específico, acotado</td></tr>
+        <tr><td><b>Duración</b></td><td>Continuo, integrado en el día a día</td><td>Evento limitado en el tiempo (1-5 días)</td></tr>
+        <tr><td><b>Herramienta visual</b></td><td>Day board</td><td>Improvement board + A3</td></tr>
+        <tr><td><b>Metodología</b></td><td>PDCA informal</td><td>DMAIC estructurado</td></tr>
+      </table>
+
+      <h3 style="color:var(--accent);">Estructura de un A3</h3>
+      <table class="ref">
+        <tr><th>#</th><th>Sección</th></tr>
+        <tr><td>1</td><td>Título / Tema</td></tr>
+        <tr><td>2</td><td>Antecedentes (Background)</td></tr>
+        <tr><td>3</td><td>Situación actual (Current Condition)</td></tr>
+        <tr><td>4</td><td>Objetivo / Meta (Target)</td></tr>
+        <tr><td>5</td><td>Análisis de causa raíz</td></tr>
+        <tr><td>6</td><td>Contramedidas propuestas</td></tr>
+        <tr><td>7</td><td>Plan de implementación</td></tr>
+        <tr><td>8</td><td>Seguimiento / resultados</td></tr>
+      </table>
+
+      <h3 style="color:var(--accent);">TIMWOODS — los 8 desperdicios Lean</h3>
+      <table class="ref">
+        <tr><th>Letra</th><th>Desperdicio</th></tr>
+        <tr><td>T</td><td>Transporte</td></tr>
+        <tr><td>I</td><td>Inventario</td></tr>
+        <tr><td>M</td><td>Movimiento</td></tr>
+        <tr><td>W</td><td>Espera (Waiting)</td></tr>
+        <tr><td>O</td><td>Sobreproducción (Overproduction)</td></tr>
+        <tr><td>O</td><td>Sobreprocesamiento (Overprocessing)</td></tr>
+        <tr><td>D</td><td>Defectos</td></tr>
+        <tr><td>S</td><td>Talento no utilizado (Skills)</td></tr>
+      </table>
+    </div>`;
+}
+
+function renderQuiz(panel, id, cfg){
+  const st = quizState[id];
+  const qs = cfg.data;
+  const answeredCount = Object.keys(st.answers).length;
+
+  panel.innerHTML = `
+    <div class="panel-head">
+      <h2>${cfg.title}</h2>
+      <p class="desc">Aprobado: ≥ ${cfg.pass}/${cfg.total} (65%) · Selecciona una opción para ver la explicación</p>
+    </div>
+    <div class="panel-body" id="panelBody"></div>`;
+  const body = document.getElementById('panelBody');
+
+  if(answeredCount === qs.length){
+    renderSummary(body, id, cfg);
+    return;
+  }
+
+  const idx = Math.min(st.current, qs.length-1);
+  const q = qs[idx];
+  const picked = st.answers[idx];
+
+  body.innerHTML = `
+    <div class="quiz-top">
+      <span class="qcount">Pregunta ${idx+1} de ${qs.length}</span>
+      <div class="dots">${qs.map((_,i)=>{
+        const a = st.answers[i];
+        let cls = 'dot';
+        if(i===idx) cls += ' current';
+        if(a) cls += a.correct ? ' right' : ' wrong';
+        return `<button class="${cls}" data-jump="${i}" title="Pregunta ${i+1}"></button>`;
+      }).join('')}</div>
+    </div>
+    <div class="qcard">
+      <div class="qtag">Módulo ${MODULE_NAME[q.m] || q.m}</div>
+      <p class="qtext">${q.q}</p>
+      ${q.o.map((opt,i)=>{
+        let cls='opt';
+        if(picked){
+          if(i===q.c) cls+=' right';
+          else if(i===picked.picked) cls+=' chosen-wrong';
+        }
+        return `<button class="${cls}" data-opt="${i}" ${picked?'disabled':''}>${opt}</button>`;
+      }).join('')}
+      <div class="explain ${picked?'show':''}"><b>${picked ? (picked.correct?'Correcto. ':'Incorrecto. ') : ''}</b>${picked?q.e:''}</div>
+    </div>
+    <div class="quiz-actions">
+      <button class="btn" id="prevBtn" ${idx===0?'disabled':''}>← Anterior</button>
+      <span class="qcount">${answeredCount}/${qs.length} respondidas</span>
+      <button class="btn primary" id="nextBtn" ${!picked?'disabled':''}>${idx===qs.length-1 ? 'Ver resultado' : 'Siguiente →'}</button>
+    </div>`;
+
+  body.querySelectorAll('[data-opt]').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      if(st.answers[idx]) return;
+      const chosen = parseInt(b.dataset.opt,10);
+      st.answers[idx] = {picked:chosen, correct: chosen===q.c};
+      renderQuiz(panel, id, cfg);
+    });
+  });
+  body.querySelectorAll('[data-jump]').forEach(b=>{
+    b.addEventListener('click', ()=>{ st.current = parseInt(b.dataset.jump,10); renderQuiz(panel,id,cfg); });
+  });
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  if(prevBtn) prevBtn.addEventListener('click', ()=>{ st.current = Math.max(0, idx-1); renderQuiz(panel,id,cfg); });
+  if(nextBtn) nextBtn.addEventListener('click', ()=>{
+    st.current = idx+1;
+    renderQuiz(panel,id,cfg);
+  });
+}
+
+function renderSummary(body, id, cfg){
+  const qs = cfg.data;
+  const st = quizState[id];
+  const correct = Object.values(st.answers).filter(a=>a.correct).length;
+  const pct = Math.round((correct/qs.length)*100);
+  const passed = correct >= cfg.pass;
+
+  const byModule = {};
+  qs.forEach((q,i)=>{
+    byModule[q.m] = byModule[q.m] || {ok:0,total:0};
+    byModule[q.m].total++;
+    if(st.answers[i].correct) byModule[q.m].ok++;
+  });
+
+  body.innerHTML = `
+    <div class="summary">
+      <div class="qcount">Resultado final</div>
+      <div class="score">${correct} / ${qs.length}</div>
+      <span class="verdict ${passed?'pass':'fail'}">${passed ? 'APROBADO' : 'NO APROBADO'} · ${pct}%</span>
+      <div class="breakdown">
+        ${Object.entries(byModule).map(([m,v])=>`
+          <div><div class="code">${MODULE_NAME[m]||m}</div><div>${v.ok}/${v.total} correctas</div></div>`).join('')}
+      </div>
+      <div class="quiz-actions" style="justify-content:center;margin-top:24px;">
+        <button class="btn primary" id="retryBtn">🔁 Repetir simulacro</button>
+      </div>
+    </div>`;
+  document.getElementById('retryBtn').addEventListener('click', ()=>{
+    quizState[id] = {current:0, answers:{}};
+    render();
+  });
+}
+
+render();
+</script>
+</body>
+</html>

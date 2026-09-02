@@ -76,7 +76,7 @@
   .theory h3{font-size:17px;margin:22px 0 8px;color:var(--accent);}
   .theory h3:first-child{margin-top:0;}
   .theory p{margin:0 0 10px;}
-  .theory ul{margin:0 0 12px;padding-left:20px;}
+  .theory ul,.theory ol{margin:0 0 12px;padding-left:20px;}
   .theory li{margin-bottom:6px;}
   .theory strong{color:var(--ink);}
   .cardgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;}
@@ -85,7 +85,7 @@
   .fc.flipped .fc-inner{transform:rotateY(180deg);}
   .fc-front,.fc-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;border:1px solid var(--border);padding:14px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:14.5px;}
   .fc-front{background:var(--surface-2);}
-  .fc-front .t{font-family:var(--font-display);font-weight:700;font-size:16px;}
+  .fc-front .t{font-family:var(--font-display);font-weight:700;font-size:15.5px;}
   .fc-front .hint{position:absolute;bottom:8px;right:10px;font-size:10.5px;color:var(--ink-soft);font-family:var(--font-mono);}
   .fc-back{background:var(--accent-soft);color:var(--ink);transform:rotateY(180deg);font-size:13.5px;}
   .quiz-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
@@ -116,9 +116,11 @@
   .summary .verdict{display:inline-block;padding:6px 16px;border-radius:999px;font-weight:700;margin-bottom:16px;}
   .verdict.pass{background:var(--good-soft);color:var(--good);}
   .verdict.fail{background:var(--danger-soft);color:var(--danger);}
-  table.ref{width:100%;border-collapse:collapse;margin:10px 0 24px;font-size:14px;}
+  table.ref{width:100%;border-collapse:collapse;margin:10px 0 24px;font-size:13.5px;}
   table.ref th, table.ref td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top;}
   table.ref th{background:var(--surface-2);font-family:var(--font-display);}
+  .ref-wrap{overflow-x:auto;margin:10px 0 24px;}
+  .ref-wrap table.ref{margin:0;}
   .breakdown{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:18px;text-align:left;}
   .breakdown div{border:1px solid var(--border);border-radius:10px;padding:10px 12px;background:var(--surface);}
   .breakdown .code{font-family:var(--font-mono);color:var(--ink-soft);font-size:11px;}
@@ -137,7 +139,7 @@
       <div class="brand-mark">改</div>
       <div class="brand-text">
         <h1>Lean IT Kaizen — Guía de estudio</h1>
-        <div class="sub">APMG · Netmind JST296 (prerrequisito: Lean IT Foundation)</div>
+        <div class="sub">APMG / Lean IT Association · basada en la Official Publication V1.03 (prerrequisito: Lean IT Foundation)</div>
       </div>
     </div>
     <div class="meta-row">
@@ -168,7 +170,7 @@
 </div>
 
 <footer>
-  Contenido original elaborado a partir de fuentes públicas de APMG y Netmind sobre la certificación Lean IT Kaizen (JST296) — no reproduce ningún examen oficial con derechos de autor. Ver <a href="README.md">README</a> para las fuentes.
+  Contenido teórico, flashcards y preguntas de práctica redactados originalmente a partir de la <em>Lean IT Kaizen — Official Publication</em> (Lean IT Association / APMG, V1.03, oct. 2015), la fuente oficial del temario de examen. No se reproducen preguntas de ningún examen oficial. Ver <a href="README.md">README</a>.
 </footer>
 
 <script>
@@ -176,275 +178,481 @@
 const MODULES = [
   { id:'in', code:'01', name:'Introducción a Kaizen',
     theory: `
-      <h3>¿Qué es Kaizen?</h3>
-      <p><strong>Kaizen</strong> (改善) es la palabra japonesa para «cambio para mejor». Se refiere a la <strong>mejora continua</strong> a través de <strong>pequeños cambios incrementales, sostenidos en el tiempo</strong> y con la participación de todas las personas del equipo, no solo de especialistas.</p>
-      <p>Lean IT Kaizen construye sobre las bases de Lean IT Foundation (valor, desperdicio, flujo, personas) y forma a profesionales de TI en las habilidades concretas para <strong>facilitar eventos de mejora</strong>.</p>
-      <h3>Kaizen diario vs. Kaizen de mejora</h3>
+      <h3>Los tres tipos de mejora: Kaizen, Kaikaku y Kakushin</h3>
       <ul>
-        <li><strong>Kaizen diario (Daily Kaizen):</strong> mejora continua integrada en el trabajo normal del equipo. Se visualiza en un <strong>tablero de equipo (day board)</strong> y no requiere abrir un evento formal.</li>
-        <li><strong>Kaizen de mejora (Improvement Kaizen):</strong> evento <strong>estructurado y limitado en el tiempo</strong> para resolver un problema concreto, siguiendo el ciclo <strong>DMAIC</strong> y documentado en un <strong>A3</strong>.</li>
+        <li><strong>Kaizen:</strong> mejora continua mediante <strong>pequeños cambios incrementales</strong> sostenidos en el tiempo. "Kai" = cambio, "Zen" = para mejor.</li>
+        <li><strong>Kaikaku:</strong> "cambio radical" — un cambio de tipo escalón (step change) sobre una situación <em>existente</em> (p. ej., actualizar una aplicación a una nueva versión).</li>
+        <li><strong>Kakushin:</strong> innovación, transformación y renovación — una <strong>ruptura completa</strong> con la situación actual, introduciendo estructuras o sistemas totalmente nuevos (p. ej., sustituir una aplicación por otra completamente distinta).</li>
       </ul>
+      <p>Lean IT Kaizen se centra en el uso de <strong>Kaizen</strong> dentro de las organizaciones de TI.</p>
+      <h3>El mindset Kaizen</h3>
+      <p>Antes de poder ejecutar Kaizen, la organización de TI debe desarrollar una mentalidad Kaizen: la creencia, compartida por managers y empleados, de que mejorar los servicios de TI puede y debe hacerse a diario. Se apoya en tres elementos:</p>
+      <ol>
+        <li><strong>Ver y priorizar problemas:</strong> estar dispuestos a descubrirlos y aceptarlos como parte de la vida diaria.</li>
+        <li><strong>Resolver problemas:</strong> invertir tiempo y recursos en entender las causas raíz y resolverlas por completo, no solo parchearlas.</li>
+        <li><strong>Compartir lecciones aprendidas:</strong> compartir lo aprendido con el resto de la organización de TI.</li>
+      </ol>
+      <p>Existen dos tipos de kaizen: <strong>Daily Kaizen</strong> (kaizen diario) e <strong>Improvement Kaizen</strong> (kaizen de mejora). Este documento se centra en el segundo (al que llamaremos simplemente "kaizen").</p>
       <h3>Modelos de mejora continua</h3>
       <ul>
-        <li><strong>PDCA</strong> (Plan-Do-Check-Act, Deming): ciclo iterativo básico sobre el que se apoyan los demás modelos.</li>
-        <li><strong>DMAIC</strong> (Define-Measure-Analyze-Improve-Control): modelo de Six Sigma para mejorar un proceso <em>existente</em>.</li>
-        <li><strong>DMEDI</strong> (Define-Measure-Explore-Develop-Implement): ciclo de <em>innovación/diseño</em>, usado cuando no existe un proceso previo y hay que crear uno nuevo.</li>
-        <li><strong>ITIL CSI</strong> (Continual Service Improvement): enfoque de mejora continua en gestión de servicios TI, alineado conceptualmente con PDCA.</li>
+        <li><strong>Ciclo de Deming / Shewhart (PDCA):</strong> Plan (establecer el estado futuro deseado y el plan) - Do (implementar y medir) - Check (evaluar resultados y reportarlos) - Act (decidir los cambios necesarios). Es la base de toda mejora dentro de Lean.</li>
+        <li><strong>ITIL CSI</strong> (Continual Service Improvement), <strong>Cobit</strong> e <strong>ISO/IEC 20000</strong> incorporan ciclos de mejora basados en PDCA.</li>
       </ul>
-      <h3>El espíritu Kaizen</h3>
-      <p>Mejora basada en datos, pasos pequeños y sostenibles, trabajo visible para todo el equipo y respeto por las personas que ejecutan el proceso.</p>`,
+      <h3>DMAIC: las cinco fases</h3>
+      <p>Un evento kaizen recorre cinco fases — <strong>Define, Measure, Analyze, Improve, Control (DMAIC)</strong> — desde el enunciado del problema hasta la implementación embebida de la mejora:</p>
+      <ul>
+        <li><strong>Define:</strong> definir el problema y los objetivos, analizar el coste de la mala calidad, delimitar el alcance con un SIPOC, formar el equipo, crear la carta del proyecto y conseguir el apoyo de los stakeholders.</li>
+        <li><strong>Measure:</strong> entender los KPI y el desempeño actual, construir el CTQ (Critical to Quality), redactar un plan de recolección de datos y relacionar el desempeño con la Voz del Cliente.</li>
+        <li><strong>Analyze:</strong> recolectar datos y verificar el sistema de medición, estudiar el proceso con un VSM, identificar desperdicios, formular hipótesis de causa raíz.</li>
+        <li><strong>Improve:</strong> generar soluciones potenciales (brainstorming), evaluar impacto/factibilidad, pilotar la mejora y medir su impacto en los CTQ.</li>
+        <li><strong>Control:</strong> implementar medición continua, anclar el cambio mediante controles, cuantificar la mejora, capturar el aprendizaje y replicarlo, cerrar el proyecto.</li>
+      </ul>
+      <h3>DMEDI: el ciclo de innovación</h3>
+      <p><strong>DMEDI</strong> (Define-Measure-Explore-Develop-Implement) es un enfoque también basado en datos, adecuado para mejoras más radicales (Kaikaku/Kakushin): se usa cuando un proceso falla tan gravemente que debe diseñarse desde cero, o cuando la brecha con el estado deseado sigue siendo enorme incluso tras aplicar DMAIC. Requiere más tiempo y recursos que DMAIC — <strong>no es adecuado para Kaizen</strong>.</p>
+      <h3>Lean y los problemas</h3>
+      <p>Lean asume que la mayoría de los problemas son solucionables (o al menos su impacto puede minimizarse); son oportunidades de mejora y retos que animan a superarlos. Resolver un problema en una organización de TI significa, en esencia, eliminar <strong>muri, mura y/o muda</strong> de las personas, los procesos y/o la tecnología.</p>
+      <h3>Problemas en TI</h3>
+      <p>ITIL define <strong>«Problem»</strong> (con P mayúscula) como <strong>«la causa de uno o más incidentes»</strong>: es una de las unidades de trabajo clave de una organización de TI.</p>
+      <ul>
+        <li><strong>Known Error (Error conocido):</strong> un Problem cuya causa raíz y solución temporal (workaround) ya se conocen.</li>
+        <li><strong>Gestión de Problemas:</strong> proceso central de ITIL con dos partes — (1) descubrir la causa raíz de los incidentes y (2) eliminar el Problem de la infraestructura del servicio, habitualmente mediante un cambio.</li>
+      </ul>
+      <p>DMAIC es totalmente compatible con la Gestión de Problemas: aporta estructura y disciplina adicional a la resolución técnica de problemas.</p>`,
     flashcards:[
-      {t:'Kaizen', d:'Palabra japonesa (改善): "cambio para mejor". Mejora continua mediante pequeños cambios incrementales.'},
-      {t:'Kaizen diario', d:'Mejora continua integrada en el trabajo diario del equipo, visible en un day board.'},
-      {t:'Kaizen de mejora', d:'Evento estructurado y limitado en el tiempo para resolver un problema, usando DMAIC y A3.'},
-      {t:'PDCA', d:'Plan-Do-Check-Act (Deming): ciclo iterativo básico de mejora continua.'},
-      {t:'DMAIC', d:'Define-Measure-Analyze-Improve-Control: modelo Six Sigma para mejorar procesos existentes.'},
-      {t:'DMEDI', d:'Define-Measure-Explore-Develop-Implement: ciclo de innovación usado cuando no existe un proceso previo.'},
-      {t:'ITIL CSI', d:'Continual Service Improvement: mejora continua en gestión de servicios TI, alineada con PDCA.'},
+      {t:'Kaizen', d:'Cambio para mejor: mejora continua mediante pequeños cambios incrementales sostenidos en el tiempo.'},
+      {t:'Kaikaku', d:'Cambio radical de tipo escalón sobre una situación existente (p. ej., actualizar una app a una nueva versión).'},
+      {t:'Kakushin', d:'Innovación/ruptura completa con la situación actual; introduce estructuras totalmente nuevas.'},
+      {t:'PDCA / Ciclo de Deming', d:'Plan-Do-Check-Act: ciclo base de toda mejora dentro de Lean, en el que se apoyan DMAIC e ITIL CSI.'},
+      {t:'DMAIC', d:'Define-Measure-Analyze-Improve-Control; método preferido de resolución de problemas en Kaizen.'},
+      {t:'DMEDI', d:'Define-Measure-Explore-Develop-Implement; ciclo de innovación para Kaikaku/Kakushin, no usado en Kaizen.'},
+      {t:'Muri', d:'Japonés: sobrecarga, exceso; a menudo causado por decisiones de política (policy).'},
+      {t:'Mura', d:'Japonés: irregularidad, variación, falta de uniformidad.'},
+      {t:'Muda', d:'Japonés: desperdicio.'},
+      {t:'Problem (ITIL, con P mayúscula)', d:'La causa de uno o más incidentes; unidad de trabajo clave en TI.'},
+      {t:'Known Error', d:'Un Problem cuya causa raíz y workaround ya se conocen y están documentados.'},
+      {t:'Kaizen mindset', d:'Creencia compartida de que mejorar el servicio de TI puede y debe hacerse a diario.'},
     ]},
   { id:'org', code:'02', name:'Organizando Kaizen',
     theory:`
-      <h3>Tableros de equipo</h3>
+      <h3>Kaizen diario (Daily Kaizen)</h3>
+      <p>Es la práctica de responder a incidencias, errores y problemas de calidad del día a día, atacándolos <strong>en el origen</strong> en lugar de conformarse con arreglos rápidos. Depende de que managers y líderes técnicos adopten el mindset Kaizen y den a su gente autoridad y tiempo para actuar. Se resume en <strong>«parar la línea»</strong> cuando aparece un problema — el equivalente TI del <strong>andon</strong> (sistema que notifica un problema de calidad o proceso). El kaizen diario resuelve problemas más simples y genera menos aprendizaje profundo que el kaizen de mejora; está integrado en las reuniones diarias/semanales del equipo.</p>
+      <h3>Kaizen de mejora (Improvement Kaizen)</h3>
+      <p>Es la forma más visible de kaizen en TI: reunir a un grupo de personas interesadas en resolver un problema concreto — un <strong>evento kaizen</strong> — y conseguir que lo resuelvan. Requiere una inversión de tiempo considerable y no siempre tiene el éxito esperado, por lo que requiere organización y gobierno.</p>
+      <h3>Fuentes de las iniciativas kaizen: las cuatro Voces</h3>
       <ul>
-        <li><strong>Day board (tablero diario):</strong> trabajo del día, estado de ánimo del equipo e impedimentos/issues.</li>
-        <li><strong>Week board (tablero semanal):</strong> objetivos, KPIs y lecciones aprendidas de la semana.</li>
-        <li><strong>Improvement board (tablero de mejora):</strong> hace visible el avance de los problemas en resolución (ciclo DMAIC/A3 en curso).</li>
+        <li><strong>Voice of the Customer (VoC):</strong> la voz más importante — cómo experimenta realmente el usuario el servicio de TI.</li>
+        <li><strong>Voice of the Business (VoB):</strong> el "negocio" de la propia organización de TI (p. ej., costes, presupuesto).</li>
+        <li><strong>Voice of the Process (VoP):</strong> señales de que los procesos no funcionan correctamente (p. ej., alta variabilidad aunque el resultado parezca aceptable).</li>
+        <li><strong>Voice of the Regulator (VoR):</strong> requisitos regulatorios y de cumplimiento (p. ej., pistas de auditoría).</li>
       </ul>
-      <h3>Roles en un evento Kaizen</h3>
+      <h3>El equipo kaizen</h3>
+      <p>La práctica demuestra que el rango óptimo es de <strong>5 a 8 personas</strong>: con menos, se compromete la diversidad de puntos de vista; con más, el problema probablemente sea demasiado grande. Existen tres roles básicos:</p>
       <ul>
-        <li><strong>Kaizen Lead / facilitador:</strong> guía el proceso de forma <em>neutral</em>, sin imponer soluciones.</li>
-        <li><strong>Sponsor / champion:</strong> aporta recursos, respaldo y elimina barreras organizativas.</li>
-        <li><strong>Equipo del evento:</strong> multidisciplinar, conocedor del proceso.</li>
-        <li><strong>Stakeholders:</strong> partes interesadas afectadas o consultadas.</li>
+        <li><strong>Kaizen sponsor:</strong> el dueño del problema, con un interés directo en que se resuelva. Sin sponsor, no hay evento kaizen.</li>
+        <li><strong>Kaizen lead:</strong> gestiona el proceso kaizen en nombre del sponsor y del equipo; necesita habilidades de facilitación y de construcción de equipos.</li>
+        <li><strong>Kaizen team member:</strong> ejecuta el trabajo; conoce el proceso de primera mano (personas "aguas arriba" y "aguas abajo" del problema).</li>
       </ul>
-      <h3>Selección y preparación</h3>
-      <p>Las oportunidades de mejora se priorizan con criterios como <strong>impacto</strong> y <strong>esfuerzo/factibilidad</strong>, a menudo mediante una <strong>matriz de priorización</strong>. Preparar un evento implica definir el alcance, reunir datos preliminares, planificar la logística y fijar una agenda (los eventos suelen durar de 1 a 5 días).</p>`,
+      <h3>Preparar un evento kaizen</h3>
+      <p>Basándose en un <strong>kaizen charter</strong> (documento breve con el problema y los recursos asignados — personas, tiempo, dinero), se organiza la logística: lugar, materiales, acceso a datos, invitaciones. El progreso se comunica, como mínimo, mediante la actualización diaria del <strong>improvement board</strong>, complementada con el estado actual del A3. Dentro de TI, en lugar de bloquear una semana completa, suele planificarse como <strong>5-6 reuniones de 3 horas repartidas en 2 semanas</strong>, dejando tiempo entre sesiones para recoger datos y hacer análisis preliminar.</p>`,
     flashcards:[
-      {t:'Day board', d:'Tablero diario: trabajo del día, estado de ánimo del equipo y problemas/impedimentos.'},
-      {t:'Week board', d:'Tablero semanal: objetivos, KPIs y lecciones aprendidas.'},
-      {t:'Improvement board', d:'Tablero de mejora: visualiza el avance de problemas en resolución (DMAIC/A3).'},
-      {t:'Kaizen Lead', d:'Facilitador neutral del evento; guía el proceso sin imponer soluciones.'},
-      {t:'Sponsor / Champion', d:'Proporciona recursos y respaldo, y elimina barreras organizativas al equipo.'},
-      {t:'Matriz de priorización', d:'Herramienta para seleccionar oportunidades de mejora según impacto y esfuerzo.'},
+      {t:'Kaizen diario', d:'Resolver incidencias del día a día en el origen; "parar la línea" ante un problema.'},
+      {t:'Andon', d:'Señal/sistema para notificar un problema de calidad o de proceso.'},
+      {t:'Kaizen de mejora', d:'Reunir a un grupo interesado en resolver un problema concreto: un evento kaizen.'},
+      {t:'Voice of the Customer (VoC)', d:'Cómo experimenta el usuario el servicio de TI; la voz más importante.'},
+      {t:'Voice of the Business (VoB)', d:'El "negocio" de la propia organización de TI (costes, presupuesto).'},
+      {t:'Voice of the Process (VoP)', d:'Señales de que los procesos no funcionan correctamente.'},
+      {t:'Voice of the Regulator (VoR)', d:'Requisitos regulatorios y de cumplimiento.'},
+      {t:'Kaizen sponsor', d:'Dueño del problema; sin sponsor no hay evento kaizen.'},
+      {t:'Kaizen lead', d:'Gestiona el proceso kaizen en nombre del sponsor y el equipo; facilita y construye el equipo.'},
+      {t:'Kaizen team member', d:'Ejecuta el trabajo; conoce el proceso de primera mano.'},
+      {t:'Tamaño óptimo del equipo kaizen', d:'Entre 5 y 8 personas.'},
+      {t:'Kaizen charter', d:'Documento breve: problema + recursos (personas, tiempo, dinero) asignados.'},
+      {t:'Improvement board', d:'Tablero que muestra los problemas actuales y su seguimiento (también Kaizen/Problem board).'},
     ]},
   { id:'a3', code:'03', name:'Método A3',
     theory:`
       <h3>¿Qué es un A3?</h3>
-      <p>Un <strong>A3</strong> es un documento de una sola página (tamaño A3) que resume un problema, su análisis y su plan de acción de forma <strong>clara y visual</strong>. Es tanto una herramienta de <strong>pensamiento estructurado</strong> (A3 thinking) como de comunicación.</p>
-      <h3>Tipos de A3</h3>
+      <p>A3 no es un acrónimo: es el tamaño de papel (29,7 × 42 cm, el doble de un A4). Su virtud es dar espacio suficiente para contar una historia relativamente compleja, mientras obliga a la concisión. También actúa como checklist para seguir la metodología elegida — en Kaizen, <strong>DMAIC</strong>. No hay una única forma correcta de estructurarlo (suele tener 7 u 8 secciones), siempre que cubra el ciclo <strong>PDCA</strong> completo. Dos criterios definen un buen A3: (1) ¿ayuda al equipo a seguir un método estructurado? y (2) ¿ayuda al lector a entender la lógica que llevó al resultado?</p>
+      <h3>A3 de resolución de problemas (Problem-solving A3)</h3>
       <ul>
-        <li><strong>A3 de propuesta (Proposal A3):</strong> sigue el ciclo DMAIC completo para proponer una solución.</li>
-        <li><strong>A3 de estado (Status Report A3):</strong> comunica el avance de una iniciativa ya en marcha.</li>
-        <li><strong>A3 de resolución de problemas (Troubleshooting A3):</strong> enfocado en incidentes puntuales.</li>
+        <li><strong>Background:</strong> el contexto y una breve descripción del problema.</li>
+        <li><strong>Current Condition:</strong> la situación actual, incluidas las complicaciones que mantienen el problema en pie.</li>
+        <li><strong>Future State goals:</strong> cómo sería la situación si el problema no existiera — idealmente con una meta numérica concreta.</li>
+        <li><strong>Analysis:</strong> breve descripción del análisis realizado para hallar la causa raíz.</li>
+        <li><strong>Proposed options:</strong> las candidatas a solución.</li>
+        <li><strong>Plan / Improvement:</strong> las mejoras a implementar y un breve plan.</li>
+        <li><strong>Follow-up:</strong> acciones para asegurar que la solución se mantiene y comunicar lecciones aprendidas.</li>
       </ul>
-      <h3>Estructura típica</h3>
-      <p>Título → Antecedentes (Background) → Situación actual (Current Condition) → Objetivo/Meta (Target) → Análisis de causa raíz → Contramedidas propuestas → Plan de implementación → Seguimiento/resultados.</p>
-      <h3>Comunicación y catchball</h3>
-      <p>Un buen A3 «cuenta una historia» lógica y visual, con datos, comprensible en pocos minutos. El <strong>catchball</strong> es el diálogo iterativo de ida y vuelta entre el autor del A3 y los stakeholders para refinar el pensamiento antes de decidir.</p>`,
+      <h3>A3 de estado y A3 de propuesta</h3>
+      <p>Sobek y Smalley (<em>Understanding A3 Thinking</em>) describen dos variantes adicionales:</p>
+      <ul>
+        <li><strong>A3 Status Report:</strong> informa del avance de una iniciativa larga; se centra en <strong>Check/Act</strong> del PDCA. Secciones: Background, Current Conditions (cambios ya hechos), <strong>Results</strong> (sección clave — base para decidir si continuar), Remaining Issues/Action Items.</li>
+        <li><strong>A3 Proposal:</strong> recomienda una acción, típicamente una nueva política o un proyecto con inversión relevante; se centra en el <strong>Plan</strong> del PDCA. Secciones: Background, <strong>Proposal</strong> (curso de acción propuesto), Analysis/Alternatives (business case), Plan details, Unresolved issues (riesgos), Implementation schedule.</li>
+      </ul>
+      <h3>Habilidades para completar un A3</h3>
+      <ul>
+        <li><strong>Summarize (resumir):</strong> expresar ideas y hechos de forma concisa.</li>
+        <li><strong>Analyze (analizar):</strong> separar el problema en sus partes para identificar qué información es relevante.</li>
+        <li><strong>Synthesize (sintetizar):</strong> combinar elementos dispares en un todo coherente.</li>
+        <li><strong>Visualize (visualizar):</strong> convertir la historia en una experiencia visual con gráficos e imágenes.</li>
+      </ul>
+      <h3>Construir la comunicación: el Principio de la Pirámide</h3>
+      <p>Para estructurar la historia del A3 se recomienda el <strong>Principio de la Pirámide</strong> de Barbara Minto:</p>
+      <ul>
+        <li><strong>Situación:</strong> la situación actual y la ambición de cómo debería verse resuelta.</li>
+        <li><strong>Complicación:</strong> lo que mantiene la situación actual o impide resolver el problema.</li>
+        <li><strong>Pregunta clave:</strong> el problema formulado como pregunta.</li>
+        <li><strong>Respuesta:</strong> los argumentos que sustentan el curso de acción propuesto.</li>
+      </ul>
+      <p>Para construir esos argumentos se usa <strong>MECE</strong> (Mutually Exclusive, Collectively Exhaustive): cada elemento pertenece a una única categoría, y todas las posibilidades quedan cubiertas.</p>`,
     flashcards:[
-      {t:'A3', d:'Documento de una página que resume problema, análisis y plan de acción; herramienta de pensamiento estructurado.'},
-      {t:'A3 de propuesta', d:'Sigue el ciclo DMAIC completo para proponer una solución a un problema.'},
-      {t:'A3 de estado', d:'Comunica el avance de una iniciativa de mejora en curso.'},
-      {t:'Catchball', d:'Diálogo iterativo entre el autor del A3 y los stakeholders para refinar ideas antes de decidir.'},
-      {t:'A3 thinking', d:'Enfoque estructurado y visual para resolver problemas y comunicar el razonamiento en una sola página.'},
+      {t:'A3', d:'Tamaño de papel (29,7×42 cm); documento que exige concisión y sigue el ciclo PDCA/DMAIC.'},
+      {t:'Background (A3)', d:'Sección que describe el contexto y el problema.'},
+      {t:'Current Condition', d:'Sección que describe la situación actual y sus complicaciones.'},
+      {t:'Future State goals', d:'Cómo se vería la situación sin el problema, idealmente con una meta numérica.'},
+      {t:'A3 Status Report', d:'Informa del avance de una iniciativa en curso; se centra en Check/Act.'},
+      {t:'A3 Proposal', d:'Recomienda una acción/inversión; se centra en el Plan del PDCA.'},
+      {t:'Summarize / Analyze / Synthesize / Visualize', d:'Las cuatro habilidades clave para redactar un A3.'},
+      {t:'Principio de la Pirámide (Minto)', d:'Situación-Complicación-Pregunta clave-Respuesta; estructura la historia del A3.'},
+      {t:'MECE', d:'Mutually Exclusive, Collectively Exhaustive: categorías sin solapes y que cubren todas las posibilidades.'},
     ]},
   { id:'de', code:'04', name:'Fase Define',
     theory:`
-      <h3>Objetivo de la fase</h3>
-      <p>Enunciar con claridad el <strong>problema</strong>, su impacto y el <strong>alcance</strong> del proyecto de mejora, antes de buscar soluciones.</p>
-      <h3>Problem statement</h3>
-      <p>Debe ser <strong>específico, medible y basado en hechos</strong> (no en causas ni soluciones), describiendo el «gap» entre el desempeño actual y el esperado.</p>
-      <h3>Herramientas clave</h3>
+      <h3>El enunciado del problema (Problem Statement)</h3>
+      <p>Todo problema tiene <strong>síntomas</strong> que lo acompañan, pero no son el problema en sí. El <strong>problem statement</strong> centra la atención del equipo; puede formularse como afirmación, pero es preferible como <strong>pregunta</strong>, porque así queda claro cuándo se ha encontrado la respuesta. Debe ser <strong>SMART</strong> (Specific, Measurable, Achievable, Realistic, Time-bound) e incluir la situación actual, por qué no es aceptable, cómo sería la situación ideal, el problema en sí y la pregunta a responder.</p>
+      <p>Debe distinguirse de una <strong>hipótesis</strong>: una creencia («creemos que...») aún no respaldada por hechos, basada en observaciones selectivas y sesgadas que deben validarse mediante análisis.</p>
+      <h3>Validar el problema: las cuatro Voces</h3>
+      <p>Los clientes de TI tienen tres necesidades básicas: que los servicios funcionen, nuevas capacidades cuando se necesiten, y buen consejo sobre cómo usar mejor la TI — cada una es fuente potencial de un problem statement. Más allá de la Voice of the Customer, frameworks como <strong>ITIL, ISO/IEC 20000 y Cobit</strong> describen el estado ideal de una organización de TI; comparar la situación actual con ese estado ideal facilita crear un problem statement.</p>
+      <h3>Tipos de problema: el modelo Cynefin</h3>
+      <p>El modelo Cynefin (Dave Snowden, 2002) clasifica los problemas/decisiones en cinco tipos:</p>
       <ul>
-        <li><strong>SIPOC</strong> (Suppliers-Inputs-Process-Outputs-Customers): mapa de alto nivel para entender el alcance y los límites del proceso.</li>
-        <li><strong>Voice of the Customer (VoC):</strong> recoge las necesidades del cliente para entender qué es «valor».</li>
-        <li><strong>Análisis de stakeholders:</strong> identifica a las partes interesadas según su nivel de <strong>influencia e interés</strong>.</li>
-        <li><strong>Project charter:</strong> formaliza problema, objetivo, alcance, equipo y cronograma.</li>
+        <li><strong>Simple / obvio:</strong> causa-efecto evidente, reproducible y predecible. Se resuelve con un procedimiento operativo estándar (SOP). Encaja con el kaizen diario.</li>
+        <li><strong>Complicado:</strong> requiere análisis y conocimiento experto, pero sigue reglas (más difíciles de lo esperado). Se resuelve con mejores prácticas y pensamiento sistémico.</li>
+        <li><strong>Complejo:</strong> causa y efecto solo se explican en retrospectiva; no hay soluciones conocidas. Requiere experimentación y síntesis; suele relacionarse con personas.</li>
+        <li><strong>Caótico:</strong> no hay relación causa-efecto perceptible; requiere gestión de crisis para estabilizar la situación (apoyada en un FMEA).</li>
+        <li><strong>Desorden:</strong> no se sabe en cuál de las cuatro categorías anteriores cae el problema.</li>
       </ul>
-      <p>El problema y el objetivo se <strong>validan con el sponsor</strong> antes de avanzar a Measure.</p>`,
+      <p>En TI, el kaizen se usa principalmente para problemas <strong>complicados y complejos</strong>; si un problema resulta ser simple, la solución (un <strong>quick win</strong>) suele encontrarse ya durante la propia fase Define.</p>
+      <h3>Validar el valor de resolver el problema</h3>
+      <p>Cada problema candidato se evalúa desde tres perspectivas: <strong>resultados/beneficio de negocio</strong> (impacto en clientes, estrategia, finanzas, urgencia, tendencia), <strong>factibilidad</strong> (recursos, experiencia, complejidad, probabilidad de éxito, respaldo) e <strong>impacto organizativo</strong> (aprendizaje, beneficios cross-funcionales, competencias clave).</p>
+      <h3>Asegurar el apoyo y el análisis de stakeholders</h3>
+      <p>Sin sponsor no debe intentarse un kaizen. El <strong>análisis de stakeholders</strong> identifica su <strong>influencia</strong> (poder formal/informal) e <strong>implicación/interés</strong>, y si su postura es positiva, negativa o neutral — a menudo descrito como el <strong>«dilema del pollo y el cerdo»</strong> (implicado indirectamente vs. directamente comprometido). Según esta posición se define una estrategia de comunicación distinta para cada stakeholder, revisada regularmente.</p>
+      <h3>Pasos clave de la fase Define</h3>
+      <ol>
+        <li><strong>Selección del problema e identificación del dueño</strong> (sponsor).</li>
+        <li><strong>Problem statement y selección del equipo</strong>, apoyándose en el análisis de stakeholders y, si hace falta, en un Ishikawa o los 5 Whys para acotar el problema.</li>
+        <li><strong>Validar el alcance</strong> mediante un <strong>SIPOC</strong> del proceso en el que ocurre.</li>
+        <li><strong>Recoger información de la Voice of the Customer</strong>, estructurada con el <strong>CTQ (Critical to Quality)</strong>.</li>
+        <li><strong>Crear un plan de alto nivel</strong> para la ejecución del evento kaizen.</li>
+      </ol>`,
     flashcards:[
-      {t:'Problem statement', d:'Enunciado claro y medible del problema, basado en hechos, sin causas ni soluciones implícitas.'},
-      {t:'SIPOC', d:'Suppliers-Inputs-Process-Outputs-Customers: mapa de alto nivel para definir el alcance de un proceso.'},
-      {t:'Voice of the Customer (VoC)', d:'Recopilación de necesidades y expectativas del cliente para definir el valor.'},
-      {t:'Project charter', d:'Documento que formaliza problema, objetivo, alcance, equipo y cronograma del proyecto.'},
-      {t:'Análisis de stakeholders', d:'Identificación de partes interesadas según su influencia e interés en el proyecto.'},
+      {t:'Problem statement', d:'Enunciado SMART, preferiblemente en forma de pregunta, que centra la investigación del equipo.'},
+      {t:'Hipótesis', d:'Creencia ("creemos que...") aún no respaldada por hechos; debe validarse con datos.'},
+      {t:'SMART', d:'Specific, Measurable, Achievable, Realistic, Time-bound.'},
+      {t:'Modelo Cynefin', d:'Clasifica problemas en simple/obvio, complicado, complejo, caótico y desorden.'},
+      {t:'Problema complicado', d:'Requiere análisis experto pero sigue reglas (aunque difíciles).'},
+      {t:'Problema complejo', d:'Causa-efecto solo se entiende en retrospectiva; requiere experimentación.'},
+      {t:'Quick win', d:'Solución encontrada ya durante la fase Define, típica de un problema simple.'},
+      {t:'CTQ (Critical to Quality)', d:'Estructura usada para recoger y organizar la Voice of the Customer.'},
+      {t:'Dilema del pollo y el cerdo', d:'Metáfora de implicación indirecta (pollo) vs. directa (cerdo) de un stakeholder.'},
+      {t:'SIPOC en Define', d:'Se usa para validar el alcance del problema y formar el equipo/carta del proyecto.'},
     ]},
   { id:'me', code:'05', name:'Fase Measure',
     theory:`
-      <h3>Objetivo de la fase</h3>
-      <p>Establecer una <strong>línea base (baseline)</strong> fiable del desempeño actual del proceso, con datos, antes de analizar causas.</p>
-      <h3>Plan de recolección de datos</h3>
-      <p>Define <strong>qué</strong> medir, <strong>cómo</strong>, <strong>quién</strong>, <strong>cuándo</strong> y con qué frecuencia; cada métrica debe definirse operacionalmente.</p>
-      <h3>Tipos de métricas</h3>
+      <h3>Variables: independientes, dependientes y de control</h3>
+      <p>y = f(x): el problema (variable <strong>dependiente</strong>, "y") es función de una o varias variables <strong>independientes</strong> ("x"), las posibles causas. Una <strong>variable de control</strong> se mantiene constante durante un experimento mientras se investigan otras. El objetivo de Measure y Analyze es encontrar las x que más influyen sobre la y.</p>
+      <h3>Unidades de trabajo en TI</h3>
+      <p>Basadas en ITIL (Incident, Service Request, Problem, Standard Change, Operational activity, Non-standard Change, Advice, Plan), se agrupan en tres categorías según su frecuencia y dinámica:</p>
       <ul>
-        <li><strong>De resultado (lag):</strong> miden el resultado final del proceso (ej. satisfacción del cliente).</li>
-        <li><strong>De proceso (lead):</strong> miden un paso intermedio que predice el resultado.</li>
+        <li><strong>Runners:</strong> ocurren a diario, requieren hasta 1 hora de trabajo (incidentes, peticiones de servicio, cambios estándar, actividad operativa). Predecibles por semana, pero no planificables individualmente.</li>
+        <li><strong>Repeaters:</strong> ocurrencia regular, aprox. semanal (incidentes de alto impacto, cambios no estándar pequeños/medianos, asesorías menores). Parcialmente planificables.</li>
+        <li><strong>Strangers:</strong> ocurrencia irregular (cambios no estándar grandes, grandes solicitudes de asesoría y planes), mensual o trimestral.</li>
       </ul>
-      <h3>Value Stream Mapping (VSM)</h3>
-      <p>Mapa visual del flujo de valor que muestra todos los pasos del proceso, identificando desperdicios (los 8 desperdicios <strong>TIMWOODS</strong>) y tiempos de espera.</p>
-      <h3>Process Cycle Efficiency (PCE)</h3>
-      <p>Relación entre el <strong>tiempo que añade valor</strong> y el <strong>tiempo total del proceso</strong> (Lead Time).</p>`,
+      <h3>Datos técnicos y datos de personas</h3>
+      <p>Además de las unidades de trabajo, se recopilan <strong>datos técnicos</strong> (logs, monitorización, rendimiento: CPU, memoria, red, almacenamiento) y <strong>datos de personas</strong> (tiempo disponible, habilidades y conocimientos).</p>
+      <h3>Ir al Gemba</h3>
+      <p>Entender el contexto de un dato implica ir al <strong>Gemba</strong>: observar cómo se usa realmente cada dato, quién lo usa y para qué, y detectar qué datos faltan, sobran o no se usan — siempre comparando con el <strong>trabajo estándar</strong> definido para detectar desviaciones.</p>
+      <h3>Sistemas de medición: cuantitativos y cualitativos</h3>
+      <ul>
+        <li><strong>Cuantitativos</strong> (numéricos): en TI, la principal fuente es la <strong>recolección automática de datos</strong> (logs). Riesgo: mucha cantidad de datos no equivale a información.</li>
+        <li><strong>Cualitativos</strong> (a menudo convertidos a una escala): <strong>observación anotada</strong> (contar ocurrencias/tiempos/errores con un check sheet), <strong>entrevista</strong> (siempre sesgada; conviene contrastar con evidencias y usar varias) y <strong>registro</strong> (datos introducidos por personas; conviene verificar visualmente la calidad de los datos crudos).</li>
+      </ul>
+      <h3>Línea base y benchmark</h3>
+      <ul>
+        <li><strong>Baseline:</strong> medición de la situación antes de una intervención, para verificar si hay cambio después. Obligatoria en Measure.</li>
+        <li><strong>Benchmark:</strong> estándar para comparar el desempeño con otras organizaciones o equipos. Opcional.</li>
+      </ul>
+      <h3>Métricas y cálculos del Value Stream Map</h3>
+      <div class="ref-wrap"><table class="ref">
+        <tr><th>Métrica</th><th>Qué mide</th></tr>
+        <tr><td>Lead time</td><td>Tiempo entre que el cliente pide algo y lo recibe</td></tr>
+        <tr><td>Takt rate</td><td>Volumen de demanda del cliente por periodo de tiempo</td></tr>
+        <tr><td>Changeover time</td><td>Tiempo perdido al cambiar de una unidad de trabajo a otra (context-switching)</td></tr>
+        <tr><td>Queue / Machine time</td><td>Tiempo de espera en cola / tiempo procesado por una máquina</td></tr>
+        <tr><td>WIP (Work-in-process)</td><td>Unidades de trabajo aún no completadas en el proceso</td></tr>
+        <tr><td>Capacity / Throughput</td><td>Salida máxima posible / salida real (siempre ≤ capacidad, por el desperdicio)</td></tr>
+        <tr><td>VA / NNVA / NVA time</td><td>Tiempo de Valor Añadido / Necesario-No-Valor-Añadido / No-Valor-Añadido</td></tr>
+      </table></div>
+      <p><strong>Process Cycle Efficiency (PCE)</strong> = Tiempo de valor añadido (VA) / Tiempo total del proceso (Lead time).</p>
+      <p><strong>Ley de Little</strong> = Unidades de trabajo en proceso (WIP) / tasa media de finalización — relaciona el lead time con el trabajo en curso.</p>
+      <h3>Pasos clave de la fase Measure</h3>
+      <ol>
+        <li>Identificar las salidas y entradas del proceso donde ocurre el problema (a partir del SIPOC).</li>
+        <li>Crear un Value Stream Map de la situación actual (siempre desde una hoja en blanco, yendo al Gemba).</li>
+        <li>Crear y ejecutar el plan de recolección de datos.</li>
+        <li>Validar el sistema de medición (reproducibilidad, supuestos documentados).</li>
+        <li>Evaluar la capacidad/desempeño del proceso y fijar la línea base.</li>
+        <li>Identificar quick wins.</li>
+      </ol>`,
     flashcards:[
-      {t:'Baseline', d:'Medición del desempeño actual del proceso antes de introducir mejoras.'},
-      {t:'Data collection plan', d:'Plan que define qué, cómo, quién y cuándo se mide cada métrica.'},
-      {t:'Métrica de resultado (lag)', d:'Mide el resultado final del proceso.'},
-      {t:'Métrica de proceso (lead)', d:'Mide un paso intermedio que predice el resultado final.'},
-      {t:'VSM', d:'Value Stream Mapping: mapa visual del flujo de valor, tiempos y desperdicios.'},
-      {t:'PCE', d:'Process Cycle Efficiency: % de tiempo de valor añadido sobre el tiempo total (Lead Time).'},
-      {t:'TIMWOODS', d:'Los 8 desperdicios Lean: Transporte, Inventario, Movimiento, Espera, Sobreproducción, Sobreprocesamiento, Defectos, Talento no utilizado.'},
+      {t:'y = f(x)', d:'El problema (y, dependiente) es función de una o varias causas (x, independientes).'},
+      {t:'Variable de control', d:'Se mantiene constante en un experimento mientras se investigan otras variables.'},
+      {t:'Runners', d:'Unidades de trabajo diarias, ≤1h (incidentes, peticiones, cambios estándar).'},
+      {t:'Repeaters', d:'Unidades de trabajo de frecuencia semanal (incidentes de alto impacto, cambios medianos).'},
+      {t:'Strangers', d:'Unidades de trabajo irregulares, mensuales/trimestrales (grandes cambios, planes).'},
+      {t:'Gemba', d:'Lugar real donde se hace el trabajo; se visita para entender el uso real de los datos.'},
+      {t:'Recolección automática de datos', d:'Principal fuente cuantitativa en TI (logs); mucho dato no es lo mismo que información.'},
+      {t:'Observación anotada / Entrevista / Registro', d:'Las tres formas de medición cualitativa.'},
+      {t:'Baseline', d:'Medición de la situación antes de intervenir; obligatoria en Measure.'},
+      {t:'Benchmark', d:'Estándar de comparación con otras organizaciones/equipos; opcional.'},
+      {t:'PCE', d:'Process Cycle Efficiency = tiempo de valor añadido / tiempo total del proceso (Lead time).'},
+      {t:'Ley de Little', d:'WIP / tasa media de finalización; relaciona lead time y trabajo en curso.'},
     ]},
   { id:'an', code:'06', name:'Fase Analyze',
     theory:`
-      <h3>Objetivo de la fase</h3>
-      <p>Identificar la(s) <strong>causa(s) raíz</strong> del problema usando datos, no suposiciones.</p>
-      <h3>Herramientas de análisis</h3>
+      <h3>Las siete herramientas básicas de calidad</h3>
+      <p>Atribuidas a Kaoru Ishikawa (inspirado en Deming), ayudan a procesar los datos de Measure y a visualizarlos para llegar a la causa raíz:</p>
       <ul>
-        <li><strong>5 Whys (5 porqués):</strong> preguntar «¿por qué?» de forma iterativa hasta llegar a la causa raíz.</li>
-        <li><strong>Diagrama de Ishikawa</strong> (espina de pescado): organiza posibles causas en categorías (las 6M, o su adaptación a TI: Personas, Proceso, Tecnología, Datos…).</li>
-        <li><strong>Diagrama de Pareto:</strong> principio 80/20 — las pocas causas vitales que explican la mayoría del problema.</li>
+        <li><strong>Histograma:</strong> agrupa datos numéricos en intervalos para mostrar la distribución de frecuencias.</li>
+        <li><strong>Diagrama de Pareto:</strong> ordena las causas de mayor a menor impacto (principio 80/20) con una línea de porcentaje acumulado.</li>
+        <li><strong>Diagrama de dispersión (scatter):</strong> muestra si existe correlación (positiva o negativa) entre dos conjuntos de datos.</li>
+        <li><strong>Diagrama de flujo (flowchart):</strong> representación paso a paso de un proceso; los "swimming lanes" muestran transferencias entre roles, fuente habitual de retrasos.</li>
+        <li><strong>Gráfico de control:</strong> serie temporal con límites de control que distingue <strong>variación de causa común</strong> (ruido inherente, proceso estable/bajo control — solo se mejora rediseñando) de <strong>variación de causa especial</strong> (asignable a una causa concreta, proceso inestable/impredecible).</li>
+        <li><strong>Diagrama de Ishikawa (espina de pescado):</strong> organiza causas potenciales. En TI se usan 4 categorías: <strong>Personas, Proceso, Tecnología y Política</strong> — <em>Collectively Exhaustive</em> (cubren todo) pero no <em>Mutually Exclusive</em> (una causa puede encajar en más de una).</li>
+        <li><strong>Hoja de verificación (check/tally sheet):</strong> tabla simple para contar ocurrencias de un síntoma; alimenta después un Pareto o un histograma.</li>
       </ul>
-      <h3>Causa raíz vs. síntoma</h3>
-      <p>La <strong>causa raíz</strong> es el origen fundamental cuya eliminación evita que el problema se repita; un síntoma o causa intermedia no lo es.</p>
-      <h3>Gemba</h3>
-      <p>«El lugar real» donde ocurre el trabajo. Un <strong>gemba walk</strong> permite observar directamente y validar hipótesis con datos, no solo con brainstorming.</p>`,
+      <h3>Encontrar la causa raíz</h3>
+      <ul>
+        <li><strong>5 Whys:</strong> preguntar «¿por qué?» sucesivamente, respaldando cada respuesta con evidencia, hasta llegar a la causa raíz.</li>
+        <li><strong>Matriz Causa-Efecto:</strong> relaciona entradas (x, filas) con salidas (y, columnas), puntuando cada relación de <strong>0 (ninguna), 1 (débil), 3 (moderada) a 9 (fuerte)</strong>; se calcula una puntuación ponderada por fila y se prioriza con Pareto.</li>
+        <li><strong>FMEA / AMFE (Failure Mode and Effects Analysis):</strong> identifica fallos potenciales. Para cada uno se puntúa de 1 a 10: <strong>Severidad</strong> (S), <strong>Ocurrencia</strong> (O) y <strong>Detectabilidad</strong> (D, donde 10 = indetectable). El <strong>RPN = S × O × D</strong> (máximo 1000) prioriza qué atacar primero.</li>
+      </ul>
+      <h3>Analizar el Value Stream Map</h3>
+      <ul>
+        <li><strong>Time trap (trampa de tiempo):</strong> paso que introduce un retraso por una decisión de política (ejemplo: una aprobación), no por falta de capacidad — asociado a <strong>muri</strong>.</li>
+        <li><strong>Capacity constraint (cuello de botella):</strong> paso sin capacidad suficiente; se identifica comparando el takt time de cada paso con el del proceso completo. Puede causar variabilidad (<strong>mura</strong>).</li>
+        <li><strong>Desperdicio (TIMWOOD):</strong> los demás tipos deben analizarse en cada paso del VSM para descartar que causen retrasos o problemas de calidad (<strong>muda</strong>).</li>
+      </ul>
+      <h3>Análisis en TI</h3>
+      <ul>
+        <li><strong>Tecnología:</strong> gran volumen de datos; las herramientas más útiles son gráficos de control, Pareto y de dispersión.</li>
+        <li><strong>Proceso:</strong> se apoya en el VSM y sus cálculos (PCE, Ley de Little).</li>
+        <li><strong>Personas:</strong> análisis de disponibilidad y habilidades (matriz de skills & knowledge) para entender cómo las decisiones sobre personas generan muri y mura.</li>
+      </ul>
+      <h3>Dos trampas que evitar</h3>
+      <ul>
+        <li><strong>No enamorarse del análisis:</strong> es un medio, no un fin — solo lo más relevante llega al A3 (aunque todo el análisis se conserva como línea base para el futuro).</li>
+        <li><strong>No saltar a conclusiones:</strong> hallar una causa raíz no significa dejar de investigar otras posiblemente más importantes.</li>
+      </ul>
+      <h3>Pasos clave de la fase Analyze</h3>
+      <ol>
+        <li>Determinar las variables independientes críticas.</li>
+        <li>Realizar el análisis de datos con las 7 herramientas básicas de calidad.</li>
+        <li>Realizar el análisis de proceso (VSM, PCE, Ley de Little).</li>
+        <li>Determinar las causas raíz (5 Whys, matriz C&amp;E, FMEA).</li>
+        <li>Priorizar las causas raíz antes de pasar a Improve.</li>
+      </ol>`,
     flashcards:[
-      {t:'5 Whys', d:'Preguntar "¿por qué?" repetidamente para llegar a la causa raíz.'},
-      {t:'Diagrama de Ishikawa', d:'Diagrama causa-efecto (espina de pescado) que organiza posibles causas por categorías.'},
-      {t:'Diagrama de Pareto', d:'Gráfico 80/20 que prioriza las causas de mayor impacto.'},
-      {t:'Causa raíz', d:'Origen fundamental de un problema; eliminarla evita que se repita.'},
-      {t:'Gemba', d:'"El lugar real" donde ocurre el trabajo; un gemba walk valida hipótesis in situ.'},
+      {t:'Las 7 herramientas básicas de calidad', d:'Histograma, Pareto, dispersión, flowchart, gráfico de control, Ishikawa y hoja de verificación.'},
+      {t:'Variación de causa común', d:'Ruido inherente al proceso; proceso estable/bajo control, solo se mejora rediseñando.'},
+      {t:'Variación de causa especial', d:'Asignable a una causa concreta; proceso inestable/impredecible.'},
+      {t:'Categorías del Ishikawa en TI', d:'Personas, Proceso, Tecnología y Política.'},
+      {t:'Matriz Causa-Efecto', d:'Relaciona x (filas) con y (columnas), puntuando 0/1/3/9 cada relación.'},
+      {t:'FMEA / AMFE', d:'Identifica fallos potenciales; puntúa Severidad, Ocurrencia y Detectabilidad (1-10).'},
+      {t:'RPN (Risk Priority Number)', d:'Severidad × Ocurrencia × Detectabilidad; máximo 1000.'},
+      {t:'Time trap', d:'Paso del VSM que introduce retraso por una decisión de política (muri).'},
+      {t:'Capacity constraint / cuello de botella', d:'Paso sin capacidad suficiente; se detecta con el takt time.'},
+      {t:'Análisis de Tecnología en TI', d:'Se apoya en gráficos de control, Pareto y de dispersión.'},
+      {t:'No enamorarse del análisis', d:'Solo lo más relevante llega al A3, pero todo el análisis se conserva como línea base.'},
     ]},
   { id:'im', code:'07', name:'Fase Improve',
     theory:`
-      <h3>Objetivo de la fase</h3>
-      <p>Generar, evaluar y seleccionar <strong>contramedidas</strong> que ataquen la causa raíz validada.</p>
-      <h3>Ideación y selección</h3>
+      <h3>Generación de ideas</h3>
       <ul>
-        <li><strong>Brainstorming / brainwriting / benchmarking:</strong> técnicas para generar el máximo número de ideas sin juzgarlas de inmediato.</li>
-        <li><strong>Matriz impacto/esfuerzo:</strong> prioriza soluciones según impacto esperado y esfuerzo o factibilidad.</li>
-        <li><strong>Análisis coste-beneficio:</strong> compara el coste de implementar frente al beneficio esperado.</li>
+        <li><strong>Brainstorming:</strong> generar el máximo número de ideas sin evaluarlas durante la sesión.</li>
+        <li><strong>Brainwriting:</strong> variante silenciosa — los factores causa se colocan en la pared y el equipo añade post-its inspirándose libremente en las ideas de los demás.</li>
+        <li><strong>Reverse thinking (pensamiento inverso):</strong> describir cómo empeorar la situación actual a propósito, para luego invertir esas ideas en soluciones reales (10-15 ideas inversas suelen bastar).</li>
+        <li><strong>SCAMPER:</strong> verbos de acción como disparadores — <strong>S</strong>ubstitute (sustituir), <strong>C</strong>ombine (combinar), <strong>A</strong>dapt (adaptar), <strong>M</strong>odify (modificar), <strong>P</strong>ut to another use (dar otro uso), <strong>E</strong>liminate (eliminar), <strong>R</strong>everse (invertir).</li>
       </ul>
-      <h3>Prueba piloto</h3>
-      <p>Probar la solución a <strong>pequeña escala</strong> (ciclo PDCA) antes de implementarla por completo, para validar que resuelve la causa raíz sin generar efectos no deseados.</p>
-      <h3>Plan de implementación</h3>
-      <p>Define quién, qué, cuándo y con qué recursos se despliega la solución, gestionando el riesgo asociado.</p>`,
+      <h3>Selección y priorización de opciones</h3>
+      <ul>
+        <li><strong>Affinity mapping:</strong> agrupar en silencio las soluciones similares o solapadas en clusters, dando un título a cada grupo.</li>
+        <li><strong>Solution matrix:</strong> dos ejes — <strong>factibilidad</strong> (coste/esfuerzo/tiempo bajos = alta factibilidad) e <strong>impacto</strong> — las soluciones de alto impacto y alta factibilidad se implementan primero.</li>
+        <li><strong>Multi-voting:</strong> cada miembro del equipo reparte un número limitado de votos entre las opciones; puede repetirse en rondas sucesivas.</li>
+        <li><strong>Business case:</strong> comparar coste y retorno de cada solución en el mismo horizonte. Regla práctica: una solución kaizen debería dar retorno positivo en <strong>máximo 6 meses</strong> — si no, probablemente es demasiado grande y conviene buscar soluciones más pequeñas o parciales.</li>
+      </ul>
+      <h3>Probar las soluciones (según el tipo Cynefin)</h3>
+      <div class="ref-wrap"><table class="ref">
+        <tr><th>Tipo de problema</th><th>Cómo probar la solución</th></tr>
+        <tr><td>Obvio</td><td>Piloto usando las mejores prácticas disponibles en el mercado</td></tr>
+        <tr><td>Complicado</td><td>Piloto de producción a pequeña escala, en el entorno real</td></tr>
+        <tr><td>Complejo</td><td>Técnicas de experimentación para entender cómo "se comporta" la solución</td></tr>
+        <tr><td>Caótico</td><td>Decidir las acciones y hacer un análisis de riesgo de cada una</td></tr>
+      </table></div>
+      <h3>Soluciones típicas en TI</h3>
+      <p><strong>Mejores prácticas (best practices):</strong> <strong>ITIL</strong> (gestión de servicios, 26 procesos), <strong>Cobit</strong> (gobierno de TI), <strong>Scrum</strong> (desarrollo ágil) y <strong>Prince2/PMI</strong> (gestión de proyectos).</p>
+      <p><strong>Buenas prácticas (good practices):</strong> <strong>Lean IT</strong> (p. ej., 5S), <strong>Agile</strong> y <strong>DevOps</strong> (integra proceso, organización, desempeño, comportamiento y automatización).</p>
+      <h3>Pasos clave de la fase Improve</h3>
+      <ol>
+        <li>Generar el máximo número de soluciones posibles.</li>
+        <li>Seleccionar y priorizar (afinidad, matriz, multi-voting).</li>
+        <li>Aplicar mejores y buenas prácticas existentes.</li>
+        <li>Desarrollar el VSM del estado futuro.</li>
+        <li>Pilotar la solución y confirmar los resultados.</li>
+        <li>Crear el plan de implementación a gran escala (comunicación, SOP, checklists, KPIs; puede apoyarse en FMEA).</li>
+      </ol>`,
     flashcards:[
-      {t:'Contramedida', d:'Solución diseñada específicamente para eliminar o mitigar una causa raíz validada.'},
-      {t:'Matriz impacto/esfuerzo', d:'Prioriza soluciones según impacto esperado y esfuerzo requerido.'},
-      {t:'Prueba piloto', d:'Prueba a pequeña escala (PDCA) antes de la implementación completa.'},
-      {t:'Brainstorming', d:'Generación de ideas en grupo, sin juzgar, para maximizar opciones.'},
-      {t:'Análisis coste-beneficio', d:'Compara el coste de implementar una solución con el beneficio esperado.'},
+      {t:'Brainstorming', d:'Generar el máximo de ideas sin evaluarlas durante la sesión.'},
+      {t:'Brainwriting', d:'Variante silenciosa del brainstorming, con post-its inspirados en ideas ajenas.'},
+      {t:'Reverse thinking', d:'Imaginar cómo empeorar la situación, para invertir esas ideas en soluciones.'},
+      {t:'SCAMPER', d:'Substitute, Combine, Adapt, Modify, Put to another use, Eliminate, Reverse.'},
+      {t:'Affinity mapping', d:'Agrupar soluciones similares en clusters con un título común.'},
+      {t:'Solution matrix', d:'Factibilidad vs. impacto; prioriza alto impacto + alta factibilidad.'},
+      {t:'Multi-voting', d:'Cada miembro reparte votos limitados entre las soluciones candidatas.'},
+      {t:'Regla de los 6 meses', d:'Una solución kaizen debería dar retorno positivo en máximo 6 meses.'},
+      {t:'Mejores prácticas en TI', d:'ITIL, Cobit, Scrum, Prince2/PMI.'},
+      {t:'Buenas prácticas en TI', d:'Lean IT, Agile, DevOps.'},
     ]},
   { id:'co', code:'08', name:'Fase Control',
     theory:`
-      <h3>Objetivo de la fase</h3>
-      <p>Asegurar que la mejora se <strong>mantenga en el tiempo</strong> y no se vuelva a los antiguos hábitos.</p>
-      <h3>Plan de control</h3>
-      <p>Documenta cómo se monitoreará el proceso mejorado: <strong>qué métrica</strong>, con qué <strong>frecuencia</strong>, quién <strong>responde</strong> ante desviaciones y qué <strong>umbrales</strong> las disparan.</p>
-      <h3>Trabajo estándar</h3>
-      <p>Documenta la nueva forma <strong>correcta y repetible</strong> de trabajar, para que sea fácil de mantener y transferir.</p>
-      <h3>Cierre y réplica</h3>
+      <h3>Lograr el control</h3>
+      <p>Un <strong>control</strong> es, en esencia, un procedimiento o una política: una forma de verificar que el trabajo se hace correctamente. El objetivo de la fase Control es doble: <strong>garantizar el desempeño mejorado</strong> y <strong>traspasar el proceso mejorado a su dueño</strong> (process owner).</p>
+      <h3>El plan de control: cuatro elementos</h3>
       <ul>
-        <li><strong>Cierre del A3/evento:</strong> se comunican resultados y lecciones aprendidas, y se traspasa la propiedad del proceso a su dueño operativo.</li>
-        <li><strong>Yokoten:</strong> réplica horizontal — compartir la mejora con otras áreas donde aplique.</li>
+        <li><strong>Documentación:</strong> registro de los cambios. Incluye <strong>política</strong> (breve y clara, sin contradecir otras políticas), <strong>documentación de proceso</strong> (flowchart + RACI, o con swimming lanes), <strong>SOP</strong> (Standard Operating Procedure — cómo ejecutar una tarea de forma consistente) y <strong>checklists</strong> (recordatorios para procesos no estandarizables).</li>
+        <li><strong>Monitorización:</strong> métricas y KPIs — distinguiendo <strong>indicadores adelantados/leading</strong> (predicen el desempeño futuro, p. ej. nº de Problems resueltos) de <strong>indicadores retrasados/lagging</strong> (miden el desempeño pasado, p. ej. nº de incidentes) — un <strong>dashboard</strong> visual, gestión visual y <strong>diálogos de desempeño</strong> (compartir feedback y detectar irregularidades; identificar causas raíz y proponer mejoras; decidir qué hacer), propagados en <strong>cascada</strong> por la organización.</li>
+        <li><strong>Respuesta:</strong> el <strong>OCAP (Out-of-Control-Action-Plan)</strong> agrupa las intervenciones ante una desviación — documento vivo que registra problemas y soluciones conocidas, apoyado en el FMEA de Analyze.</li>
+        <li><strong>Formación:</strong> asegura que cada rol conoce su responsabilidad, la documentación, las herramientas de monitorización y las acciones de respuesta; se apoya en una <strong>matriz de habilidades y conocimientos</strong>.</li>
       </ul>
-      <p>El ciclo no termina: alimenta el siguiente Kaizen (PDCA continuo).</p>`,
+      <h3>Plan de comunicación</h3>
+      <p>Responde a: <strong>Contenido</strong> (qué), <strong>Audiencia</strong> (para quién), <strong>Propósito</strong> (por qué), <strong>Momento</strong> (cuándo, puntual o recurrente), <strong>Forma</strong> (boletín, email, reunión...), <strong>Input</strong> (de quién se necesita consulta previa), <strong>Acciones</strong> (quién hace qué) y <strong>Capacidad</strong> (tiempo necesario).</p>
+      <h3>Cierre del kaizen</h3>
+      <p>El kaizen se cierra cuando el dueño del problema acepta: el desempeño mejorado (con datos antes/después como nueva línea base), el A3 completo con lecciones aprendidas, la documentación (SOP, políticas, VSM), la formación operativa, y un plan de traspaso del conocimiento.</p>
+      <ul>
+        <li><strong>Réplica (Replication):</strong> aplicar la misma solución a un problema idéntico o similar en otra parte de la organización.</li>
+        <li><strong>Estandarización (Standardization):</strong> aplicar las lecciones aprendidas a otros problemas distintos.</li>
+      </ul>
+      <h3>Pasos clave de la fase Control</h3>
+      <ol>
+        <li>Crear el sistema de medición (integrado en un dashboard).</li>
+        <li>Crear la documentación (concisa, para la audiencia correcta).</li>
+        <li>Crear el plan de control completo (documentación, monitorización, respuesta, formación).</li>
+        <li>Comunicar a los stakeholders (formación + sesiones informativas; un email no basta).</li>
+        <li>Presentar los resultados en el A3 final.</li>
+        <li>Traspasar la propiedad del proceso al sponsor/dueño del proceso — y celebrar el éxito con el equipo.</li>
+      </ol>`,
     flashcards:[
-      {t:'Plan de control', d:'Define métrica, frecuencia, responsable y umbrales para monitorear el proceso mejorado.'},
-      {t:'Trabajo estándar', d:'Documentación de la nueva forma correcta y repetible de trabajar.'},
-      {t:'Yokoten', d:'Réplica horizontal: compartir una mejora exitosa con otras áreas o equipos.'},
-      {t:'Sostenibilidad de la mejora', d:'Capacidad de mantener los resultados en el tiempo, sin volver a los antiguos hábitos.'},
-      {t:'Cierre del A3', d:'Comunicación de resultados y lecciones aprendidas, y traspaso de la propiedad del proceso.'},
+      {t:'Control', d:'En esencia, un procedimiento o una política que verifica que el trabajo se hace correctamente.'},
+      {t:'Plan de control', d:'Cuatro elementos: documentación, monitorización, respuesta y formación.'},
+      {t:'SOP', d:'Standard Operating Procedure; describe cómo ejecutar una tarea de forma consistente.'},
+      {t:'Indicador leading (adelantado)', d:'Predice el desempeño futuro (ej. nº de Problems resueltos).'},
+      {t:'Indicador lagging (retrasado)', d:'Mide el desempeño ya ocurrido (ej. nº de incidentes).'},
+      {t:'Diálogo de desempeño', d:'Comparte feedback, identifica causas raíz y decide acciones; se propaga en cascada.'},
+      {t:'OCAP', d:'Out-of-Control-Action-Plan; documento vivo con respuestas ante desviaciones, ligado al FMEA.'},
+      {t:'Matriz de habilidades y conocimientos', d:'Identifica el conocimiento actual y necesario para sostener la mejora.'},
+      {t:'Plan de comunicación', d:'Contenido, audiencia, propósito, momento, forma, input, acciones y capacidad.'},
+      {t:'Réplica (Replication)', d:'Aplicar la misma solución a un problema idéntico/similar en otra parte de la organización.'},
+      {t:'Estandarización (Standardization)', d:'Aplicar lecciones aprendidas a otros problemas distintos.'},
     ]},
 ];
 
 const EXAM = [
- {m:'in',q:'¿Qué significa la palabra japonesa "Kaizen"?',o:['Control de calidad total','Cambio para mejor / mejora continua','Eliminación total de desperdicios','Justo a tiempo'],c:1,e:'Kaizen (改善) se traduce como "cambio para mejor" y designa la mejora continua mediante pequeños pasos.'},
- {m:'in',q:'¿Cuál es la principal diferencia entre el Kaizen diario y el Kaizen de mejora (Improvement Kaizen)?',o:['El Kaizen diario requiere aprobación del sponsor y el de mejora no','El Kaizen diario se integra en el trabajo normal del equipo mientras que el de mejora es un evento estructurado y limitado en el tiempo','El Kaizen de mejora solo aplica a procesos de TI','No existe diferencia, son sinónimos'],c:1,e:'El Kaizen diario ocurre de forma continua en el trabajo del equipo; el de mejora es un evento acotado que sigue el ciclo DMAIC.'},
- {m:'in',q:'¿Qué modelo de mejora continua sirve de base conceptual tanto a DMAIC como a ITIL CSI?',o:['SIPOC','PDCA (Plan-Do-Check-Act)','5S','TIMWOODS'],c:1,e:'El ciclo PDCA de Deming es la base iterativa sobre la que se construyen DMAIC y el enfoque de mejora continua de ITIL.'},
- {m:'in',q:'¿Cuándo es más apropiado usar el ciclo DMEDI en lugar de DMAIC?',o:['Cuando el proceso ya existe y solo necesita ajustes menores','Cuando no existe un proceso y hay que diseñar uno nuevo (innovación/rediseño)','Cuando el problema es puramente de comportamiento del equipo','Cuando el evento Kaizen dura menos de un día'],c:1,e:'DMEDI (Define, Measure, Explore, Develop, Implement) es un ciclo de diseño/innovación para cuando no existe un proceso previo.'},
- {m:'in',q:'¿Cuál de los siguientes es un prerrequisito oficial para presentarse al examen Lean IT Kaizen?',o:['Certificación Lean Six Sigma Green Belt','Certificación Lean IT Foundation','Certificación ITIL Foundation','No existe prerrequisito'],c:1,e:'Lean IT Foundation es un prerrequisito oficial para presentarse al examen Lean IT Kaizen.'},
- {m:'org',q:'¿Qué información se visualiza típicamente en un "day board" (tablero diario)?',o:['Los KPIs anuales de la organización','El trabajo del día, el estado de ánimo del equipo y los impedimentos','El presupuesto del departamento de TI','El organigrama del equipo'],c:1,e:'El day board hace visible el trabajo diario, el ánimo del equipo y los impedimentos a resolver.'},
- {m:'org',q:'¿Cuál es el rol principal del Kaizen Lead durante un evento de mejora?',o:['Imponer la solución que considera correcta','Facilitar el proceso de forma neutral, sin imponer soluciones','Aprobar el presupuesto del proyecto','Sustituir al dueño del proceso'],c:1,e:'El Kaizen Lead facilita el proceso de forma neutral; no impone soluciones al equipo.'},
- {m:'org',q:'¿Qué aporta principalmente el sponsor/champion a un evento Kaizen?',o:['Conocimiento técnico detallado del proceso','Recursos, respaldo y eliminación de barreras organizativas','Facilitación neutral de las sesiones','Redacción del A3 final'],c:1,e:'El sponsor proporciona recursos, respaldo y elimina barreras organizativas al equipo.'},
- {m:'org',q:'En un "week board" (tablero semanal) es habitual encontrar:',o:['Únicamente el registro de incidencias del día','Objetivos, KPIs y lecciones aprendidas de la semana','El plan de vacaciones del equipo','El diagrama de Ishikawa del último problema'],c:1,e:'El week board resume objetivos, KPIs y lecciones aprendidas a nivel semanal.'},
- {m:'org',q:'¿Qué criterios se usan típicamente en una matriz de priorización para seleccionar oportunidades de mejora?',o:['Antigüedad del proceso y número de empleados involucrados','Impacto esperado y esfuerzo/factibilidad','Idioma del equipo y ubicación geográfica','Color del tablero utilizado'],c:1,e:'La priorización se basa habitualmente en el impacto esperado y el esfuerzo o factibilidad de cada opción.'},
- {m:'a3',q:'¿Cuál es el propósito principal de un documento A3?',o:['Sustituir las reuniones de seguimiento del proyecto','Resumir en una sola página un problema, su análisis y su plan de acción de forma clara y visual','Registrar formalmente las horas dedicadas al proyecto','Servir como contrato legal entre el equipo y el sponsor'],c:1,e:'El A3 resume en una página el problema, el análisis y el plan de acción, de forma visual.'},
- {m:'a3',q:'¿Qué diferencia a un "A3 de propuesta" (Proposal A3) de un "A3 de estado" (Status Report A3)?',o:['El A3 de propuesta sigue el ciclo DMAIC completo para proponer una solución; el de estado comunica el avance de una iniciativa ya en marcha','No hay diferencia real entre ambos','El A3 de estado solo se usa para incidentes críticos','El A3 de propuesta no requiere datos'],c:0,e:'El A3 de propuesta recorre todo el DMAIC; el de estado informa del avance de algo ya iniciado.'},
- {m:'a3',q:'¿Qué se entiende por "catchball" en el contexto del método A3?',o:['Un juego de team building previo al evento Kaizen','Un diálogo iterativo de ida y vuelta entre el autor del A3 y los stakeholders para refinar el pensamiento','La fase final de cierre del A3','Un tipo de gráfico usado en la fase Measure'],c:1,e:'Catchball es el intercambio iterativo entre autor y stakeholders para refinar el A3 antes de decidir.'},
- {m:'a3',q:'Un buen "A3 thinking" se caracteriza principalmente por:',o:['Usar el máximo texto posible para no omitir detalles','Contar una historia lógica y visual apoyada en datos, comprensible en pocos minutos','Centrarse solo en la solución, sin describir el problema','Evitar la participación de los stakeholders'],c:1,e:'El A3 thinking cuenta una historia lógica, visual y basada en datos, fácil de entender rápidamente.'},
- {m:'a3',q:'¿En qué sección de un A3 se documenta habitualmente el análisis de causa raíz?',o:['En los antecedentes (Background)','Entre la situación actual/objetivo y las contramedidas propuestas','En el plan de implementación','No forma parte de la estructura del A3'],c:1,e:'El análisis de causa raíz se ubica entre la descripción de la situación/objetivo y las contramedidas.'},
- {m:'de',q:'Un buen "problem statement" (enunciado del problema) debe:',o:['Incluir ya la solución propuesta','Ser específico, medible y basado en hechos, sin implicar causas ni soluciones','Ser lo más general posible para no limitar el análisis','Redactarse únicamente por el sponsor'],c:1,e:'El problem statement describe hechos observables y medibles, sin adelantar causas ni soluciones.'},
- {m:'de',q:'¿Para qué se utiliza la herramienta SIPOC en la fase Define?',o:['Para calcular el Process Cycle Efficiency','Para obtener un mapa de alto nivel de Proveedores-Entradas-Proceso-Salidas-Clientes y definir el alcance','Para priorizar las causas raíz','Para documentar el plan de control'],c:1,e:'SIPOC da una visión de alto nivel del proceso y ayuda a delimitar su alcance.'},
- {m:'de',q:'La "Voice of the Customer" (VoC) tiene como objetivo:',o:['Medir el tiempo de ciclo del proceso','Recoger las necesidades y expectativas del cliente para entender qué es valor','Documentar el trabajo estándar','Seleccionar al Kaizen Lead'],c:1,e:'VoC recoge la perspectiva del cliente para definir qué constituye valor.'},
- {m:'de',q:'El "project charter" (carta del proyecto) en la fase Define sirve para:',o:['Formalizar el problema, objetivo, alcance, equipo y cronograma del proyecto de mejora','Registrar las causas raíz identificadas','Documentar el plan de control final','Sustituir al A3'],c:0,e:'El project charter formaliza problema, objetivo, alcance, equipo y cronograma.'},
- {m:'de',q:'En el análisis de stakeholders, las partes interesadas se clasifican habitualmente según:',o:['Su antigüedad en la empresa','Su nivel de influencia e interés en el proyecto','El idioma que hablan','El departamento de TI al que pertenecen únicamente'],c:1,e:'Se clasifican según su nivel de influencia e interés, para definir la estrategia de comunicación.'},
- {m:'me',q:'¿Cuál es el objetivo principal de la fase Measure?',o:['Implementar la solución definitiva','Establecer una línea base fiable del desempeño actual antes de analizar causas','Cerrar el evento Kaizen','Seleccionar al sponsor del proyecto'],c:1,e:'Measure busca establecer una línea base fiable antes de pasar a analizar causas.'},
- {m:'me',q:'Una métrica de "resultado" (lag) se diferencia de una métrica de "proceso" (lead) en que:',o:['La de resultado mide un paso intermedio que predice el desempeño final','La de resultado mide el resultado final del proceso, mientras que la de proceso mide un paso intermedio','No existe diferencia, son intercambiables','Las métricas de proceso solo aplican a TI'],c:1,e:'Lag mide el resultado final; lead mide un paso intermedio que lo predice.'},
- {m:'me',q:'El Value Stream Mapping (VSM) permite principalmente:',o:['Calcular el presupuesto del proyecto','Visualizar el flujo de valor completo e identificar desperdicios y tiempos de espera','Redactar el A3 de propuesta','Seleccionar las contramedidas finales'],c:1,e:'El VSM visualiza el flujo completo y expone desperdicios y esperas.'},
- {m:'me',q:'El Process Cycle Efficiency (PCE) se calcula como:',o:['Número de defectos dividido entre el número de unidades producidas','Tiempo que añade valor dividido entre el tiempo total del proceso (Lead Time)','Coste del proyecto dividido entre beneficio esperado','Número de stakeholders dividido entre el tamaño del equipo'],c:1,e:'PCE = tiempo de valor añadido / tiempo total (Lead Time).'},
- {m:'me',q:'El acrónimo TIMWOODS se utiliza para recordar:',o:['Las fases del ciclo DMAIC','Los ocho tipos de desperdicio Lean','Los roles de un evento Kaizen','Las secciones de un documento A3'],c:1,e:'TIMWOODS enumera los 8 desperdicios Lean.'},
- {m:'an',q:'La técnica de los "5 Whys" (5 porqués) se utiliza para:',o:['Priorizar soluciones según impacto y esfuerzo','Llegar a la causa raíz de un problema preguntando "¿por qué?" de forma iterativa','Calcular el Process Cycle Efficiency','Documentar el plan de control'],c:1,e:'Los 5 Whys ayudan a llegar a la causa raíz preguntando "¿por qué?" repetidamente.'},
- {m:'an',q:'En un diagrama de Ishikawa (espina de pescado), las posibles causas se organizan:',o:['Por orden cronológico de aparición','En categorías (por ejemplo, las 6M o su adaptación a TI)','Por coste de investigación','Alfabéticamente'],c:1,e:'Las causas se agrupan en categorías, como las 6M o su adaptación a TI.'},
- {m:'an',q:'El diagrama de Pareto se basa en el principio de que:',o:['Todas las causas tienen el mismo peso en el problema','Un pequeño número de causas explica la mayor parte del problema (80/20)','Solo existe una causa raíz posible por problema','Las causas deben validarse sin usar datos'],c:1,e:'El principio 80/20 indica que pocas causas explican la mayor parte del efecto.'},
- {m:'an',q:'¿Qué distingue a una causa raíz de un simple síntoma?',o:['La causa raíz es siempre la más fácil de resolver','La causa raíz es el origen fundamental cuya eliminación evita que el problema se repita','El síntoma siempre aparece antes que la causa raíz','No hay diferencia práctica entre ambos'],c:1,e:'La causa raíz, al eliminarse, evita que el problema vuelva a ocurrir; el síntoma no.'},
- {m:'an',q:'Realizar un "gemba walk" durante la fase Analyze significa:',o:['Reunir al equipo en una sala de conferencias para hacer brainstorming','Ir al lugar real donde ocurre el trabajo para observar y validar hipótesis directamente','Enviar una encuesta a los stakeholders','Redactar el informe final del A3'],c:1,e:'Un gemba walk implica ir al lugar real de trabajo para observar y validar con datos.'},
- {m:'im',q:'El objetivo principal de la fase Improve es:',o:['Medir el desempeño actual del proceso','Generar, evaluar y seleccionar contramedidas que ataquen la causa raíz validada','Definir el problema y su alcance','Cerrar el evento Kaizen'],c:1,e:'Improve genera, evalúa y selecciona contramedidas contra la causa raíz validada.'},
- {m:'im',q:'Una matriz de impacto/esfuerzo se utiliza en la fase Improve para:',o:['Calcular el Process Cycle Efficiency','Priorizar las soluciones candidatas según su impacto esperado y el esfuerzo requerido','Definir el enunciado del problema','Documentar el trabajo estándar'],c:1,e:'Sirve para priorizar soluciones candidatas por impacto y esfuerzo.'},
- {m:'im',q:'¿Por qué se recomienda realizar una prueba piloto antes de implementar una solución a gran escala?',o:['Porque es un requisito legal en todos los proyectos de TI','Porque permite validar a pequeña escala, mediante PDCA, que la solución resuelve la causa raíz sin efectos no deseados','Porque reduce el número de stakeholders involucrados','Porque sustituye la necesidad de medir la línea base'],c:1,e:'La prueba piloto valida a pequeña escala, vía PDCA, que la solución funciona sin efectos no deseados.'},
- {m:'im',q:'El brainstorming como técnica de ideación se caracteriza por:',o:['Juzgar y descartar ideas inmediatamente para ahorrar tiempo','Generar el máximo número de ideas en grupo sin juzgarlas en el momento','Limitarse a una sola persona para evitar sesgos','Aplicarse únicamente en la fase Control'],c:1,e:'El brainstorming maximiza la cantidad de ideas en grupo, sin juicio inmediato.'},
- {m:'im',q:'Un análisis coste-beneficio en la fase Improve sirve para:',o:['Comparar el coste de implementar una solución con el beneficio esperado','Calcular el Lead Time del proceso','Definir los stakeholders del proyecto','Sustituir el diagrama de Ishikawa'],c:0,e:'Compara el coste de implementar una solución frente al beneficio esperado.'},
- {m:'co',q:'¿Cuál es el propósito principal de un plan de control?',o:['Documentar el problema inicial del proyecto','Definir cómo se monitoreará el proceso mejorado: métrica, frecuencia, responsable y umbrales','Sustituir el A3 de propuesta','Seleccionar al Kaizen Lead del siguiente evento'],c:1,e:'El plan de control define métrica, frecuencia, responsable y umbrales de monitoreo.'},
- {m:'co',q:'El "trabajo estándar" (standard work) tras una mejora tiene como fin:',o:['Documentar la nueva forma correcta y repetible de realizar el proceso mejorado','Registrar únicamente los errores del proceso anterior','Sustituir la necesidad de un plan de control','Eliminar la necesidad de gestión visual'],c:0,e:'El trabajo estándar documenta la nueva forma correcta y repetible de trabajar.'},
- {m:'co',q:'El término "yokoten" hace referencia a:',o:['El cierre formal del evento Kaizen','La réplica horizontal de una mejora exitosa a otras áreas o equipos','El diagrama de causa-efecto','La fase final del ciclo DMEDI'],c:1,e:'Yokoten es la réplica horizontal de una mejora exitosa a otras áreas.'},
- {m:'co',q:'Sostener una mejora en el tiempo (evitar volver a los antiguos hábitos) depende principalmente de:',o:['Aumentar el presupuesto del proyecto','Un plan de control efectivo y trabajo estándar bien comunicado','Cambiar de Kaizen Lead cada mes','Eliminar la gestión visual del proceso'],c:1,e:'La sostenibilidad depende de un buen plan de control y un trabajo estándar bien comunicado.'},
- {m:'co',q:'Al cerrar un A3/evento Kaizen es una buena práctica:',o:['Evitar comunicar los resultados para no generar expectativas','Comunicar resultados y lecciones aprendidas, y traspasar la propiedad del proceso al dueño correspondiente','Eliminar el tablero de mejora inmediatamente','Mantener al equipo del evento como propietario permanente del proceso'],c:1,e:'Al cerrar, se comunican resultados/lecciones y se traspasa la propiedad del proceso a su dueño.'},
+ {m:'in',q:'Según el documento oficial, ¿qué representa "Kaikaku" frente a Kaizen?',o:['Un pequeño ajuste diario sin impacto visible','Un cambio radical de tipo escalón sobre una situación existente','La eliminación total de una función de negocio','Un sinónimo de Kaizen usado en Japón'],c:1,e:'Kaikaku es un cambio radical, de tipo "step change", sobre la situación existente (p. ej., actualizar una aplicación a una nueva versión).'},
+ {m:'in',q:'¿Cuál de las siguientes NO es una de las tres preguntas que definen el "Kaizen mindset"?',o:['Ver y priorizar problemas','Resolver problemas','Compartir las lecciones aprendidas','Delegar los problemas en un consultor externo'],c:3,e:'El mindset Kaizen se basa en ver/priorizar problemas, resolverlos y compartir lecciones aprendidas — no en delegarlos externamente.'},
+ {m:'in',q:'Dentro del ciclo PDCA (Deming), ¿qué ocurre en el paso "Check"?',o:['Se establece el estado futuro deseado','Se implementa el plan y se mide su desempeño','Se evalúan los resultados y se reportan a quienes deciden','Se decide qué cambios son necesarios'],c:2,e:'Check consiste en evaluar los resultados de las acciones tomadas y reportarlos a los decisores; Act es donde se decide qué cambiar.'},
+ {m:'in',q:'¿Por qué DMEDI no es adecuado para un evento Kaizen?',o:['Porque no está basado en datos','Porque requiere más tiempo y recursos que DMAIC y está pensado para cambios más radicales (Kaikaku/Kakushin)','Porque no incluye una fase de Define','Porque solo aplica a procesos de manufactura'],c:1,e:'DMEDI requiere más lead time y recursos, y se orienta a rediseñar desde cero; el documento indica explícitamente que DMEDI no es adecuado para Kaizen.'},
+ {m:'in',q:'Según la definición ITIL citada en el documento, un "Problem" (con P mayúscula) es:',o:['Cualquier queja de un cliente','La causa de uno o más incidentes','Un cambio no autorizado','Un error de configuración'],c:1,e:'El documento cita la definición ITIL de Problem como "la causa de uno o más incidentes".'},
+ {m:'org',q:'¿Qué sistema de notificación de problemas de calidad se asocia con "parar la línea" en el Kaizen diario dentro de TI?',o:['El Kanban','El Andon','El Poka-Yoke','El OCAP'],c:1,e:'El andon es el sistema que notifica un problema de calidad o proceso; el documento pregunta "¿cuál es el andon en tu organización de TI?" al hablar de parar la línea.'},
+ {m:'org',q:'Según el documento, ¿cuál es el rango óptimo de tamaño de un equipo kaizen?',o:['2 a 4 personas','5 a 8 personas','10 a 15 personas','No hay un tamaño recomendado'],c:1,e:'5 a 8 personas es el rango óptimo: menos compromete la diversidad de puntos de vista, más suele indicar un problema demasiado grande.'},
+ {m:'org',q:'¿Cuál de las siguientes NO es una de las cuatro "Voces" que pueden originar una iniciativa kaizen?',o:['Voice of the Customer','Voice of the Business','Voice of the Regulator','Voice of the Vendor'],c:3,e:'Las cuatro voces son Customer, Business, Process y Regulator; "Voice of the Vendor" no forma parte del modelo.'},
+ {m:'org',q:'¿Qué distingue principalmente al "Kaizen sponsor" del "Kaizen lead"?',o:['El sponsor es el dueño del problema con interés directo en resolverlo; el lead gestiona el proceso kaizen en su nombre','El sponsor hace el trabajo técnico y el lead solo observa','Ambos roles son intercambiables y hacen lo mismo','El lead debe ser siempre el manager directo del sponsor'],c:0,e:'El sponsor es el dueño del problema (sin él no hay kaizen); el lead gestiona el proceso en su nombre, con habilidades de facilitación.'},
+ {m:'org',q:'Dado lo difícil que resulta bloquear una semana completa en una organización de TI, ¿qué alternativa de planificación propone el documento para un evento kaizen?',o:['Cancelar el evento y resolver el problema por email','5-6 reuniones de 3 horas repartidas en un periodo de 2 semanas','Una única reunión de 8 horas','Delegar todo el evento a un consultor externo'],c:1,e:'El documento propone organizar 5-6 reuniones de 3 horas a intervalos regulares durante dos semanas, dejando tiempo entre sesiones.'},
+ {m:'a3',q:'¿Qué tamaño tiene exactamente una hoja A3?',o:['21 x 29,7 cm','29,7 x 42 cm','42 x 59,4 cm','10 x 15 cm'],c:1,e:'A3 mide 29,7 × 42 cm — el doble de un A4 y la mitad de un A2.'},
+ {m:'a3',q:'En un A3 de resolución de problemas, ¿qué describe la sección "Future State goals"?',o:['El histórico de la organización','Cómo se vería la situación si el problema no existiera, idealmente con una meta numérica','El análisis de causa raíz','El plan de comunicación final'],c:1,e:'"Future State goals" describe la situación ideal sin el problema, preferiblemente con una meta numérica concreta.'},
+ {m:'a3',q:'¿En qué fases del ciclo PDCA se centra principalmente un "A3 Status Report"?',o:['Plan y Do','Check y Act','Solo en Plan','No sigue el ciclo PDCA'],c:1,e:'El A3 Status Report comprueba si los supuestos siguen siendo correctos y qué acciones tomar: se centra en Check y Act.'},
+ {m:'a3',q:'¿Cuál de las siguientes NO es una de las cuatro habilidades necesarias para completar un A3?',o:['Summarize (resumir)','Analyze (analizar)','Negotiate (negociar)','Visualize (visualizar)'],c:2,e:'Las cuatro habilidades son Summarize, Analyze, Synthesize y Visualize; "Negotiate" no aparece entre ellas.'},
+ {m:'a3',q:'En el Principio de la Pirámide de Barbara Minto aplicado al A3, ¿qué representa la "Complicación"?',o:['La pregunta que se debe responder','Lo que mantiene la situación actual o impide resolver el problema','El curso de acción propuesto','El resultado final medido'],c:1,e:'La "Complicación" describe los factores que mantienen la situación actual o impiden que el problema se resuelva.'},
+ {m:'de',q:'Según el documento, ¿por qué es preferible formular el problem statement como una pregunta en lugar de una afirmación?',o:['Porque las preguntas son más cortas de escribir','Porque así queda claro cuándo se ha encontrado la respuesta/solución','Porque lo exige la norma ISO 20000','Porque evita tener que definir el alcance'],c:1,e:'Formularlo como pregunta permite reconocer con claridad el momento en que se ha encontrado la respuesta.'},
+ {m:'de',q:'¿Qué diferencia a una hipótesis de un problem statement?',o:['No hay diferencia, son sinónimos','La hipótesis es una creencia ("creemos que...") aún no respaldada por hechos; el problem statement enmarca la pregunta a investigar','El problem statement siempre incluye la solución','La hipótesis solo puede formularla el sponsor'],c:1,e:'Una hipótesis es una creencia basada en observaciones sesgadas, pendiente de validación; el problem statement enmarca qué se va a investigar.'},
+ {m:'de',q:'Según el modelo Cynefin, un problema en el que la relación causa-efecto solo puede explicarse en retrospectiva y no existen soluciones conocidas se clasifica como:',o:['Simple / obvio','Complicado','Complejo','Caótico'],c:2,e:'Los problemas complejos solo se explican en retrospectiva y requieren experimentación y síntesis.'},
+ {m:'de',q:'¿Con qué tipos de problema, según Cynefin, trabaja principalmente el Kaizen dentro de TI?',o:['Simples y caóticos','Complicados y complejos','Solo caóticos','Solo simples'],c:1,e:'El kaizen se usa generalmente para problemas complicados y complejos; si resulta ser simple, la solución (quick win) suele hallarse ya en Define.'},
+ {m:'de',q:'En el análisis de stakeholders, la metáfora del "dilema del pollo y el cerdo" se usa para distinguir:',o:['Quién es el sponsor y quién es el lead','La implicación indirecta frente a la implicación directa/comprometida de un stakeholder','Los problemas simples de los complejos','Las mejores prácticas de las buenas prácticas'],c:1,e:'El pollo aporta el huevo (implicación indirecta) mientras el cerdo aporta el beicon (implicación directa y comprometida).'},
+ {m:'me',q:'En la notación y = f(x1, x2, ... xn) utilizada en la fase Measure, ¿qué representa "y"?',o:['Una variable de control','Una variable independiente cualquiera','El problema, es decir, la variable dependiente','El número de stakeholders'],c:2,e:'"y" es la variable dependiente — en la práctica, el problema — función de las variables independientes (x), las posibles causas.'},
+ {m:'me',q:'¿A qué categoría de unidades de trabajo de TI pertenecen los incidentes, peticiones de servicio y cambios estándar?',o:['Runners','Repeaters','Strangers','Ninguna de las anteriores'],c:0,e:'Los Runners son unidades diarias de hasta 1 hora: incidentes, peticiones de servicio, cambios estándar y actividad operativa.'},
+ {m:'me',q:'¿Cuál es la principal fuente de datos cuantitativos dentro de una organización de TI, según el documento?',o:['Las entrevistas a los usuarios','La recolección automática de datos (logs)','La observación anotada','Los formularios de satisfacción'],c:1,e:'La recolección automática de datos es la fuente cuantitativa principal en TI; el reto es entender correctamente lo que dicen.'},
+ {m:'me',q:'¿Cuál es la diferencia clave entre una línea base (baseline) y un benchmark?',o:['No hay diferencia, ambas son opcionales','La línea base es obligatoria en Measure para medir el progreso; el benchmark, que compara con otras organizaciones, es opcional','El benchmark es obligatorio y la línea base es opcional','Ambas se calculan con la fórmula del PCE'],c:1,e:'Es vital fijar una línea base durante Measure; el benchmarking, aunque útil, es opcional.'},
+ {m:'me',q:'La fórmula del Process Cycle Efficiency (PCE) es:',o:['WIP / tasa media de finalización','Tiempo de valor añadido (VA) / tiempo total del proceso (Lead time)','Severidad × Ocurrencia × Detectabilidad','Número de causas / número de efectos'],c:1,e:'PCE = tiempo de valor añadido / Lead time. WIP/tasa de finalización corresponde a la Ley de Little.'},
+ {m:'an',q:'¿Cuál de las siguientes NO forma parte de las siete herramientas básicas de calidad?',o:['Histograma','Diagrama de Pareto','Matriz de priorización impacto/esfuerzo','Gráfico de control'],c:2,e:'Las siete herramientas son histograma, Pareto, dispersión, flowchart, gráfico de control, Ishikawa y hoja de verificación; la matriz impacto/esfuerzo es de Improve.'},
+ {m:'an',q:'En un gráfico de control, la "variación de causa común" indica que:',o:['El proceso es inestable e impredecible y hay que investigar la causa concreta','El proceso es estable ("bajo control") y solo puede mejorarse rediseñándolo','Los datos son inválidos y deben descartarse','Se ha detectado un fallo crítico inminente'],c:1,e:'La variación de causa común es "ruido" inherente al proceso, que es estable; solo se mejora rediseñando (parte de) el proceso.'},
+ {m:'an',q:'En TI, ¿qué cuatro categorías se usan habitualmente en un diagrama de Ishikawa?',o:['Coste, Tiempo, Calidad y Riesgo','Personas, Proceso, Tecnología y Política','Define, Measure, Analyze e Improve','Runners, Repeaters, Strangers y Advice'],c:1,e:'Dentro de TI se usan comúnmente cuatro categorías: Personas, Proceso, Tecnología y Política.'},
+ {m:'an',q:'En la Matriz Causa-Efecto, una relación "fuerte" entre una entrada (x) y una salida (y) se puntúa con:',o:['0','1','3','9'],c:3,e:'Escala habitual: 0 = sin relación, 1 = débil, 3 = moderada, 9 = fuerte.'},
+ {m:'an',q:'En un FMEA, el RPN (Risk Priority Number) se calcula como:',o:['Severidad + Ocurrencia + Detectabilidad','Severidad × Ocurrencia × Detectabilidad','Severidad / Detectabilidad','Ocurrencia − Detectabilidad'],c:1,e:'RPN = Severidad × Ocurrencia × Detectabilidad, cada una puntuada de 1 a 10 (máximo posible: 1000).'},
+ {m:'im',q:'En la técnica SCAMPER, ¿qué representa la letra "P"?',o:['Prioritize (priorizar)','Put to another use (dar otro uso)','Plan (planificar)','Pilot (pilotar)'],c:1,e:'En SCAMPER, P significa "Put to another use" — dar un uso distinto a un elemento de la causa del problema.'},
+ {m:'im',q:'¿Qué diferencia principal hay entre brainstorming y brainwriting?',o:['No hay diferencia, son sinónimos','El brainwriting se hace en silencio, colocando ideas en post-its en los que otros pueden inspirarse','El brainstorming solo lo puede hacer una persona','El brainwriting no permite generar ideas nuevas'],c:1,e:'El brainwriting es una variante silenciosa: los participantes colocan post-its con ideas y se inspiran libremente en las de los demás.'},
+ {m:'im',q:'En la matriz de soluciones (solution matrix) descrita en el documento, ¿qué dos ejes se utilizan?',o:['Coste y tiempo','Factibilidad e impacto','Urgencia y complejidad','Riesgo y beneficio'],c:1,e:'La solution matrix usa factibilidad (coste/esfuerzo/tiempo bajos = alta factibilidad) e impacto esperado.'},
+ {m:'im',q:'Según la "regla de los 6 meses" del documento para el business case de una solución kaizen, si el retorno tarda más en ser positivo, ¿qué se recomienda?',o:['Cancelar definitivamente el proyecto de mejora','Buscar soluciones más pequeñas, posiblemente atacando solo parte del problema','Aumentar el presupuesto del equipo','Sustituir al kaizen sponsor'],c:1,e:'Si el retorno tarda más de 6 meses, probablemente la solución es demasiado grande; conviene buscar soluciones más pequeñas.'},
+ {m:'im',q:'Según la tabla de pruebas de solución basada en Cynefin, ¿cómo se recomienda probar una solución para un problema "complicado"?',o:['Implementar directamente a gran escala sin pruebas','Crear un pequeño piloto de producción para ver cómo se comporta en el entorno real','Usar solo un análisis de riesgo','Aplicar técnicas de experimentación abierta'],c:1,e:'Para problemas complicados se recomienda un pequeño piloto de producción; para complejos, experimentación; para obvios, mejores prácticas de mercado.'},
+ {m:'co',q:'¿Cuáles son los cuatro elementos de un plan de control, según el documento?',o:['Define, Measure, Analyze, Improve','Documentación, Monitorización, Respuesta y Formación','SIPOC, VSM, A3 y DMAIC','Sponsor, Lead, Team member y Stakeholder'],c:1,e:'El plan de control se compone de Documentación, Monitorización, Respuesta y Formación.'},
+ {m:'co',q:'¿Qué diferencia a un indicador "leading" de uno "lagging"?',o:['No hay diferencia real entre ambos','El leading predice el desempeño futuro (p. ej., nº de Problems resueltos); el lagging mide el desempeño ya ocurrido (p. ej., nº de incidentes)','El lagging siempre es más importante que el leading','Los indicadores leading solo se usan en la fase Define'],c:1,e:'Un indicador adelantado (leading) anticipa el desempeño futuro; uno retrasado (lagging) mide el resultado después de ocurrido.'},
+ {m:'co',q:'¿Qué es un OCAP (Out-of-Control-Action-Plan)?',o:['Un tipo de diagrama de Ishikawa','Un documento vivo que agrupa las intervenciones/respuestas ante una desviación, apoyado en el FMEA','El nombre alternativo del A3 de propuesta','Una métrica de la fase Measure'],c:1,e:'El OCAP agrupa las intervenciones ante un fallo; es un documento vivo ligado al FMEA de la fase Analyze.'},
+ {m:'co',q:'¿Qué diferencia hay entre "réplica" (replication) y "estandarización" (standardization) al cerrar un kaizen?',o:['Son sinónimos exactos','La réplica aplica la misma solución a un problema idéntico/similar en otra parte de la organización; la estandarización aplica las lecciones aprendidas a problemas distintos','La réplica solo aplica a procesos técnicos','La estandarización nunca se recomienda en TI'],c:1,e:'La réplica lleva la misma solución a un problema igual/similar; la estandarización aplica las lecciones aprendidas a problemas diferentes.'},
+ {m:'co',q:'Según el documento, ¿por qué "enviar un email para informar de un cambio" NO se considera comunicación efectiva a los stakeholders?',o:['Porque el email es un formato prohibido en TI','Porque la comunicación efectiva requiere formación e información estructurada, no un simple aviso','Porque los stakeholders nunca leen el correo','Porque debe hacerse siempre en persona'],c:1,e:'El documento afirma que enviar un email no constituye comunicación a los stakeholders — se necesita formación y sesiones informativas.'},
 ];
 
 const SIM1 = [
  {m:'in',q:'¿Qué significan "Kai" y "Zen" en la palabra Kaizen?',o:['Rápido y lento','Cambio y para mejor','Grande y pequeño','Individual y equipo'],c:1,e:'"Kai" = cambio, "Zen" = para mejor.'},
- {m:'in',q:'El ciclo PDCA significa:',o:['Plan-Do-Check-Act','Process-Data-Control-Analysis','Plan-Define-Check-Analyze','Problem-Diagnose-Correct-Act'],c:0,e:'PDCA: Plan-Do-Check-Act.'},
- {m:'org',q:'¿Qué tablero muestra el trabajo, ánimo e impedimentos del día?',o:['Week board','Day board','Improvement board','Control board'],c:1,e:'El day board se centra en el trabajo diario, el ánimo del equipo y los impedimentos.'},
- {m:'org',q:'¿Quién facilita un evento Kaizen de forma neutral?',o:['El sponsor','El Kaizen Lead','El cliente','El auditor'],c:1,e:'El Kaizen Lead facilita de forma neutral.'},
- {m:'a3',q:'¿Qué tamaño de página da nombre al método A3?',o:['A4','A3','A2','Carta'],c:1,e:'El método toma su nombre del tamaño de papel A3.'},
- {m:'a3',q:'El diálogo iterativo entre autor y stakeholders del A3 se llama:',o:['Gemba walk','Catchball','Yokoten','Brainstorming'],c:1,e:'Ese diálogo iterativo se llama catchball.'},
- {m:'de',q:'¿Qué herramienta mapea Proveedores-Entradas-Proceso-Salidas-Clientes?',o:['VSM','SIPOC','A3','DMAIC'],c:1,e:'SIPOC mapea Suppliers-Inputs-Process-Outputs-Customers.'},
- {m:'de',q:'Un problem statement no debe incluir:',o:['Datos','El impacto del problema','La causa o solución del problema','El alcance'],c:2,e:'No debe adelantar causas ni soluciones, solo describir hechos.'},
- {m:'me',q:'¿Qué mide una línea base (baseline)?',o:['El desempeño futuro deseado','El desempeño actual antes de mejorar','El coste del proyecto','La satisfacción del sponsor'],c:1,e:'La línea base mide el desempeño actual, antes de mejorar.'},
- {m:'me',q:'TIMWOODS enumera:',o:['Las fases DMAIC','Los 8 desperdicios Lean','Los roles del equipo','Las secciones del A3'],c:1,e:'TIMWOODS enumera los 8 desperdicios Lean.'},
- {m:'an',q:'¿Cuántas veces se pregunta típicamente "¿por qué?" en la técnica 5 Whys?',o:['3','5','8','10'],c:1,e:'La técnica toma su nombre de preguntar "por qué" típicamente 5 veces.'},
- {m:'an',q:'El diagrama de Ishikawa también se conoce como:',o:['Diagrama de Pareto','Diagrama de espina de pescado','Diagrama SIPOC','Diagrama de flujo de valor'],c:1,e:'Ishikawa = diagrama de espina de pescado (causa-efecto).'},
- {m:'an',q:'Ir al gemba significa:',o:['Consultar una base de datos histórica','Ir al lugar real donde ocurre el trabajo','Redactar el informe final','Convocar al sponsor'],c:1,e:'Gemba es el lugar real donde ocurre el trabajo.'},
- {m:'im',q:'Probar una solución a pequeña escala antes de implementarla del todo se llama:',o:['Plan de control','Prueba piloto','Trabajo estándar','Gemba walk'],c:1,e:'Se llama prueba piloto.'},
- {m:'im',q:'Una matriz impacto/esfuerzo sirve para:',o:['Medir el Lead Time','Priorizar soluciones candidatas','Definir el problema','Cerrar el A3'],c:1,e:'Sirve para priorizar soluciones candidatas.'},
- {m:'co',q:'El trabajo estándar documenta:',o:['Los errores del proceso anterior','La nueva forma correcta y repetible de trabajar','El presupuesto del proyecto','Los stakeholders del proyecto'],c:1,e:'Documenta la nueva forma correcta y repetible de trabajar.'},
- {m:'co',q:'Replicar una mejora exitosa en otras áreas se denomina:',o:['Catchball','Yokoten','Gemba','PDCA'],c:1,e:'Esa réplica horizontal se llama yokoten.'},
- {m:'in',q:'DMEDI se usa preferentemente cuando:',o:['Ya existe un proceso maduro a optimizar','Hay que diseñar un proceso nuevo','El evento dura menos de un día','No hay sponsor disponible'],c:1,e:'DMEDI se usa cuando hay que diseñar un proceso nuevo.'},
- {m:'de',q:'La Voice of the Customer (VoC) ayuda a definir:',o:['El presupuesto del proyecto','Qué es valor desde la perspectiva del cliente','El plan de control','El trabajo estándar'],c:1,e:'VoC ayuda a definir qué es valor desde la perspectiva del cliente.'},
- {m:'me',q:'El PCE (Process Cycle Efficiency) compara:',o:['Coste vs beneficio','Tiempo de valor añadido vs tiempo total del proceso','Número de defectos vs unidades','Stakeholders vs equipo'],c:1,e:'PCE compara el tiempo de valor añadido con el tiempo total del proceso.'},
+ {m:'in',q:'¿Cuál de estos tres términos japoneses representa una ruptura completa con la situación actual (innovación/transformación)?',o:['Kaizen','Kaikaku','Kakushin','Gemba'],c:2,e:'Kakushin es la ruptura completa, introduciendo estructuras totalmente nuevas.'},
+ {m:'in',q:'¿Qué ciclo de mejora continua es la base de DMAIC, ITIL CSI y Cobit?',o:['SIPOC','PDCA (Deming)','5S','MECE'],c:1,e:'El ciclo PDCA de Deming es la base de toda mejora Lean, incluidos DMAIC, ITIL CSI y Cobit.'},
+ {m:'org',q:'¿Cómo se llama el documento breve que describe el problema y los recursos asignados antes de un evento kaizen?',o:['A3','Kaizen charter','SIPOC','VSM'],c:1,e:'El kaizen charter describe el problema y los recursos (personas, tiempo, dinero) asignados.'},
+ {m:'org',q:'¿Cuál de las siguientes es una de las cuatro "Voces" que originan iniciativas kaizen?',o:['Voice of the Customer','Voice of the Supplier','Voice of the Manager','Voice of the Team'],c:0,e:'Voice of the Customer es una de las cuatro voces (junto a Business, Process y Regulator).'},
+ {m:'org',q:'¿Cuál es el rango de tamaño óptimo de un equipo kaizen, según el documento?',o:['2-4','5-8','10-15','20-25'],c:1,e:'El rango óptimo es de 5 a 8 personas.'},
+ {m:'a3',q:'¿Qué tamaño de papel da nombre al método A3?',o:['A4','A3','A2','Carta'],c:1,e:'El método toma su nombre del tamaño de papel A3.'},
+ {m:'a3',q:'¿Cuál de estas NO es una de las cuatro habilidades para completar un A3?',o:['Summarize','Synthesize','Visualize','Negotiate'],c:3,e:'Las cuatro son Summarize, Analyze, Synthesize y Visualize.'},
+ {m:'de',q:'Un buen problem statement debe ser, entre otras cosas:',o:['Vago y general','SMART (específico, medible...)','Redactado solo por el sponsor','Idéntico a la solución final'],c:1,e:'Debe ser SMART: Specific, Measurable, Achievable, Realistic, Time-bound.'},
+ {m:'de',q:'¿Cuántos tipos de problema define el modelo Cynefin?',o:['3','4','5','6'],c:2,e:'Cynefin define cinco tipos: simple, complicado, complejo, caótico y desorden.'},
+ {m:'de',q:'¿Qué herramienta se usa en Define para validar el alcance del problema?',o:['SIPOC','FMEA','OCAP','RACI'],c:0,e:'El SIPOC se usa en Define para validar el alcance del proceso en el que ocurre el problema.'},
+ {m:'me',q:'¿Qué unidades de trabajo de TI ocurren de forma irregular, con frecuencia mensual o trimestral?',o:['Runners','Repeaters','Strangers','Advice'],c:2,e:'Los Strangers son unidades de ocurrencia irregular, mensual o trimestral.'},
+ {m:'me',q:'¿Qué mide la "línea base" (baseline) en la fase Measure?',o:['El desempeño futuro deseado','El desempeño actual antes de intervenir','El coste del proyecto','La satisfacción del sponsor'],c:1,e:'La línea base mide el desempeño actual, antes de intervenir.'},
+ {m:'an',q:'¿Cuál de las siguientes es una de las siete herramientas básicas de calidad?',o:['Matriz de priorización','Diagrama de dispersión (scatter)','SCAMPER','OCAP'],c:1,e:'El diagrama de dispersión (scatter) es una de las siete herramientas básicas de calidad.'},
+ {m:'an',q:'En TI, ¿cuántas categorías se usan habitualmente en el diagrama de Ishikawa?',o:['3','4','6','8'],c:1,e:'En TI se usan 4 categorías: Personas, Proceso, Tecnología y Política.'},
+ {m:'an',q:'En un FMEA, ¿cuál es el rango de puntuación usado para severidad, ocurrencia y detectabilidad?',o:['0 a 5','1 a 10','1 a 100','0 a 1'],c:1,e:'Cada una de las tres dimensiones se puntúa de 1 a 10.'},
+ {m:'im',q:'¿Qué técnica de ideación usa verbos de acción como Sustituir, Combinar o Eliminar?',o:['Brainwriting','SCAMPER','Affinity mapping','Multi-voting'],c:1,e:'SCAMPER usa verbos de acción como disparadores de ideas.'},
+ {m:'im',q:'En la solution matrix, ¿qué dos ejes se comparan?',o:['Coste y riesgo','Factibilidad e impacto','Tiempo y calidad','Personas y proceso'],c:1,e:'La solution matrix compara factibilidad e impacto.'},
+ {m:'co',q:'¿Qué documento describe cómo ejecutar una tarea concreta de forma consistente?',o:['A3','SOP (Standard Operating Procedure)','VSM','SIPOC'],c:1,e:'El SOP describe cómo ejecutar una tarea de forma consistente.'},
+ {m:'co',q:'¿Qué tipo de indicador predice el desempeño futuro?',o:['Lagging','Leading','Neutral','Cualitativo'],c:1,e:'El indicador leading (adelantado) predice el desempeño futuro.'},
 ];
 
 const SIM2 = [
- {m:'org',q:'Un equipo de TI resuelve pequeños problemas cada mañana en una reunión de 15 minutos frente a su tablero, sin abrir un evento formal. ¿Qué tipo de Kaizen practican?',o:['Improvement Kaizen','Kaizen diario','DMEDI','A3 de propuesta'],c:1,e:'Resolver problemas pequeños en el trabajo diario, sin evento formal, es Kaizen diario.'},
- {m:'org',q:'Durante un evento Kaizen, el facilitador propone directamente la solución que él considera correcta e impide que el equipo explore otras alternativas. ¿Qué principio incumple?',o:['El principio de neutralidad del Kaizen Lead','El uso de SIPOC','El cálculo del PCE','La regla de las 6M'],c:0,e:'El Kaizen Lead debe ser neutral y no imponer soluciones.'},
- {m:'in',q:'Un equipo detecta un problema de disponibilidad en un servicio completamente nuevo, sin proceso previo definido. ¿Qué ciclo es más adecuado?',o:['DMAIC','DMEDI','PDCA clásico','5 Whys'],c:1,e:'Sin proceso previo que mejorar, DMEDI (diseño/innovación) es más adecuado que DMAIC.'},
- {m:'org',q:'El sponsor de un proyecto libera tiempo de dos analistas para el equipo y elimina un bloqueo con el área de seguridad. ¿Qué rol desempeña?',o:['Kaizen Lead','Sponsor/Champion','Stakeholder externo','Dueño del proceso'],c:1,e:'Aportar recursos y eliminar barreras es propio del sponsor/champion.'},
- {m:'de',q:'Un equipo redacta: "El proceso de aprobación de cambios es lento porque el equipo de aprobadores no usa la herramienta correcta". ¿Cuál es el defecto principal?',o:['Es demasiado corto','Ya incluye una causa/solución implícita en lugar de describir solo el hecho observable','No menciona el nombre del proceso','Está escrito en presente'],c:1,e:'El enunciado adelanta una causa/solución, cuando debería describir solo el hecho observable.'},
- {m:'de',q:'Al construir el SIPOC de un proceso de gestión de incidencias, el equipo identifica quién solicita el servicio y quién recibe el resultado final. ¿A qué elementos corresponde?',o:['Suppliers e Inputs','Process y Outputs','Suppliers y Customers','Inputs y Outputs'],c:2,e:'Quien solicita es el Supplier (o el propio Customer que origina la solicitud) y quien recibe el resultado es el Customer; en este caso corresponde a Suppliers y Customers.'},
- {m:'me',q:'Un equipo mide el tiempo que tarda un ticket en resolverse (resultado final) y, por separado, el tiempo que tarda en ser asignado a un técnico (paso intermedio). ¿Cómo se clasifican?',o:['Ambas son métricas de resultado (lag)','Métrica de resultado (lag) y métrica de proceso (lead)','Métrica de proceso (lead) y métrica de resultado (lag)','Ambas son métricas de proceso (lead)'],c:1,e:'El tiempo de resolución final es lag; el tiempo de asignación (paso intermedio) es lead.'},
- {m:'me',q:'En un VSM, un ticket permanece 6 horas en cola sin que nadie trabaje en él, de un total de 8 horas. ¿Qué indica esto sobre el PCE?',o:['El PCE será muy alto, cercano al 100%','El PCE será bajo, ya que la mayor parte del tiempo no añade valor','El PCE no se puede calcular sin conocer el coste','El PCE mide directamente la satisfacción del cliente'],c:1,e:'Si la mayor parte del tiempo es espera sin valor añadido, el PCE resultante es bajo.'},
- {m:'an',q:'Aplicando los 5 Whys a un fallo recurrente de un servidor, el equipo se detiene en la segunda pregunta porque "el disco se llenó". ¿Qué riesgo tiene detenerse ahí?',o:['Ninguno, esa ya es la causa raíz','Confundir un síntoma o causa intermedia con la causa raíz real','Haber preguntado demasiadas veces','Que el diagrama de Ishikawa quede incompleto'],c:1,e:'Detenerse pronto puede confundir una causa intermedia con la verdadera causa raíz.'},
- {m:'an',q:'En un diagrama de Ishikawa aplicado a TI, el equipo agrupa causas bajo "Proceso", "Personas", "Tecnología" y "Datos". ¿Qué está haciendo?',o:['Sustituyendo el DMAIC por DMEDI','Adaptando las categorías clásicas (6M) al contexto de TI','Calculando el PCE','Redactando el problem statement'],c:1,e:'Está adaptando las categorías clásicas del Ishikawa (6M) al contexto de TI.'},
- {m:'an',q:'Un Pareto muestra que el 78% de los tickets de un tipo provienen de solo 2 de 15 causas posibles. ¿Qué debería priorizar el equipo?',o:['Atacar las 13 causas restantes primero','Enfocar el análisis y las soluciones en esas 2 causas vitales','Ignorar el Pareto y usar solo el diagrama de Ishikawa','Repetir la medición porque el resultado es inválido'],c:1,e:'Según el principio 80/20, hay que enfocarse en las pocas causas vitales.'},
- {m:'im',q:'Antes de implementar una nueva forma de asignar tickets a todo el departamento, el equipo la aplica primero solo con un turno durante dos semanas. ¿Qué práctica es esta?',o:['Yokoten','Prueba piloto (PDCA a pequeña escala)','Gemba walk','Catchball'],c:1,e:'Probar a pequeña escala antes de generalizar es una prueba piloto (PDCA).'},
- {m:'im',q:'El equipo genera 30 ideas para reducir el tiempo de espera sin descartar ninguna en la sesión inicial, evaluándolas solo después. ¿Qué técnica usan y por qué no juzgar en el momento?',o:['5 Whys; para llegar rápido a la causa raíz','Brainstorming; para maximizar la cantidad de ideas antes de evaluarlas','SIPOC; para definir el alcance','Pareto; para priorizar causas'],c:1,e:'Es brainstorming: no juzgar de inmediato maximiza la cantidad de ideas generadas.'},
- {m:'im',q:'Dos soluciones tienen impacto similar, pero una requiere cambiar un sistema legado (alto esfuerzo) y otra solo un ajuste de configuración (bajo esfuerzo). ¿Cuál se prioriza primero normalmente?',o:['La de alto esfuerzo, porque es más duradera','La de bajo esfuerzo y buen impacto ("quick win")','Ninguna, hay que esperar a Control','Se eligen ambas simultáneamente sin análisis'],c:1,e:'Con impacto similar, se prioriza la de menor esfuerzo ("quick win").'},
- {m:'co',q:'Tras implementar la mejora, el equipo define qué métrica se revisará cada semana, quién actuará si se desvía y qué umbral dispara una alerta. ¿Qué están elaborando?',o:['El problem statement','El plan de control','El SIPOC','La matriz de priorización'],c:1,e:'Definir métrica, responsable y umbrales de desviación es el plan de control.'},
- {m:'co',q:'Un proceso mejorado se documenta paso a paso para que cualquier técnico nuevo pueda ejecutarlo igual, incluso sin el creador de la mejora presente. ¿Qué concepto se aplica?',o:['Trabajo estándar','Yokoten','Catchball','DMEDI'],c:0,e:'Documentar el proceso paso a paso para que sea repetible es trabajo estándar.'},
- {m:'co',q:'El área de TI que resolvió un problema de lentitud en despliegues comparte su solución con otro equipo con un problema similar en otra plataforma. ¿Cómo se llama esta práctica?',o:['Gemba walk','Yokoten (réplica horizontal)','Catchball','SIPOC'],c:1,e:'Compartir una mejora con otro equipo/área es yokoten.'},
- {m:'in',q:'Un Kaizen Lead nota que el equipo empieza a proponer soluciones antes de haber medido el proceso actual. ¿Qué fase del ciclo DMAIC se está saltando?',o:['Define','Measure','Control','Ninguna, es válido saltar fases'],c:1,e:'Proponer soluciones sin datos de línea base indica que se está saltando Measure.'},
- {m:'co',q:'En el cierre de un evento Kaizen, el equipo transfiere la responsabilidad de mantener el nuevo proceso a quien lo ejecuta día a día. ¿A quién se traspasa la propiedad?',o:['Al Kaizen Lead de forma permanente','Al sponsor únicamente','Al dueño del proceso/equipo operativo','A un consultor externo'],c:2,e:'La propiedad del proceso se traspasa al dueño del proceso/equipo operativo.'},
- {m:'me',q:'Un equipo confunde "estar ocupado" con "estar generando valor" al medir su proceso. ¿Qué herramienta de Measure ayuda a distinguir el tiempo que añade valor del que no?',o:['SIPOC','Value Stream Mapping (VSM) y el cálculo de PCE','Diagrama de Ishikawa','Matriz impacto/esfuerzo'],c:1,e:'El VSM y el PCE distinguen claramente el tiempo de valor añadido del que no lo es.'},
+ {m:'in',q:'Un equipo de TI sustituye por completo su antiguo sistema de tickets por una plataforma completamente distinta que cambia todos los roles y flujos existentes. ¿Qué tipo de mejora describe mejor esta situación?',o:['Kaizen','Kaikaku','Kakushin','Daily Kaizen'],c:2,e:'Sustituir una aplicación por otra completamente distinta, con estructuras y roles nuevos, es un ejemplo de Kakushin.'},
+ {m:'org',q:'Un ingeniero nota un defecto en el código durante el desarrollo y detiene la entrega en lugar de dejar que lo encuentren los testers. ¿Qué concepto Lean IT ilustra mejor esta acción?',o:['Kaizen de mejora','"Parar la línea" (andon) propio del kaizen diario','Un evento kaizen formal','Un A3 de propuesta'],c:1,e:'Detener el trabajo ante un problema de calidad es "parar la línea", el equivalente TI del andon, propio del kaizen diario.'},
+ {m:'org',q:'El sponsor de un kaizen pierde interés en resolver el problema a mitad del evento. Según el documento, ¿qué se recomienda hacer?',o:['Continuar el evento igualmente porque ya se ha invertido tiempo','Detener el proceso de inmediato, ya que cualquier acción posterior es desperdicio','Sustituir al sponsor por el kaizen lead','Ignorar la falta de interés y seguir con el plan original'],c:1,e:'El documento indica que en cuanto nadie sienta la necesidad de resolver el problema, hay que detener el proceso de inmediato.'},
+ {m:'a3',q:'Un equipo necesita informar a los stakeholders sobre el avance de un proyecto de mejora que lleva varios meses en marcha, centrándose en si las suposiciones iniciales siguen siendo válidas. ¿Qué tipo de A3 deben usar?',o:['A3 de resolución de problemas','A3 Status Report','A3 Proposal','A3 Charter'],c:1,e:'El A3 Status Report informa del avance de una iniciativa larga y comprueba si las suposiciones siguen siendo válidas (Check/Act).'},
+ {m:'a3',q:'Al estructurar la historia de un A3 con el Principio de la Pirámide, un equipo agrupa las llamadas de soporte en categorías donde cada llamada pertenece a una única categoría y todas quedan cubiertas. ¿Qué técnica están aplicando?',o:['SCAMPER','MECE','FMEA','OCAP'],c:1,e:'MECE (Mutually Exclusive, Collectively Exhaustive) asegura categorías sin solapes que cubren todas las posibilidades.'},
+ {m:'de',q:'Un equipo redacta: "¿Cómo podemos reducir a la mitad los fallos de release en los próximos dos meses?" ¿Por qué este problem statement sigue las buenas prácticas del documento?',o:['Porque incluye ya la solución','Porque está formulado como pregunta medible y con un plazo definido (SMART)','Porque no menciona ningún dato','Porque fue escrito únicamente por el kaizen lead'],c:1,e:'Está formulado como pregunta, es medible y tiene un plazo definido — cumple con SMART.'},
+ {m:'de',q:'Un incidente nunca visto antes ocurre en un sistema crítico; no hay relación causa-efecto perceptible y hay que estabilizar la situación de inmediato antes de investigar. Según Cynefin, ¿qué tipo de problema es?',o:['Simple','Complicado','Complejo','Caótico'],c:3,e:'Sin relación causa-efecto perceptible y necesidad de estabilizar primero: es un problema caótico.'},
+ {m:'de',q:'Durante el análisis de stakeholders, un equipo identifica a una persona con alto interés en el problema pero sin poder formal ni informal para influir en la solución. ¿Qué dimensión describe mejor su nivel bajo?',o:['Influencia','Implicación','Complejidad','Feasibility'],c:0,e:'La influencia se refiere al poder formal o informal sobre el problema; en este caso es baja aunque la implicación/interés sea alta.'},
+ {m:'me',q:'Un equipo mide el número de solicitudes de cambio grandes que ocurren solo una vez al trimestre. ¿A qué categoría de unidad de trabajo corresponde?',o:['Runners','Repeaters','Strangers','Advice'],c:2,e:'Los cambios grandes de ocurrencia trimestral son Strangers.'},
+ {m:'me',q:'Un kaizen lead entrevista a cinco usuarios distintos sobre un mismo problema para reducir el sesgo de una única opinión. ¿Qué tipo de sistema de medición está reforzando?',o:['Cuantitativo mediante logs','Cualitativo mediante entrevistas','Cuantitativo mediante control charts','Ninguno, las entrevistas no son un sistema de medición'],c:1,e:'Las entrevistas son un sistema de medición cualitativo; usar varias reduce el sesgo de una sola opinión.'},
+ {m:'me',q:'Un proceso tiene un Lead Time de 10 horas, de las cuales solo 2 horas son de valor añadido. ¿Cuál es el PCE aproximado?',o:['80%','20%','200%','No se puede calcular sin conocer el WIP'],c:1,e:'PCE = VA / Lead time = 2/10 = 20%.'},
+ {m:'an',q:'Un gráfico de control muestra que el tiempo de cierre de incidentes varía de forma aleatoria dentro de unos límites estables, sin picos atribuibles a un evento concreto. ¿Qué tipo de variación es esta?',o:['Variación de causa especial','Variación de causa común','Variación de causa raíz','Variación MECE'],c:1,e:'La variación aleatoria dentro de límites estables, sin causa puntual asignable, es variación de causa común.'},
+ {m:'an',q:'En una Matriz Causa-Efecto, una entrada tiene una relación "moderada" con una salida. ¿Qué puntuación recibe?',o:['0','1','3','9'],c:2,e:'Una relación moderada se puntúa con 3 (débil=1, fuerte=9, sin relación=0).'},
+ {m:'an',q:'Un equipo detecta un cuello de botella en un paso del proceso comparando el takt time de ese paso con el del proceso completo. ¿Qué tipo de desperdicio japonés está más asociado a este cuello de botella?',o:['Muda','Mura','Muri','Gemba'],c:1,e:'Los cuellos de botella (capacity constraints) pueden causar variabilidad — mura — en todo el proceso.'},
+ {m:'im',q:'Al aplicar reverse thinking a un problema de disponibilidad, el equipo genera 12 formas de "sabotear" el servicio a propósito. ¿Cuál es el objetivo real de este ejercicio?',o:['Documentar amenazas de seguridad reales','Usar esas ideas invertidas como inspiración para soluciones reales','Sustituir al equipo de Analyze','Redactar el plan de control'],c:1,e:'El reverse thinking usa ideas "negativas" invertidas como inspiración para encontrar soluciones reales positivas.'},
+ {m:'im',q:'Un equipo reduce 30 ideas a un top 10 haciendo que cada miembro reparta 10 votos, y luego repite el ejercicio con 3 votos por persona sobre las 10 finalistas. ¿Qué técnica están usando?',o:['Affinity mapping','Multi-voting','Business case development','SCAMPER'],c:1,e:'Repartir votos limitados en rondas sucesivas para acotar las soluciones es multi-voting.'},
+ {m:'co',q:'Un equipo de TI adopta una nueva forma de asignar tickets y define qué métrica se revisa cada semana, quién actúa ante una desviación y qué umbral la dispara. ¿Qué parte del plan de control están construyendo?',o:['Documentación','Monitorización','Respuesta','Formación'],c:1,e:'Definir métricas, frecuencia de revisión y umbrales de desviación corresponde a la Monitorización.'},
+ {m:'co',q:'El log de un OCAP muestra que un mismo tipo de fallo se ha resuelto tres veces con la misma acción en el último mes. ¿Para qué sirve principalmente este registro, según el documento?',o:['Para sancionar al equipo responsable','Para dar visibilidad a problemas frecuentes y orientar nuevas iniciativas kaizen','Para sustituir el A3 final','Para calcular el PCE del proceso'],c:1,e:'El log del OCAP ofrece visibilidad sobre problemas frecuentes y puede orientar nuevas iniciativas kaizen.'},
+ {m:'co',q:'Tras cerrar un kaizen sobre incidencias de red, otro equipo con un problema de red casi idéntico adopta exactamente la misma solución. ¿Cómo se llama esta práctica?',o:['Estandarización','Réplica','Benchmarking','Multi-voting'],c:1,e:'Aplicar la misma solución a un problema idéntico o similar en otra parte de la organización es réplica (replication).'},
+ {m:'co',q:'El sponsor de un kaizen acepta el A3 final, la documentación y la formación operativa, y asume la responsabilidad continua del proceso mejorado. ¿Qué paso del cierre del kaizen describe esto?',o:['Validar el problema','Crear el plan de control','Transición de la propiedad (ownership) del proceso','Seleccionar el equipo kaizen'],c:2,e:'El paso final del cierre es transferir la responsabilidad del proceso mejorado al sponsor/dueño del proceso.'},
 ];
 
 const MODULE_NAME = Object.fromEntries(MODULES.map(m=>[m.id, m.name]));
@@ -545,43 +753,89 @@ function renderResumen(panel){
   panel.innerHTML = `
     <div class="panel-head">
       <h2>Resumen rápido</h2>
-      <p class="desc">Tablas de referencia para repaso final</p>
+      <p class="desc">Tablas de referencia para repaso final, basadas en la Official Publication</p>
     </div>
     <div class="panel-body">
-      <h3 style="color:var(--accent);margin-top:0;">Ciclo DMAIC</h3>
-      <table class="ref">
+      <h3 style="color:var(--accent);margin-top:0;">Kaizen, Kaikaku y Kakushin</h3>
+      <div class="ref-wrap"><table class="ref">
+        <tr><th>Término</th><th>Significado</th><th>Ejemplo TI</th></tr>
+        <tr><td><b>Kaizen</b></td><td>Pequeños cambios incrementales, sostenidos en el tiempo</td><td>Actualización menor de software</td></tr>
+        <tr><td><b>Kaikaku</b></td><td>Cambio radical de tipo escalón sobre la situación existente</td><td>Subir de versión una aplicación en uso</td></tr>
+        <tr><td><b>Kakushin</b></td><td>Ruptura completa: innovación, transformación, renovación</td><td>Sustituir una aplicación por otra completamente distinta</td></tr>
+      </table></div>
+
+      <h3 style="color:var(--accent);">Ciclo DMAIC</h3>
+      <div class="ref-wrap"><table class="ref">
         <tr><th>Fase</th><th>Objetivo</th><th>Herramientas clave</th></tr>
-        <tr><td><b>Define</b></td><td>Enunciar el problema, impacto y alcance</td><td>Problem statement, SIPOC, VoC, project charter, stakeholders</td></tr>
-        <tr><td><b>Measure</b></td><td>Establecer la línea base con datos fiables</td><td>Data collection plan, VSM, PCE, métricas lead/lag</td></tr>
-        <tr><td><b>Analyze</b></td><td>Identificar la causa raíz</td><td>5 Whys, Ishikawa, Pareto, gemba walk</td></tr>
-        <tr><td><b>Improve</b></td><td>Generar y seleccionar contramedidas</td><td>Brainstorming, matriz impacto/esfuerzo, prueba piloto</td></tr>
-        <tr><td><b>Control</b></td><td>Sostener la mejora en el tiempo</td><td>Plan de control, trabajo estándar, yokoten</td></tr>
-      </table>
+        <tr><td><b>Define</b></td><td>Problem statement, objetivos, alcance</td><td>SIPOC, project charter, análisis de stakeholders, Cynefin</td></tr>
+        <tr><td><b>Measure</b></td><td>Entender KPIs y desempeño actual</td><td>CTQ, plan de recolección de datos, VSM, baseline</td></tr>
+        <tr><td><b>Analyze</b></td><td>Identificar la causa raíz (las x críticas)</td><td>7 herramientas de calidad, 5 Whys, C&amp;E Matrix, FMEA</td></tr>
+        <tr><td><b>Improve</b></td><td>Generar y seleccionar contramedidas</td><td>Brainstorming, SCAMPER, solution matrix, piloto</td></tr>
+        <tr><td><b>Control</b></td><td>Sostener la mejora y traspasar el proceso</td><td>Plan de control (documentación/monitorización/respuesta/formación), OCAP</td></tr>
+      </table></div>
 
-      <h3 style="color:var(--accent);">Kaizen diario vs. Kaizen de mejora</h3>
-      <table class="ref">
-        <tr><th></th><th>Kaizen diario</th><th>Kaizen de mejora (Improvement)</th></tr>
-        <tr><td><b>Alcance</b></td><td>Pequeñas mejoras del trabajo normal</td><td>Problema específico, acotado</td></tr>
-        <tr><td><b>Duración</b></td><td>Continuo, integrado en el día a día</td><td>Evento limitado en el tiempo (1-5 días)</td></tr>
-        <tr><td><b>Herramienta visual</b></td><td>Day board</td><td>Improvement board + A3</td></tr>
-        <tr><td><b>Metodología</b></td><td>PDCA informal</td><td>DMAIC estructurado</td></tr>
-      </table>
+      <h3 style="color:var(--accent);">Modelo Cynefin (tipos de problema)</h3>
+      <div class="ref-wrap"><table class="ref">
+        <tr><th>Tipo</th><th>Causa-efecto</th><th>Cómo se resuelve</th></tr>
+        <tr><td>Simple / obvio</td><td>Evidente y predecible</td><td>Procedimiento operativo estándar (SOP)</td></tr>
+        <tr><td>Complicado</td><td>Sigue reglas, pero requiere expertise</td><td>Mejores prácticas, pensamiento sistémico</td></tr>
+        <tr><td>Complejo</td><td>Solo se explica en retrospectiva</td><td>Experimentación y síntesis</td></tr>
+        <tr><td>Caótico</td><td>No perceptible</td><td>Gestión de crisis, estabilizar primero</td></tr>
+        <tr><td>Desorden</td><td>No se sabe cuál de los 4 tipos es</td><td>Investigar para reclasificar</td></tr>
+      </table></div>
 
-      <h3 style="color:var(--accent);">Estructura de un A3</h3>
-      <table class="ref">
+      <h3 style="color:var(--accent);">Las 4 Voces (fuentes de iniciativas kaizen)</h3>
+      <div class="ref-wrap"><table class="ref">
+        <tr><th>Voz</th><th>Qué indica</th></tr>
+        <tr><td>Voice of the Customer (VoC)</td><td>Cómo experimenta el usuario el servicio de TI (la más importante)</td></tr>
+        <tr><td>Voice of the Business (VoB)</td><td>El "negocio" de la propia TI: costes, presupuesto</td></tr>
+        <tr><td>Voice of the Process (VoP)</td><td>Procesos que no funcionan correctamente</td></tr>
+        <tr><td>Voice of the Regulator (VoR)</td><td>Requisitos regulatorios y de cumplimiento</td></tr>
+      </table></div>
+
+      <h3 style="color:var(--accent);">Las 7 herramientas básicas de calidad</h3>
+      <div class="ref-wrap"><table class="ref">
+        <tr><th>Herramienta</th><th>Para qué sirve</th></tr>
+        <tr><td>Histograma</td><td>Distribución de frecuencias de datos numéricos</td></tr>
+        <tr><td>Diagrama de Pareto</td><td>Ordenar causas por impacto (80/20)</td></tr>
+        <tr><td>Diagrama de dispersión</td><td>Correlación entre dos variables</td></tr>
+        <tr><td>Diagrama de flujo</td><td>Pasos y decisiones de un proceso</td></tr>
+        <tr><td>Gráfico de control</td><td>Variación de causa común vs. especial</td></tr>
+        <tr><td>Diagrama de Ishikawa</td><td>Categorizar causas potenciales (People/Process/Technology/Policy en TI)</td></tr>
+        <tr><td>Hoja de verificación</td><td>Contar ocurrencias de un síntoma</td></tr>
+      </table></div>
+
+      <h3 style="color:var(--accent);">Muri · Mura · Muda</h3>
+      <div class="ref-wrap"><table class="ref">
+        <tr><th>Término</th><th>Significado</th></tr>
+        <tr><td><b>Muri</b></td><td>Sobrecarga / exceso — a menudo por decisiones de política</td></tr>
+        <tr><td><b>Mura</b></td><td>Irregularidad / variación / falta de uniformidad</td></tr>
+        <tr><td><b>Muda</b></td><td>Desperdicio</td></tr>
+      </table></div>
+
+      <h3 style="color:var(--accent);">Estructura de un A3 de resolución de problemas</h3>
+      <div class="ref-wrap"><table class="ref">
         <tr><th>#</th><th>Sección</th></tr>
-        <tr><td>1</td><td>Título / Tema</td></tr>
-        <tr><td>2</td><td>Antecedentes (Background)</td></tr>
-        <tr><td>3</td><td>Situación actual (Current Condition)</td></tr>
-        <tr><td>4</td><td>Objetivo / Meta (Target)</td></tr>
-        <tr><td>5</td><td>Análisis de causa raíz</td></tr>
-        <tr><td>6</td><td>Contramedidas propuestas</td></tr>
-        <tr><td>7</td><td>Plan de implementación</td></tr>
-        <tr><td>8</td><td>Seguimiento / resultados</td></tr>
-      </table>
+        <tr><td>1</td><td>Background</td></tr>
+        <tr><td>2</td><td>Current Condition</td></tr>
+        <tr><td>3</td><td>Future State goals</td></tr>
+        <tr><td>4</td><td>Analysis</td></tr>
+        <tr><td>5</td><td>Proposed options</td></tr>
+        <tr><td>6</td><td>Plan / Improvement</td></tr>
+        <tr><td>7</td><td>Follow-up</td></tr>
+      </table></div>
+
+      <h3 style="color:var(--accent);">Plan de control (4 elementos)</h3>
+      <div class="ref-wrap"><table class="ref">
+        <tr><th>Elemento</th><th>Incluye</th></tr>
+        <tr><td>Documentación</td><td>Política, documentación de proceso, SOP, checklists</td></tr>
+        <tr><td>Monitorización</td><td>Métricas/KPIs (leading/lagging), dashboard, diálogos de desempeño, cascada</td></tr>
+        <tr><td>Respuesta</td><td>OCAP (Out-of-Control-Action-Plan), ligado al FMEA</td></tr>
+        <tr><td>Formación</td><td>Matriz de habilidades y conocimientos</td></tr>
+      </table></div>
 
       <h3 style="color:var(--accent);">TIMWOODS — los 8 desperdicios Lean</h3>
-      <table class="ref">
+      <div class="ref-wrap"><table class="ref">
         <tr><th>Letra</th><th>Desperdicio</th></tr>
         <tr><td>T</td><td>Transporte</td></tr>
         <tr><td>I</td><td>Inventario</td></tr>
@@ -591,7 +845,7 @@ function renderResumen(panel){
         <tr><td>O</td><td>Sobreprocesamiento (Overprocessing)</td></tr>
         <tr><td>D</td><td>Defectos</td></tr>
         <tr><td>S</td><td>Talento no utilizado (Skills)</td></tr>
-      </table>
+      </table></div>
     </div>`;
 }
 

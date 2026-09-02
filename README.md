@@ -1,6 +1,6 @@
 # Lean IT Kaizen — Guía de estudio
 
-Aplicación de una sola página (`index.html`) para preparar el examen de certificación **Lean IT Kaizen** (APMG / Netmind, código de curso **JST296**), prerrequisito: **Lean IT Foundation**.
+Aplicación de una sola página (`index.html`) para preparar el examen de certificación **Lean IT Kaizen** (APMG / Lean IT Association, código de curso **JST296**), prerrequisito: **Lean IT Foundation**.
 
 Incluye:
 
@@ -8,7 +8,7 @@ Incluye:
 - **Flashcards** de conceptos clave por módulo (clic para voltear).
 - Un **examen simulado de 40 preguntas** con el mismo formato que el examen oficial (≥ 26/40, 65% para aprobar).
 - Dos **simulacros adicionales** de 20 preguntas cada uno (Fácil / Medio), con corrección, explicación y desglose de aciertos por módulo.
-- Sección de **resumen rápido** con tablas de referencia: ciclo DMAIC, Kaizen diario vs. Kaizen de mejora, estructura de un A3 y los 8 desperdicios (TIMWOODS).
+- Sección de **resumen rápido** con tablas de referencia: Kaizen/Kaikaku/Kakushin, ciclo DMAIC, modelo Cynefin, las 4 Voces, las 7 herramientas de calidad, Muri/Mura/Muda, estructura del A3, el plan de control y TIMWOODS.
 - Tema claro/oscuro.
 
 ## Cómo usarlo
@@ -27,13 +27,13 @@ Abre `index.html` en cualquier navegador. No requiere instalación ni servidor.
 
 ## Origen del contenido
 
-A diferencia de la [guía de Lean IT Foundation](https://angelalvro.github.io/lean-it-study-guide/) —basada en el Digital Kit y el Sample Paper **oficiales** de APMG—, para Kaizen **no se dispuso de material oficial** (digital kit / sample paper con derechos de autor de APMG). Todo el contenido de esta guía es:
+Esta guía se basa en la **fuente oficial del temario de examen**: la *Lean IT Kaizen — Official Publication* (Lean IT Association / APMG, V1.03, octubre de 2015, autor Niels Loader), cuyo propio texto indica que "todas las preguntas del examen pueden responderse a partir de la información de este documento".
 
-- **Temario y estructura de módulos**: reconstruidos a partir de páginas públicas de descripción del curso Lean IT Kaizen (JST296) de [Netmind](https://netmind.net/en/formacion/uncategorized/lean-it-kaizen/) y de [APMG International](https://apmg-international.com/product/lean-it), así como de fuentes públicas adicionales sobre el formato del examen ([Advised Skills](https://www.advisedskills.com/lean-it/lean-it-kaizen), [Credly](https://www.credly.com/org/apmg-international/badge/apmg-lean-it-kaizen)).
-- **Teoría, flashcards y preguntas de práctica**: redactadas de forma **original** aplicando el conocimiento estándar de Lean/Six Sigma sobre DMAIC, A3 y Kaizen. No se reproduce ninguna pregunta de ningún examen oficial de APMG.
+- **Teoría y flashcards**: redactadas originalmente en español, resumiendo y parafraseando los conceptos de esa publicación oficial (Kaizen/Kaikaku/Kakushin, el modelo Cynefin, las 4 Voces, las 7 herramientas básicas de calidad, FMEA/RPN, OCAP, SCAMPER, la Ley de Little, etc.) — no es una traducción literal ni una copia del documento.
+- **Preguntas de práctica** (examen de 40 + 2 simulacros de 20): redactadas de forma **original**, evaluando esos mismos conceptos. No reproducen preguntas de ningún examen oficial de APMG.
 
-Si dispones del Digital Kit o el Sample Paper oficial de Lean IT Kaizen, el contenido teórico y las preguntas pueden sustituirse/ampliarse siguiendo el mismo formato de datos usado en `index.html` (arrays `MODULES`, `EXAM`, `SIM1`, `SIM2`).
+Al ser contenido derivado de una publicación con copyright (© 2015 Lean IT Association), esta guía se ofrece como material de estudio personal — no sustituye ni reproduce el documento original, que sigue siendo la referencia normativa para el examen.
 
 ## Aviso
 
-Este material es una ayuda de estudio personal, no un producto oficial de APMG, Netmind ni PeopleCert. Los nombres "Lean IT" y "Lean IT Kaizen" son marcas de sus respectivos titulares.
+Este material es una ayuda de estudio personal, no un producto oficial de APMG, Lean IT Association, Netmind ni PeopleCert. Los nombres "Lean IT" y "Lean IT Kaizen" son marcas de sus respectivos titulares.

@@ -79,6 +79,10 @@
   .theory ul,.theory ol{margin:0 0 12px;padding-left:20px;}
   .theory li{margin-bottom:6px;}
   .theory strong{color:var(--ink);}
+  .callout{border:1px solid var(--accent);background:var(--accent-soft);border-radius:12px;padding:14px 16px;margin:14px 0;font-size:14.5px;}
+  .callout .lbl{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);display:block;margin-bottom:4px;}
+  .callout.warn{border-color:var(--danger);background:var(--danger-soft);}
+  .callout.warn .lbl{color:var(--danger);}
   .cardgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;}
   .fc{perspective:1000px;height:150px;cursor:pointer;}
   .fc-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;}
@@ -139,7 +143,7 @@
       <div class="brand-mark">改</div>
       <div class="brand-text">
         <h1>Lean IT Kaizen — Guía de estudio</h1>
-        <div class="sub">APMG / Lean IT Association · basada en la Official Publication V1.03 (prerrequisito: Lean IT Foundation)</div>
+        <div class="sub">APMG / Lean IT Association · Official Publication V1.03 + notas de curso oficial (prerrequisito: Lean IT Foundation)</div>
       </div>
     </div>
     <div class="meta-row">
@@ -170,7 +174,7 @@
 </div>
 
 <footer>
-  Contenido teórico, flashcards y preguntas de práctica redactados originalmente a partir de la <em>Lean IT Kaizen — Official Publication</em> (Lean IT Association / APMG, V1.03, oct. 2015), la fuente oficial del temario de examen. No se reproducen preguntas de ningún examen oficial. Ver <a href="README.md">README</a>.
+  Contenido teórico, flashcards y preguntas de práctica redactados originalmente a partir de la <em>Lean IT Kaizen — Official Publication</em> (Lean IT Association / APMG, V1.03, oct. 2015) y de notas propias tomadas de un curso oficial de preparación (diapositivas + clases en directo), incluyendo trucos y matices de examen que el instructor señaló explícitamente. No se reproducen preguntas de ningún examen oficial ni material con copyright de terceros. Ver <a href="README.md">README</a>.
 </footer>
 
 <script>
@@ -253,7 +257,12 @@ const MODULES = [
         <li><strong>Kaizen team member:</strong> ejecuta el trabajo; conoce el proceso de primera mano (personas "aguas arriba" y "aguas abajo" del problema).</li>
       </ul>
       <h3>Preparar un evento kaizen</h3>
-      <p>Basándose en un <strong>kaizen charter</strong> (documento breve con el problema y los recursos asignados — personas, tiempo, dinero), se organiza la logística: lugar, materiales, acceso a datos, invitaciones. El progreso se comunica, como mínimo, mediante la actualización diaria del <strong>improvement board</strong>, complementada con el estado actual del A3. Dentro de TI, en lugar de bloquear una semana completa, suele planificarse como <strong>5-6 reuniones de 3 horas repartidas en 2 semanas</strong>, dejando tiempo entre sesiones para recoger datos y hacer análisis preliminar.</p>`,
+      <p>Basándose en un <strong>kaizen charter</strong> (documento breve con el problema y los recursos asignados — personas, tiempo, dinero), se organiza la logística: lugar, materiales, acceso a datos, invitaciones. El progreso se comunica, como mínimo, mediante la actualización diaria del <strong>improvement board</strong>, complementada con el estado actual del A3.</p>
+      <p>El evento kaizen <strong>«puro»</strong> consiste en aislar a las 5-8 personas del equipo al 100% de su jornada durante <strong>5 días laborables</strong> seguidos, de modo que el viernes la mejora ya esté implantada. Como esto rara vez es viable dentro de una organización de TI (nadie puede quedarse una semana sin dar servicio), la alternativa realista y recomendada es planificar <strong>5 reuniones de 3 horas — una por cada fase del DMAIC —, separadas por unos 2 días entre sí</strong>, dejando tiempo para recoger datos y avanzar entre sesión y sesión.</p>
+      <div class="callout warn"><span class="lbl">Truco de examen</span>La <strong>ejecución</strong> de un evento kaizen dura <strong>como máximo 2 semanas</strong> (la preparación previa sí puede llevar más). Si un enunciado habla de un trimestre o de varios meses de ejecución, <strong>no</strong> se trata de un evento kaizen DMAIC, sino de otra cosa (un proyecto, un DMEDI…).</div>
+      <h3>La ambigüedad del término «sponsor»</h3>
+      <div class="callout"><span class="lbl">Cuidado con esto en el examen</span>El manual oficial (y algunas preguntas de examen) usan la palabra <strong>«sponsor»</strong> para <strong>dos roles distintos</strong>: (1) la persona que vigila y prioriza el panel de mejoras y decide qué iniciativa merece convocar un evento kaizen; y (2) el <strong>Kaizen Sponsor</strong> propiamente dicho — el dueño real del problema, que aporta recursos y participa en el evento. Son personas distintas y cada evento kaizen tendrá su propio sponsor (2), distinto del responsable (1) que prioriza el panel. Hay que resolver por contexto a cuál se refiere la pregunta.</div>
+      <p>En el análisis de stakeholders se distingue entre una persona <strong>implicada</strong> (sigue el procedimiento, hace lo que se le pide — como la gallina que pone el huevo) y una <strong>comprometida</strong> (se juega algo directo en el resultado — como el cerdo que pone el beicon). Se valora a cada stakeholder de <strong>1 a 5</strong> en dos ejes: su <strong>influencia/poder</strong> y su <strong>implicación/interés</strong>.</p>`,
     flashcards:[
       {t:'Kaizen diario', d:'Resolver incidencias del día a día en el origen; "parar la línea" ante un problema.'},
       {t:'Andon', d:'Señal/sistema para notificar un problema de calidad o de proceso.'},
@@ -262,12 +271,15 @@ const MODULES = [
       {t:'Voice of the Business (VoB)', d:'El "negocio" de la propia organización de TI (costes, presupuesto).'},
       {t:'Voice of the Process (VoP)', d:'Señales de que los procesos no funcionan correctamente.'},
       {t:'Voice of the Regulator (VoR)', d:'Requisitos regulatorios y de cumplimiento.'},
-      {t:'Kaizen sponsor', d:'Dueño del problema; sin sponsor no hay evento kaizen.'},
+      {t:'Kaizen sponsor', d:'Dueño real del problema, distinto de quien prioriza el panel de mejoras; aporta recursos. Sin sponsor no hay evento kaizen.'},
       {t:'Kaizen lead', d:'Gestiona el proceso kaizen en nombre del sponsor y el equipo; facilita y construye el equipo.'},
       {t:'Kaizen team member', d:'Ejecuta el trabajo; conoce el proceso de primera mano.'},
       {t:'Tamaño óptimo del equipo kaizen', d:'Entre 5 y 8 personas.'},
       {t:'Kaizen charter', d:'Documento breve: problema + recursos (personas, tiempo, dinero) asignados.'},
       {t:'Improvement board', d:'Tablero que muestra los problemas actuales y su seguimiento (también Kaizen/Problem board).'},
+      {t:'Evento kaizen "puro"', d:'5-8 personas dedicadas al 100% durante 5 días laborables seguidos.'},
+      {t:'Alternativa realista en TI', d:'5 reuniones de 3h (una por fase DMAIC), separadas por unos 2 días entre sí.'},
+      {t:'Implicado vs. comprometido', d:'Implicado: sigue el procedimiento (la gallina). Comprometido: se juega algo directo (el cerdo).'},
     ]},
   { id:'a3', code:'03', name:'Método A3',
     theory:`
@@ -333,10 +345,15 @@ const MODULES = [
         <li><strong>Desorden:</strong> no se sabe en cuál de las cuatro categorías anteriores cae el problema.</li>
       </ul>
       <p>En TI, el kaizen se usa principalmente para problemas <strong>complicados y complejos</strong>; si un problema resulta ser simple, la solución (un <strong>quick win</strong>) suele encontrarse ya durante la propia fase Define.</p>
+      <div class="callout"><span class="lbl">Truco de examen: Complicado vs. Complejo vs. Caótico</span>
+        Cuando un enunciado usa adjetivos como <strong>«innovadora», «novedosa» o «de última generación»</strong> (tecnología nunca antes usada, sin buenas prácticas conocidas), el examen quiere que respondas <strong>Complejo</strong>. Si describe algo ya resuelto muchas veces con <strong>buenas prácticas, expertos y procedimientos conocidos</strong> (aunque haga falta analizarlo con detalle), quiere <strong>Complicado</strong>. Si el enunciado es dramático — <strong>caída total, incendio, parada de todo el servicio</strong>, hay que estabilizar ya y analizar después — quiere <strong>Caótico</strong>. Si no hay ni siquiera información para saber en qué categoría cae, es <strong>Desorden</strong>.
+      </div>
+      <p>Cada tipo de problema sugiere un modo de actuar distinto (a veces resumido como <strong>Sense-Categorize-Respond</strong> para lo simple/obvio, <strong>Sense-Analyze-Respond</strong> para lo complicado, <strong>Probe-Sense-Respond</strong> para lo complejo y <strong>Act-Sense-Respond</strong> para lo caótico): percibir/clasificar y responder con un SOP en lo obvio; percibir y analizar con expertos en lo complicado; sondear con pequeños experimentos seguros-para-fallar antes de responder en lo complejo; y actuar de inmediato para estabilizar antes de analizar en lo caótico.</p>
       <h3>Validar el valor de resolver el problema</h3>
-      <p>Cada problema candidato se evalúa desde tres perspectivas: <strong>resultados/beneficio de negocio</strong> (impacto en clientes, estrategia, finanzas, urgencia, tendencia), <strong>factibilidad</strong> (recursos, experiencia, complejidad, probabilidad de éxito, respaldo) e <strong>impacto organizativo</strong> (aprendizaje, beneficios cross-funcionales, competencias clave).</p>
+      <p>Cada problema candidato se evalúa desde tres perspectivas: <strong>resultados/beneficio de negocio</strong> (impacto en clientes, estrategia, finanzas, urgencia, tendencia — incluye analizar el <strong>coste de la mala calidad</strong> o COPQ, el gasto que genera no resolver el problema), <strong>factibilidad</strong> (recursos, experiencia, complejidad, probabilidad de éxito, respaldo) e <strong>impacto organizativo</strong> (aprendizaje, beneficios cross-funcionales, competencias clave).</p>
       <h3>Asegurar el apoyo y el análisis de stakeholders</h3>
-      <p>Sin sponsor no debe intentarse un kaizen. El <strong>análisis de stakeholders</strong> identifica su <strong>influencia</strong> (poder formal/informal) e <strong>implicación/interés</strong>, y si su postura es positiva, negativa o neutral — a menudo descrito como el <strong>«dilema del pollo y el cerdo»</strong> (implicado indirectamente vs. directamente comprometido). Según esta posición se define una estrategia de comunicación distinta para cada stakeholder, revisada regularmente.</p>
+      <p>Sin sponsor no debe intentarse un kaizen. El <strong>análisis de stakeholders</strong> identifica su <strong>influencia</strong> (poder formal/informal) e <strong>implicación/interés</strong>, valorando a cada persona de <strong>1 a 5</strong> en ambos ejes, y si su postura es positiva, negativa o neutral — a menudo descrito como el <strong>«dilema del pollo y el cerdo»</strong> (implicado indirectamente vs. directamente comprometido). Según esta posición se define una estrategia de comunicación distinta para cada stakeholder, revisada regularmente.</p>
+      <div class="callout warn"><span class="lbl">No existe en el examen</span>Las cuatro voces oficiales son VoC, VoB, VoP y VoR. <strong>No existe una «Voz del empleado» (Voice of the Employee)</strong> entre las fuentes oficiales de iniciativas kaizen — si aparece como opción, es un distractor.</div>
       <h3>Pasos clave de la fase Define</h3>
       <ol>
         <li><strong>Selección del problema e identificación del dueño</strong> (sponsor).</li>
@@ -356,6 +373,10 @@ const MODULES = [
       {t:'CTQ (Critical to Quality)', d:'Estructura usada para recoger y organizar la Voice of the Customer.'},
       {t:'Dilema del pollo y el cerdo', d:'Metáfora de implicación indirecta (pollo) vs. directa (cerdo) de un stakeholder.'},
       {t:'SIPOC en Define', d:'Se usa para validar el alcance del problema y formar el equipo/carta del proyecto.'},
+      {t:'Coste de la mala calidad (COPQ)', d:'Gasto que genera no resolver el problema; se analiza al validar el valor de negocio en Define.'},
+      {t:'Sense-Categorize-Respond', d:'Modo de actuar Cynefin para un problema simple/obvio: clasificar y aplicar un SOP.'},
+      {t:'Probe-Sense-Respond', d:'Modo de actuar Cynefin para un problema complejo: sondear con experimentos seguros-para-fallar.'},
+      {t:'Act-Sense-Respond', d:'Modo de actuar Cynefin para un problema caótico: actuar ya para estabilizar, analizar después.'},
     ]},
   { id:'me', code:'05', name:'Fase Measure',
     theory:`
@@ -368,6 +389,7 @@ const MODULES = [
         <li><strong>Repeaters:</strong> ocurrencia regular, aprox. semanal (incidentes de alto impacto, cambios no estándar pequeños/medianos, asesorías menores). Parcialmente planificables.</li>
         <li><strong>Strangers:</strong> ocurrencia irregular (cambios no estándar grandes, grandes solicitudes de asesoría y planes), mensual o trimestral.</li>
       </ul>
+      <div class="callout warn"><span class="lbl">Truco de examen</span>Para clasificar una unidad de trabajo, no os fiéis solo de la <strong>frecuencia/periodicidad</strong> — es la variable menos fiable, porque en la práctica es muy subjetiva. Fijaos sobre todo en el <strong>esfuerzo y el conocimiento experto</strong> que hace falta para resolverla: si se resuelve rápido con un checklist, es un Runner aunque no ocurra a diario; si necesita investigación y expertos, es más propio de un Repeater aunque no sea semanal.</div>
       <h3>Datos técnicos y datos de personas</h3>
       <p>Además de las unidades de trabajo, se recopilan <strong>datos técnicos</strong> (logs, monitorización, rendimiento: CPU, memoria, red, almacenamiento) y <strong>datos de personas</strong> (tiempo disponible, habilidades y conocimientos).</p>
       <h3>Ir al Gemba</h3>
@@ -428,7 +450,7 @@ const MODULES = [
         <li><strong>Diagrama de dispersión (scatter):</strong> muestra si existe correlación (positiva o negativa) entre dos conjuntos de datos.</li>
         <li><strong>Diagrama de flujo (flowchart):</strong> representación paso a paso de un proceso; los "swimming lanes" muestran transferencias entre roles, fuente habitual de retrasos.</li>
         <li><strong>Gráfico de control:</strong> serie temporal con límites de control que distingue <strong>variación de causa común</strong> (ruido inherente, proceso estable/bajo control — solo se mejora rediseñando) de <strong>variación de causa especial</strong> (asignable a una causa concreta, proceso inestable/impredecible).</li>
-        <li><strong>Diagrama de Ishikawa (espina de pescado):</strong> organiza causas potenciales. En TI se usan 4 categorías: <strong>Personas, Proceso, Tecnología y Política</strong> — <em>Collectively Exhaustive</em> (cubren todo) pero no <em>Mutually Exclusive</em> (una causa puede encajar en más de una).</li>
+        <li><strong>Diagrama de Ishikawa (espina de pescado):</strong> organiza causas potenciales. Para el examen de Kaizen se usan 4 categorías: <strong>Personas, Proceso, Tecnología y Política</strong> — <em>Collectively Exhaustive</em> (cubren todo) pero no <em>Mutually Exclusive</em> (una causa puede encajar en más de una). (Fuera del examen existen otros modelos con más categorías, como las 6M, pero no son los que Lean IT Kaizen utiliza.)</li>
         <li><strong>Hoja de verificación (check/tally sheet):</strong> tabla simple para contar ocurrencias de un síntoma; alimenta después un Pareto o un histograma.</li>
       </ul>
       <h3>Encontrar la causa raíz</h3>
@@ -439,7 +461,7 @@ const MODULES = [
       </ul>
       <h3>Analizar el Value Stream Map</h3>
       <ul>
-        <li><strong>Time trap (trampa de tiempo):</strong> paso que introduce un retraso por una decisión de política (ejemplo: una aprobación), no por falta de capacidad — asociado a <strong>muri</strong>.</li>
+        <li><strong>Time trap (trampa de tiempo):</strong> paso que introduce un retraso por una <strong>decisión de política o un procedimiento burocrático</strong> de la organización, no por falta de capacidad de trabajo. Ejemplo típico: para viajar a resolver una incidencia en sitio, hay que pedir autorización de viaje al departamento de compras, que tarda 2 días en aprobarla — ese tiempo de espera es una trampa de tiempo, no un problema de capacidad. Está asociado a <strong>muri</strong>.</li>
         <li><strong>Capacity constraint (cuello de botella):</strong> paso sin capacidad suficiente; se identifica comparando el takt time de cada paso con el del proceso completo. Puede causar variabilidad (<strong>mura</strong>).</li>
         <li><strong>Desperdicio (TIMWOOD):</strong> los demás tipos deben analizarse en cada paso del VSM para descartar que causen retrasos o problemas de calidad (<strong>muda</strong>).</li>
       </ul>
@@ -478,19 +500,24 @@ const MODULES = [
   { id:'im', code:'07', name:'Fase Improve',
     theory:`
       <h3>Generación de ideas</h3>
+      <div class="callout"><span class="lbl">Foco de examen</span>De todas las técnicas de ideación, Lean IT Kaizen pregunta principalmente por estas <strong>tres</strong>: lluvia de ideas (brainstorming), pensamiento inverso y SCAMPER.</div>
       <ul>
-        <li><strong>Brainstorming:</strong> generar el máximo número de ideas sin evaluarlas durante la sesión.</li>
-        <li><strong>Brainwriting:</strong> variante silenciosa — los factores causa se colocan en la pared y el equipo añade post-its inspirándose libremente en las ideas de los demás.</li>
+        <li><strong>Brainstorming (lluvia de ideas):</strong> generar el máximo número de ideas sin evaluarlas durante la sesión. <strong>Brainwriting</strong> es una variante silenciosa — los factores causa se colocan en la pared y el equipo añade post-its inspirándose libremente en las ideas de los demás.</li>
         <li><strong>Reverse thinking (pensamiento inverso):</strong> describir cómo empeorar la situación actual a propósito, para luego invertir esas ideas en soluciones reales (10-15 ideas inversas suelen bastar).</li>
         <li><strong>SCAMPER:</strong> verbos de acción como disparadores — <strong>S</strong>ubstitute (sustituir), <strong>C</strong>ombine (combinar), <strong>A</strong>dapt (adaptar), <strong>M</strong>odify (modificar), <strong>P</strong>ut to another use (dar otro uso), <strong>E</strong>liminate (eliminar), <strong>R</strong>everse (invertir).</li>
       </ul>
       <h3>Selección y priorización de opciones</h3>
       <ul>
         <li><strong>Affinity mapping:</strong> agrupar en silencio las soluciones similares o solapadas en clusters, dando un título a cada grupo.</li>
-        <li><strong>Solution matrix:</strong> dos ejes — <strong>factibilidad</strong> (coste/esfuerzo/tiempo bajos = alta factibilidad) e <strong>impacto</strong> — las soluciones de alto impacto y alta factibilidad se implementan primero.</li>
+        <li><strong>Solution matrix:</strong> dos ejes — <strong>impacto/valor de negocio</strong> (eje horizontal) y <strong>factibilidad</strong> (coste/esfuerzo/tiempo bajos = alta factibilidad, eje vertical) — las soluciones de alto impacto y alta factibilidad se implementan primero. Ojo: la palabra «impacto» también se usa en la matriz de priorización del panel de mejoras (impacto/viabilidad/valor de negocio) — son matrices distintas, para momentos distintos.</li>
         <li><strong>Multi-voting:</strong> cada miembro del equipo reparte un número limitado de votos entre las opciones; puede repetirse en rondas sucesivas.</li>
-        <li><strong>Business case:</strong> comparar coste y retorno de cada solución en el mismo horizonte. Regla práctica: una solución kaizen debería dar retorno positivo en <strong>máximo 6 meses</strong> — si no, probablemente es demasiado grande y conviene buscar soluciones más pequeñas o parciales.</li>
+        <li><strong>Business case:</strong> comparar coste y retorno de cada solución en el mismo horizonte (el examen no pide calcular ROI/VAN, solo el concepto). Regla práctica: una solución kaizen debería dar retorno positivo en <strong>máximo 6 meses</strong> — si no, probablemente es demasiado grande y conviene buscar soluciones más pequeñas o parciales.</li>
       </ul>
+      <h3>Poka-Yoke: prevención de errores</h3>
+      <p><strong>Poka-Yoke</strong> es una técnica Lean para diseñar procesos y herramientas que hacen <strong>imposible cometer un error</strong> no intencionado, garantizando que solo existe una forma correcta de ejecutar una tarea. Su objetivo estratégico es transformar la detección de errores (reactiva) en <strong>prevención</strong> (proactiva), ayudando a que la mejora se sostenga tras el evento kaizen.</p>
+      <p>Ejemplos en TI: un script de validación que bloquea un despliegue si el código no cumple el estándar; infraestructura como código (IaC) que audita y revierte cambios manuales automáticamente; campos obligatorios en un formulario que impiden enviar un ticket incompleto; o un conector físico diseñado para que solo encaje de una manera.</p>
+      <div class="callout"><span class="lbl">Regla de oro</span>Poka-Yoke no es un castigo ni una medida disciplinaria: es un diseño inteligente. Si un error puede ocurrir, se rediseña el proceso o la herramienta para impedirlo por naturaleza.</div>
+      <div class="callout warn"><span class="lbl">Truco de examen</span>Igual que con el sponsor en Define: si durante Improve o Control el dueño del proceso o las personas afectadas <strong>no creen</strong> que la solución vaya a resolver el problema o no tienen interés, la respuesta correcta es <strong>cancelar el evento kaizen</strong> — no tiene sentido gastar recursos en algo que nadie va a adoptar.</div>
       <h3>Probar las soluciones (según el tipo Cynefin)</h3>
       <div class="ref-wrap"><table class="ref">
         <tr><th>Tipo de problema</th><th>Cómo probar la solución</th></tr>
@@ -522,6 +549,8 @@ const MODULES = [
       {t:'Regla de los 6 meses', d:'Una solución kaizen debería dar retorno positivo en máximo 6 meses.'},
       {t:'Mejores prácticas en TI', d:'ITIL, Cobit, Scrum, Prince2/PMI.'},
       {t:'Buenas prácticas en TI', d:'Lean IT, Agile, DevOps.'},
+      {t:'Poka-Yoke', d:'Diseñar procesos/herramientas que hacen imposible cometer un error; prevención proactiva, no detección reactiva.'},
+      {t:'Poka-Yoke: ejemplo en TI', d:'Un script que bloquea un despliegue si el código no cumple el estándar; un campo obligatorio que impide enviar un ticket incompleto.'},
     ]},
   { id:'co', code:'08', name:'Fase Control',
     theory:`
@@ -531,7 +560,7 @@ const MODULES = [
       <ul>
         <li><strong>Documentación:</strong> registro de los cambios. Incluye <strong>política</strong> (breve y clara, sin contradecir otras políticas), <strong>documentación de proceso</strong> (flowchart + RACI, o con swimming lanes), <strong>SOP</strong> (Standard Operating Procedure — cómo ejecutar una tarea de forma consistente) y <strong>checklists</strong> (recordatorios para procesos no estandarizables).</li>
         <li><strong>Monitorización:</strong> métricas y KPIs — distinguiendo <strong>indicadores adelantados/leading</strong> (predicen el desempeño futuro, p. ej. nº de Problems resueltos) de <strong>indicadores retrasados/lagging</strong> (miden el desempeño pasado, p. ej. nº de incidentes) — un <strong>dashboard</strong> visual, gestión visual y <strong>diálogos de desempeño</strong> (compartir feedback y detectar irregularidades; identificar causas raíz y proponer mejoras; decidir qué hacer), propagados en <strong>cascada</strong> por la organización.</li>
-        <li><strong>Respuesta:</strong> el <strong>OCAP (Out-of-Control-Action-Plan)</strong> agrupa las intervenciones ante una desviación — documento vivo que registra problemas y soluciones conocidas, apoyado en el FMEA de Analyze.</li>
+        <li><strong>Respuesta:</strong> el <strong>OCAP (Out-of-Control-Action-Plan)</strong> agrupa las intervenciones ante una desviación cuando una métrica se sale de sus umbrales — un plan de contingencia a pequeña escala, originado en Philips Semiconductors, que se documenta como un <strong>flujograma</strong> (para una reacción rápida) y que integra procedimientos claros de acción ligados al FMEA de Analyze. Es un <strong>documento vivo</strong> que mantiene un registro de usos (problema y solución) y así revela fallos repetitivos que pueden orientar nuevas iniciativas kaizen.</li>
         <li><strong>Formación:</strong> asegura que cada rol conoce su responsabilidad, la documentación, las herramientas de monitorización y las acciones de respuesta; se apoya en una <strong>matriz de habilidades y conocimientos</strong>.</li>
       </ul>
       <h3>Plan de comunicación</h3>
@@ -575,8 +604,8 @@ const EXAM = [
  {m:'org',q:'¿Qué sistema de notificación de problemas de calidad se asocia con "parar la línea" en el Kaizen diario dentro de TI?',o:['El Kanban','El Andon','El Poka-Yoke','El OCAP'],c:1,e:'El andon es el sistema que notifica un problema de calidad o proceso; el documento pregunta "¿cuál es el andon en tu organización de TI?" al hablar de parar la línea.'},
  {m:'org',q:'Según el documento, ¿cuál es el rango óptimo de tamaño de un equipo kaizen?',o:['2 a 4 personas','5 a 8 personas','10 a 15 personas','No hay un tamaño recomendado'],c:1,e:'5 a 8 personas es el rango óptimo: menos compromete la diversidad de puntos de vista, más suele indicar un problema demasiado grande.'},
  {m:'org',q:'¿Cuál de las siguientes NO es una de las cuatro "Voces" que pueden originar una iniciativa kaizen?',o:['Voice of the Customer','Voice of the Business','Voice of the Regulator','Voice of the Vendor'],c:3,e:'Las cuatro voces son Customer, Business, Process y Regulator; "Voice of the Vendor" no forma parte del modelo.'},
- {m:'org',q:'¿Qué distingue principalmente al "Kaizen sponsor" del "Kaizen lead"?',o:['El sponsor es el dueño del problema con interés directo en resolverlo; el lead gestiona el proceso kaizen en su nombre','El sponsor hace el trabajo técnico y el lead solo observa','Ambos roles son intercambiables y hacen lo mismo','El lead debe ser siempre el manager directo del sponsor'],c:0,e:'El sponsor es el dueño del problema (sin él no hay kaizen); el lead gestiona el proceso en su nombre, con habilidades de facilitación.'},
- {m:'org',q:'Dado lo difícil que resulta bloquear una semana completa en una organización de TI, ¿qué alternativa de planificación propone el documento para un evento kaizen?',o:['Cancelar el evento y resolver el problema por email','5-6 reuniones de 3 horas repartidas en un periodo de 2 semanas','Una única reunión de 8 horas','Delegar todo el evento a un consultor externo'],c:1,e:'El documento propone organizar 5-6 reuniones de 3 horas a intervalos regulares durante dos semanas, dejando tiempo entre sesiones.'},
+ {m:'org',q:'Dado lo difícil que resulta aislar al equipo 5 días completos en una organización de TI, ¿qué alternativa de planificación se recomienda para un evento kaizen?',o:['Cancelar el evento y resolver el problema por email','5 reuniones de 3 horas, una por cada fase del DMAIC, separadas por unos 2 días entre sí','Una única reunión de 8 horas','Delegar todo el evento a un consultor externo'],c:1,e:'La alternativa realista es planificar 5 reuniones de 3 horas —una por fase del DMAIC— separadas por unos 2 días, dejando tiempo para trabajar entre sesiones.'},
+ {m:'org',q:'El manual oficial de Lean IT Kaizen usa la palabra "sponsor" para dos roles distintos. ¿Cuáles son?',o:['El Kaizen Lead y el propietario del proceso','Quien prioriza el panel de mejoras y decide qué iniciativa convocar como evento, y el Kaizen Sponsor que aporta los recursos al evento','El equipo de trabajo y los stakeholders externos','El auditor de calidad y el Kaizen Lead'],c:1,e:'Es una ambigüedad conocida del manual: "sponsor" designa tanto a quien prioriza el panel de mejoras como al Kaizen Sponsor real (dueño del problema) que aporta recursos al evento; hay que resolverlo por contexto.'},
  {m:'a3',q:'¿Qué tamaño tiene exactamente una hoja A3?',o:['21 x 29,7 cm','29,7 x 42 cm','42 x 59,4 cm','10 x 15 cm'],c:1,e:'A3 mide 29,7 × 42 cm — el doble de un A4 y la mitad de un A2.'},
  {m:'a3',q:'En un A3 de resolución de problemas, ¿qué describe la sección "Future State goals"?',o:['El histórico de la organización','Cómo se vería la situación si el problema no existiera, idealmente con una meta numérica','El análisis de causa raíz','El plan de comunicación final'],c:1,e:'"Future State goals" describe la situación ideal sin el problema, preferiblemente con una meta numérica concreta.'},
  {m:'a3',q:'¿En qué fases del ciclo PDCA se centra principalmente un "A3 Status Report"?',o:['Plan y Do','Check y Act','Solo en Plan','No sigue el ciclo PDCA'],c:1,e:'El A3 Status Report comprueba si los supuestos siguen siendo correctos y qué acciones tomar: se centra en Check y Act.'},
@@ -585,10 +614,10 @@ const EXAM = [
  {m:'de',q:'Según el documento, ¿por qué es preferible formular el problem statement como una pregunta en lugar de una afirmación?',o:['Porque las preguntas son más cortas de escribir','Porque así queda claro cuándo se ha encontrado la respuesta/solución','Porque lo exige la norma ISO 20000','Porque evita tener que definir el alcance'],c:1,e:'Formularlo como pregunta permite reconocer con claridad el momento en que se ha encontrado la respuesta.'},
  {m:'de',q:'¿Qué diferencia a una hipótesis de un problem statement?',o:['No hay diferencia, son sinónimos','La hipótesis es una creencia ("creemos que...") aún no respaldada por hechos; el problem statement enmarca la pregunta a investigar','El problem statement siempre incluye la solución','La hipótesis solo puede formularla el sponsor'],c:1,e:'Una hipótesis es una creencia basada en observaciones sesgadas, pendiente de validación; el problem statement enmarca qué se va a investigar.'},
  {m:'de',q:'Según el modelo Cynefin, un problema en el que la relación causa-efecto solo puede explicarse en retrospectiva y no existen soluciones conocidas se clasifica como:',o:['Simple / obvio','Complicado','Complejo','Caótico'],c:2,e:'Los problemas complejos solo se explican en retrospectiva y requieren experimentación y síntesis.'},
- {m:'de',q:'¿Con qué tipos de problema, según Cynefin, trabaja principalmente el Kaizen dentro de TI?',o:['Simples y caóticos','Complicados y complejos','Solo caóticos','Solo simples'],c:1,e:'El kaizen se usa generalmente para problemas complicados y complejos; si resulta ser simple, la solución (quick win) suele hallarse ya en Define.'},
+ {m:'de',q:'Un enunciado de examen describe la integración de "una tecnología novedosa e innovadora, nunca antes utilizada por la organización". Según el truco práctico para distinguir Complicado de Complejo, ¿qué tipo de problema es?',o:['Simple / obvio','Complicado','Complejo','Desorden'],c:2,e:'Adjetivos como "novedosa" o "innovadora" (tecnología sin buenas prácticas conocidas) son la señal de que el examen quiere Complejo; sin esos adjetivos, y con buenas prácticas y expertos disponibles, sería Complicado.'},
  {m:'de',q:'En el análisis de stakeholders, la metáfora del "dilema del pollo y el cerdo" se usa para distinguir:',o:['Quién es el sponsor y quién es el lead','La implicación indirecta frente a la implicación directa/comprometida de un stakeholder','Los problemas simples de los complejos','Las mejores prácticas de las buenas prácticas'],c:1,e:'El pollo aporta el huevo (implicación indirecta) mientras el cerdo aporta el beicon (implicación directa y comprometida).'},
  {m:'me',q:'En la notación y = f(x1, x2, ... xn) utilizada en la fase Measure, ¿qué representa "y"?',o:['Una variable de control','Una variable independiente cualquiera','El problema, es decir, la variable dependiente','El número de stakeholders'],c:2,e:'"y" es la variable dependiente — en la práctica, el problema — función de las variables independientes (x), las posibles causas.'},
- {m:'me',q:'¿A qué categoría de unidades de trabajo de TI pertenecen los incidentes, peticiones de servicio y cambios estándar?',o:['Runners','Repeaters','Strangers','Ninguna de las anteriores'],c:0,e:'Los Runners son unidades diarias de hasta 1 hora: incidentes, peticiones de servicio, cambios estándar y actividad operativa.'},
+ {m:'me',q:'Al clasificar una unidad de trabajo de TI en Runner, Repeater o Stranger, ¿en qué variable hay que confiar menos según la experiencia práctica?',o:['El esfuerzo necesario para resolverla','El conocimiento experto que requiere','La frecuencia/periodicidad con la que ocurre','La forma en que se resuelve (checklist vs. investigación)'],c:2,e:'La frecuencia es la variable menos fiable para clasificar en la práctica, por ser muy subjetiva; pesan más el esfuerzo y el conocimiento experto que requiere resolverla.'},
  {m:'me',q:'¿Cuál es la principal fuente de datos cuantitativos dentro de una organización de TI, según el documento?',o:['Las entrevistas a los usuarios','La recolección automática de datos (logs)','La observación anotada','Los formularios de satisfacción'],c:1,e:'La recolección automática de datos es la fuente cuantitativa principal en TI; el reto es entender correctamente lo que dicen.'},
  {m:'me',q:'¿Cuál es la diferencia clave entre una línea base (baseline) y un benchmark?',o:['No hay diferencia, ambas son opcionales','La línea base es obligatoria en Measure para medir el progreso; el benchmark, que compara con otras organizaciones, es opcional','El benchmark es obligatorio y la línea base es opcional','Ambas se calculan con la fórmula del PCE'],c:1,e:'Es vital fijar una línea base durante Measure; el benchmarking, aunque útil, es opcional.'},
  {m:'me',q:'La fórmula del Process Cycle Efficiency (PCE) es:',o:['WIP / tasa media de finalización','Tiempo de valor añadido (VA) / tiempo total del proceso (Lead time)','Severidad × Ocurrencia × Detectabilidad','Número de causas / número de efectos'],c:1,e:'PCE = tiempo de valor añadido / Lead time. WIP/tasa de finalización corresponde a la Ley de Little.'},
@@ -598,7 +627,7 @@ const EXAM = [
  {m:'an',q:'En la Matriz Causa-Efecto, una relación "fuerte" entre una entrada (x) y una salida (y) se puntúa con:',o:['0','1','3','9'],c:3,e:'Escala habitual: 0 = sin relación, 1 = débil, 3 = moderada, 9 = fuerte.'},
  {m:'an',q:'En un FMEA, el RPN (Risk Priority Number) se calcula como:',o:['Severidad + Ocurrencia + Detectabilidad','Severidad × Ocurrencia × Detectabilidad','Severidad / Detectabilidad','Ocurrencia − Detectabilidad'],c:1,e:'RPN = Severidad × Ocurrencia × Detectabilidad, cada una puntuada de 1 a 10 (máximo posible: 1000).'},
  {m:'im',q:'En la técnica SCAMPER, ¿qué representa la letra "P"?',o:['Prioritize (priorizar)','Put to another use (dar otro uso)','Plan (planificar)','Pilot (pilotar)'],c:1,e:'En SCAMPER, P significa "Put to another use" — dar un uso distinto a un elemento de la causa del problema.'},
- {m:'im',q:'¿Qué diferencia principal hay entre brainstorming y brainwriting?',o:['No hay diferencia, son sinónimos','El brainwriting se hace en silencio, colocando ideas en post-its en los que otros pueden inspirarse','El brainstorming solo lo puede hacer una persona','El brainwriting no permite generar ideas nuevas'],c:1,e:'El brainwriting es una variante silenciosa: los participantes colocan post-its con ideas y se inspiran libremente en las de los demás.'},
+ {m:'im',q:'¿Cuál es el objetivo estratégico de una solución Poka-Yoke frente a un control de calidad tradicional?',o:['Detectar los errores lo antes posible tras producirse','Prevenir el error de forma proactiva, haciendo que sea imposible cometerlo','Sancionar a quien comete el error para que no se repita','Documentar el error en un informe para revisarlo trimestralmente'],c:1,e:'Poka-Yoke transforma la detección reactiva de errores en prevención proactiva: se rediseña el proceso o la herramienta para que el error no pueda ocurrir.'},
  {m:'im',q:'En la matriz de soluciones (solution matrix) descrita en el documento, ¿qué dos ejes se utilizan?',o:['Coste y tiempo','Factibilidad e impacto','Urgencia y complejidad','Riesgo y beneficio'],c:1,e:'La solution matrix usa factibilidad (coste/esfuerzo/tiempo bajos = alta factibilidad) e impacto esperado.'},
  {m:'im',q:'Según la "regla de los 6 meses" del documento para el business case de una solución kaizen, si el retorno tarda más en ser positivo, ¿qué se recomienda?',o:['Cancelar definitivamente el proyecto de mejora','Buscar soluciones más pequeñas, posiblemente atacando solo parte del problema','Aumentar el presupuesto del equipo','Sustituir al kaizen sponsor'],c:1,e:'Si el retorno tarda más de 6 meses, probablemente la solución es demasiado grande; conviene buscar soluciones más pequeñas.'},
  {m:'im',q:'Según la tabla de pruebas de solución basada en Cynefin, ¿cómo se recomienda probar una solución para un problema "complicado"?',o:['Implementar directamente a gran escala sin pruebas','Crear un pequeño piloto de producción para ver cómo se comporta en el entorno real','Usar solo un análisis de riesgo','Aplicar técnicas de experimentación abierta'],c:1,e:'Para problemas complicados se recomienda un pequeño piloto de producción; para complejos, experimentación; para obvios, mejores prácticas de mercado.'},
@@ -776,13 +805,14 @@ function renderResumen(panel){
 
       <h3 style="color:var(--accent);">Modelo Cynefin (tipos de problema)</h3>
       <div class="ref-wrap"><table class="ref">
-        <tr><th>Tipo</th><th>Causa-efecto</th><th>Cómo se resuelve</th></tr>
-        <tr><td>Simple / obvio</td><td>Evidente y predecible</td><td>Procedimiento operativo estándar (SOP)</td></tr>
-        <tr><td>Complicado</td><td>Sigue reglas, pero requiere expertise</td><td>Mejores prácticas, pensamiento sistémico</td></tr>
-        <tr><td>Complejo</td><td>Solo se explica en retrospectiva</td><td>Experimentación y síntesis</td></tr>
-        <tr><td>Caótico</td><td>No perceptible</td><td>Gestión de crisis, estabilizar primero</td></tr>
-        <tr><td>Desorden</td><td>No se sabe cuál de los 4 tipos es</td><td>Investigar para reclasificar</td></tr>
+        <tr><th>Tipo</th><th>Causa-efecto</th><th>Modo de actuar</th><th>Cómo se resuelve</th></tr>
+        <tr><td>Simple / obvio</td><td>Evidente y predecible</td><td>Sense-Categorize-Respond</td><td>Procedimiento operativo estándar (SOP)</td></tr>
+        <tr><td>Complicado</td><td>Sigue reglas, pero requiere expertise</td><td>Sense-Analyze-Respond</td><td>Mejores prácticas, pensamiento sistémico</td></tr>
+        <tr><td>Complejo</td><td>Solo se explica en retrospectiva</td><td>Probe-Sense-Respond</td><td>Experimentación (seguro-para-fallar) y síntesis</td></tr>
+        <tr><td>Caótico</td><td>No perceptible</td><td>Act-Sense-Respond</td><td>Gestión de crisis, estabilizar primero</td></tr>
+        <tr><td>Desorden</td><td>No se sabe cuál de los 4 tipos es</td><td>—</td><td>Investigar para reclasificar</td></tr>
       </table></div>
+      <div class="callout"><span class="lbl">Truco de examen</span>Adjetivos como «innovadora / novedosa / última generación» → <b>Complejo</b>. Algo ya resuelto antes con buenas prácticas y expertos → <b>Complicado</b>. Enunciado dramático (caída total, incendio) que exige estabilizar ya → <b>Caótico</b>.</div>
 
       <h3 style="color:var(--accent);">Las 4 Voces (fuentes de iniciativas kaizen)</h3>
       <div class="ref-wrap"><table class="ref">
@@ -833,6 +863,37 @@ function renderResumen(panel){
         <tr><td>Respuesta</td><td>OCAP (Out-of-Control-Action-Plan), ligado al FMEA</td></tr>
         <tr><td>Formación</td><td>Matriz de habilidades y conocimientos</td></tr>
       </table></div>
+
+      <h3 style="color:var(--accent);">Ambigüedades conocidas del manual oficial</h3>
+      <div class="ref-wrap"><table class="ref">
+        <tr><th>Término</th><th>Los dos sentidos que puede tener</th></tr>
+        <tr><td><b>Sponsor</b></td><td>(1) Quien prioriza el panel de mejoras y decide qué iniciativa convocar como evento kaizen. (2) El Kaizen Sponsor real: el dueño del problema que aporta recursos al evento. Resolver por contexto.</td></tr>
+        <tr><td><b>Problema / Problem</b></td><td>«problema» genérico (cualquier dificultad a resolver) vs. «Problem» con P mayúscula (definición ITIL: causa raíz de uno o más incidentes). Resolver por contexto.</td></tr>
+      </table></div>
+
+      <h3 style="color:var(--accent);">Kit de herramientas Kaizen (qué se usa en cada fase)</h3>
+      <div class="ref-wrap"><table class="ref">
+        <tr><th>Herramienta</th><th>Fase(s) de uso</th><th>Función</th></tr>
+        <tr><td>A3 / Kaizen Charter</td><td>Todo el evento</td><td>Registro continuo del problema, contexto, estado, meta, contramedidas y plan</td></tr>
+        <tr><td>SIPOC</td><td>Define (y Measure)</td><td>Delimita el alcance del proceso: entradas, salidas, proveedores, clientes</td></tr>
+        <tr><td>Diagrama de Pareto</td><td>Analyze</td><td>Destaca las causas raíz más relevantes entre varios factores</td></tr>
+        <tr><td>Value Stream Map (VSM)</td><td>Measure y Analyze</td><td>Visualiza el proceso e identifica tiempos de valor añadido y desperdicios</td></tr>
+        <tr><td>5 Whys</td><td>Analyze (también Define para acotar)</td><td>Preguntas iterativas para ir más allá de los síntomas y hallar la causa raíz</td></tr>
+        <tr><td>Ishikawa (espina de pescado)</td><td>Analyze (también Define)</td><td>Clasifica causas potenciales en Personas, Proceso, Tecnología y Política</td></tr>
+        <tr><td>Matriz de soluciones</td><td>Improve</td><td>Prioriza soluciones por impacto y factibilidad</td></tr>
+      </table></div>
+      <div class="callout"><span class="lbl">Ojo</span>Que una herramienta se enseñe «asociada» a una fase no significa que solo se use ahí: el Ishikawa y los 5 Whys, por ejemplo, también sirven en Define para acotar rápidamente el problema; el VSM se usa tanto en Measure (medir el estado actual) como en Analyze (buscar desperdicios).</div>
+
+      <h3 style="color:var(--accent);">Trampas y contramedidas por fase DMAIC</h3>
+      <div class="ref-wrap"><table class="ref">
+        <tr><th>Fase</th><th>Trampa común</th><th>Contramedida</th></tr>
+        <tr><td><b>Define</b></td><td>Exceso de detalle en el mapa del proceso o alcance demasiado amplio (caer en un "mini-kaizen" en Define)</td><td>Cubrir el 80% con datos, refinar el SIPOC y aplicar Pareto</td></tr>
+        <tr><td><b>Measure</b></td><td>Recopilar un volumen excesivo de datos, o un sistema de medición no válido</td><td>Usar Ishikawa para enfocar los datos clave y estudiar el Gemba</td></tr>
+        <tr><td><b>Analyze</b></td><td>Trabajar sobre suposiciones no verificadas o saltar a conclusiones</td><td>Validar hipótesis con stakeholders y usar herramientas gráficas</td></tr>
+        <tr><td><b>Improve</b></td><td>Imponer la solución predilecta del líder o subestimar el impacto del cambio</td><td>Toma de decisiones estructurada y gestión activa de la comunicación</td></tr>
+        <tr><td><b>Control</b></td><td>Cerrar el evento antes de tiempo o con baja realización de beneficios</td><td>Herramientas de monitoreo continuo y planificar la replicación con SOP</td></tr>
+      </table></div>
+      <p>Tres factores clave de éxito, según el curso: <b>1)</b> prioridad estratégica (respaldo de dirección y compromiso del equipo), <b>2)</b> datos objetivos (evitar intuiciones o suposiciones vagas) y <b>3)</b> herramientas y comunicación adecuadas para cada fase.</p>
 
       <h3 style="color:var(--accent);">TIMWOODS — los 8 desperdicios Lean</h3>
       <div class="ref-wrap"><table class="ref">

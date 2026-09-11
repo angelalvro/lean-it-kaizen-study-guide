@@ -8,7 +8,8 @@ Incluye:
 - **Flashcards** de conceptos clave por módulo (clic para voltear).
 - Un **examen simulado de 40 preguntas** con el mismo formato que el examen oficial (≥ 26/40, 65% para aprobar).
 - Dos **simulacros adicionales** de 20 preguntas cada uno (Fácil / Medio), con corrección, explicación y desglose de aciertos por módulo.
-- Sección de **resumen rápido** con tablas de referencia: Kaizen/Kaikaku/Kakushin, ciclo DMAIC, modelo Cynefin, las 4 Voces, las 7 herramientas de calidad, Muri/Mura/Muda, estructura del A3, el plan de control y TIMWOODS.
+- Sección de **resumen rápido** con tablas de referencia: Kaizen/Kaikaku/Kakushin, ciclo DMAIC, modelo Cynefin (con sus modos de actuar Sense/Probe/Act), las 4 Voces, las 7 herramientas de calidad, Muri/Mura/Muda, estructura del A3, el plan de control, un kit de herramientas por fase, las ambigüedades conocidas del manual oficial, la matriz de trampas y contramedidas por fase DMAIC, y TIMWOODS.
+- **Trucos y matices de examen** señalados explícitamente en callouts (🟢 truco / 🔴 cuidado), extraídos de un curso oficial en directo: la ambigüedad del término "sponsor", el heurístico de adjetivos para distinguir Complicado/Complejo/Caótico en Cynefin, por qué la frecuencia es una variable poco fiable al clasificar unidades de trabajo, Poka-Yoke, la trampa de tiempo con ejemplo real, y más.
 - Tema claro/oscuro.
 
 ## Cómo usarlo
@@ -27,12 +28,15 @@ Abre `index.html` en cualquier navegador. No requiere instalación ni servidor.
 
 ## Origen del contenido
 
-Esta guía se basa en la **fuente oficial del temario de examen**: la *Lean IT Kaizen — Official Publication* (Lean IT Association / APMG, V1.03, octubre de 2015, autor Niels Loader), cuyo propio texto indica que "todas las preguntas del examen pueden responderse a partir de la información de este documento".
+Esta guía se basa en dos fuentes:
 
-- **Teoría y flashcards**: redactadas originalmente en español, resumiendo y parafraseando los conceptos de esa publicación oficial (Kaizen/Kaikaku/Kakushin, el modelo Cynefin, las 4 Voces, las 7 herramientas básicas de calidad, FMEA/RPN, OCAP, SCAMPER, la Ley de Little, etc.) — no es una traducción literal ni una copia del documento.
-- **Preguntas de práctica** (examen de 40 + 2 simulacros de 20): redactadas de forma **original**, evaluando esos mismos conceptos. No reproducen preguntas de ningún examen oficial de APMG.
+1. La **fuente oficial del temario de examen**: la *Lean IT Kaizen — Official Publication* (Lean IT Association / APMG, V1.03, octubre de 2015, autor Niels Loader), cuyo propio texto indica que "todas las preguntas del examen pueden responderse a partir de la información de este documento".
+2. **Notas propias** tomadas de un curso oficial de preparación en directo (diapositivas del curso + transcripciones de las 4 sesiones), que aportan matices, ejemplos y "trucos de examen" que el instructor señaló explícitamente y que no aparecen literalmente en el documento oficial (p. ej. la ambigüedad del término "sponsor" en el manual, el heurístico de adjetivos para Cynefin, o por qué la frecuencia es una variable poco fiable al clasificar unidades de trabajo de TI).
 
-Al ser contenido derivado de una publicación con copyright (© 2015 Lean IT Association), esta guía se ofrece como material de estudio personal — no sustituye ni reproduce el documento original, que sigue siendo la referencia normativa para el examen.
+- **Teoría y flashcards**: redactadas originalmente en español, resumiendo y parafraseando los conceptos de ambas fuentes (Kaizen/Kaikaku/Kakushin, el modelo Cynefin, las 4 Voces, las 7 herramientas básicas de calidad, FMEA/RPN, OCAP, SCAMPER, Poka-Yoke, la Ley de Little, etc.) — no es una traducción ni una transcripción literal de ningún documento.
+- **Preguntas de práctica** (examen de 40 + 2 simulacros de 20): redactadas de forma **original**, evaluando esos mismos conceptos. No reproducen preguntas de ningún examen oficial de APMG ni de ningún simulador de terceros.
+
+Al ser contenido derivado de una publicación con copyright (© 2015 Lean IT Association) y de material de un curso de formación de pago, esta guía se ofrece como material de estudio personal — no sustituye ni reproduce esos documentos originales, que siguen siendo la referencia normativa para el examen.
 
 ## Aviso
 

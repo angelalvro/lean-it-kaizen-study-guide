@@ -83,6 +83,13 @@
   .callout .lbl{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);display:block;margin-bottom:4px;}
   .callout.warn{border-color:var(--danger);background:var(--danger-soft);}
   .callout.warn .lbl{color:var(--danger);}
+  .callout.gold{border-color:#b8860b;background:var(--surface-2);}
+  .callout.gold .lbl{color:#b8860b;}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:14px 0;}
+  .step{border:1px solid var(--border);border-radius:12px;padding:14px;background:var(--surface-2);}
+  .step .num{font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--accent);display:block;line-height:1;margin-bottom:6px;}
+  .step .stitle{font-family:var(--font-display);font-weight:700;font-size:14.5px;display:block;margin-bottom:6px;}
+  .step p{margin:0;font-size:13px;color:var(--ink-soft);}
   .cardgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;}
   .fc{perspective:1000px;height:150px;cursor:pointer;}
   .fc-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;}
@@ -354,14 +361,15 @@ const MODULES = [
       <h3>Asegurar el apoyo y el análisis de stakeholders</h3>
       <p>Sin sponsor no debe intentarse un kaizen. El <strong>análisis de stakeholders</strong> identifica su <strong>influencia</strong> (poder formal/informal) e <strong>implicación/interés</strong>, valorando a cada persona de <strong>1 a 5</strong> en ambos ejes, y si su postura es positiva, negativa o neutral — a menudo descrito como el <strong>«dilema del pollo y el cerdo»</strong> (implicado indirectamente vs. directamente comprometido). Según esta posición se define una estrategia de comunicación distinta para cada stakeholder, revisada regularmente.</p>
       <div class="callout warn"><span class="lbl">No existe en el examen</span>Las cuatro voces oficiales son VoC, VoB, VoP y VoR. <strong>No existe una «Voz del empleado» (Voice of the Employee)</strong> entre las fuentes oficiales de iniciativas kaizen — si aparece como opción, es un distractor.</div>
-      <h3>Pasos clave de la fase Define</h3>
-      <ol>
-        <li><strong>Selección del problema e identificación del dueño</strong> (sponsor).</li>
-        <li><strong>Problem statement y selección del equipo</strong>, apoyándose en el análisis de stakeholders y, si hace falta, en un Ishikawa o los 5 Whys para acotar el problema.</li>
-        <li><strong>Validar el alcance</strong> mediante un <strong>SIPOC</strong> del proceso en el que ocurre.</li>
-        <li><strong>Recoger información de la Voice of the Customer</strong>, estructurada con el <strong>CTQ (Critical to Quality)</strong>.</li>
-        <li><strong>Crear un plan de alto nivel</strong> para la ejecución del evento kaizen.</li>
-      </ol>`,
+      <h3>5 pasos clave para completar la fase Define</h3>
+      <div class="steps">
+        <div class="step"><span class="num">01</span><span class="stitle">Selección y Propiedad</span><p>Identificar un problema <strong>significativo</strong> y asegurar un patrocinador (sponsor) serio. El propietario debe mantener el impulso para resolverlo rápidamente.</p></div>
+        <div class="step"><span class="num">02</span><span class="stitle">Definición y Equipo</span><p>Redactar el <strong>enunciado del problema</strong> en el A3 y elegir al equipo mediante análisis de stakeholders. Usar Ishikawa o 5 Porqués para delimitar síntomas.</p></div>
+        <div class="step"><span class="num">03</span><span class="stitle">Validar el Alcance</span><p>Dibujar un <strong>SIPOC</strong> para entender el proceso. No precipitarse; lograr el acuerdo del equipo requiere tiempo para escucharse. El líder Kaizen modera y guía.</p></div>
+        <div class="step"><span class="num">04</span><span class="stitle">Voz del Cliente (VoC)</span><p>Recopilar información relevante del cliente: <strong>CTQ</strong> (Crítico para la Calidad). Formular preguntas específicas si el origen proviene de VoC, negocio o regulación.</p></div>
+        <div class="step"><span class="num">05</span><span class="stitle">Plan de Alto Nivel</span><p>Acordar fechas y asegurar la liberación de agendas. En TI, se sugiere planificar <strong>5 reuniones de 3h separadas por 2 días</strong>. Definir la comunicación de resultados.</p></div>
+      </div>
+      <div class="callout gold"><span class="lbl">Regla de oro</span>Es crítico completar todos los aspectos de la fase "Define" antes de pasar a "Measure". Sin un enunciado acordado, se volverá inevitablemente al inicio.</div>`,
     flashcards:[
       {t:'Problem statement', d:'Enunciado SMART, preferiblemente en forma de pregunta, que centra la investigación del equipo.'},
       {t:'Hipótesis', d:'Creencia ("creemos que...") aún no respaldada por hechos; debe validarse con datos.'},

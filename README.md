@@ -7,7 +7,7 @@ Incluye:
 - Teoría organizada en los **8 módulos** del temario: Introducción a Kaizen, Organizando Kaizen, Método A3, y las 5 fases del ciclo **DMAIC** (Define, Measure, Analyze, Improve, Control).
 - **Flashcards** de conceptos clave por módulo (clic para voltear).
 - Un **examen simulado de 40 preguntas** con el mismo formato que el examen oficial (≥ 26/40, 65% para aprobar).
-- Dos **simulacros adicionales** de 20 preguntas cada uno (Fácil / Medio), con corrección, explicación y desglose de aciertos por módulo.
+- Tres **simulacros adicionales**: dos de 20 preguntas (Fácil / Medio) y un tercero de 40 ("Repaso completo") — 120 preguntas de práctica en total, todas con corrección, explicación y desglose de aciertos por módulo.
 - Sección de **resumen rápido** con tablas de referencia: Kaizen/Kaikaku/Kakushin, ciclo DMAIC, modelo Cynefin (con sus modos de actuar Sense/Probe/Act), las 4 Voces, las 7 herramientas de calidad, Muri/Mura/Muda, estructura del A3, el plan de control, un kit de herramientas por fase, las ambigüedades conocidas del manual oficial, la matriz de trampas y contramedidas por fase DMAIC, y TIMWOODS.
 - **Trucos y matices de examen** señalados explícitamente en callouts (🟢 truco / 🔴 cuidado), extraídos de un curso oficial en directo: la ambigüedad del término "sponsor", el heurístico de adjetivos para distinguir Complicado/Complejo/Caótico en Cynefin, por qué la frecuencia es una variable poco fiable al clasificar unidades de trabajo, Poka-Yoke, la trampa de tiempo con ejemplo real, y más.
 - Tema claro/oscuro.
